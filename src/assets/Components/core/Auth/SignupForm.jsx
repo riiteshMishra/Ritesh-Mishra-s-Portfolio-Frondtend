@@ -3,11 +3,14 @@ import { useState } from "react";
 import { ACCOUNT_TYPE } from "../../../../utils/utilsData";
 import { IoEyeOff } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
+import { sendOtp } from "../../../../services/oprations/auth";
 
 const SignupForm = () => {
   const account = Object.values(ACCOUNT_TYPE);
   const [otpSent, setOtpSent] = useState(false);
-
+  const [passwordType, setPasswordType] = useState("password");
+  const [confirmPasswordType, setConfirmPasswordType] = useState("password");
+  
   const {
     register,
     handleSubmit,
@@ -24,8 +27,7 @@ const SignupForm = () => {
     reset();
     setOtpSent(false); // reset OTP state
   };
-  const [passwordType, setPasswordType] = useState("password");
-  const [confirmPasswordType, setConfirmPasswordType] = useState("password");
+
   const toggleConfirmPassword = () => {
     return setConfirmPasswordType((prev) =>
       prev === "password" ? "text" : "password"
@@ -33,6 +35,11 @@ const SignupForm = () => {
   };
   const togglePassword = () =>
     setPasswordType((prev) => (prev === "password" ? "text" : "password"));
+
+
+  const sendOtpHandler = async ()=>{
+    const otp = await sendOtp()
+  }
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-4xl mb-6">Sign-up</h1>
@@ -107,7 +114,7 @@ const SignupForm = () => {
             <button
               type="button"
               className="capsule w-fit h-fit"
-              onClick={() => setOtpSent(true)}
+              onClick={sendOtpHandler}
             >
               Send OTP
             </button>
