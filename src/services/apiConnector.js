@@ -2,7 +2,6 @@ import axios from "axios";
 
 // Base axios instance
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL, // automatically base URL
   withCredentials: true, // cookies / JWT ke liye
 });
 
