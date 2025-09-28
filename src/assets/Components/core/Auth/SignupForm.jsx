@@ -19,7 +19,6 @@ const SignupForm = () => {
     formState: { errors },
   } = useForm();
   const email = watch("email");
-  console.log("email", email);
   const [accountType, setAccountType] = useState(account[0]);
   const password = watch("password");
 
@@ -38,8 +37,10 @@ const SignupForm = () => {
     setPasswordType((prev) => (prev === "password" ? "text" : "password"));
 
   // send otp api
-  const sendOtpHandler = async (email) => {
+  const sendOtpHandler = async () => {
+    console.log("email in handler", email);
     const otp = await sendOtp(email);
+    setOtpSent(true);
     return otp;
   };
   return (

@@ -2,6 +2,7 @@ import axios from "axios";
 
 // Base axios instance
 const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_REACT_APP_BACKEND_URL,
   withCredentials: true, // cookies / JWT ke liye
 });
 

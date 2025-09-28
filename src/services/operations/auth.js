@@ -4,6 +4,7 @@ import { authEndPoints } from "../allApis";
 
 // Send OTP function
 export const sendOtp = async (email) => {
+  console.log("api emai",email)
   let result;
   const toastId = toast.loading("Sending otp...");
   try {
