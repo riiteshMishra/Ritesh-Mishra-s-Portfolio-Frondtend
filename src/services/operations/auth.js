@@ -1,6 +1,8 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { authEndPoints } from "../allApis";
+import { clearToken, setToken } from "../../slices/auth";
+import { deleteUser, setUser } from "../../slices/profile";
 
 // Send OTP function
 export const sendOtp = async (email) => {
@@ -23,7 +25,7 @@ export const sendOtp = async (email) => {
 };
 
 // signup data
-export const signup = async (formData, navigate,dispatch) => {
+export const signup = async (formData, navigate, dispatch) => {
   const toastId = toast.loading("Submitting your data");
   let result;
   try {
@@ -39,8 +41,7 @@ export const signup = async (formData, navigate,dispatch) => {
     toast.success("Signup successfully");
     navigate("/login");
   } catch (err) {
-    
-    const errMessage =  err.response.data.message || "Signup Failed";
+    const errMessage = err.response.data.message || "Signup Failed";
     toast.error(errMessage);
     console.log("SIGNUP API RESPONSE.........", err);
   } finally {
@@ -49,13 +50,15 @@ export const signup = async (formData, navigate,dispatch) => {
   }
 };
 // login function
-export const login = async (formData) => {
+export const login = async (formData, navigate, dispatch) => {
   const toastId = toast.loading("Please hold on, attempt to login");
   let result;
   try {
-    const response = await apiConnector("POST", authEndPoints.LOG_IN_API, {
-      formData,
-    });
+    const response = await apiConnector(
+      "POST",
+      authEndPoints.LOG_IN_API,
+      formData
+    );
 
     // validation
     if (!response.data.success) return toast.error("Login failed");
@@ -64,12 +67,36 @@ export const login = async (formData) => {
 
     result = response.data;
 
+    // SET TOKEN
+    dispatch(setToken(response.data.token));
+
+    // SET PROFILE DATA
+    dispatch(setUser(response.data.user));
+
     toast.success("Login successfully");
+    navigate("/dashboard/profile");
   } catch (err) {
     console.log("LOGIN API ERROR RESPONSE..........", err);
-    const errMessage = err.data.message || "Login failed";
+    const errMessage =
+      err.message || err.response.data.message || "Login failed";
+    toast.error(errMessage);
   } finally {
     toast.dismiss(toastId);
     return result;
+  }
+};
+
+// logout function
+export const logout = async (navigate, dispatch) => {
+  try {
+    dispatch(setToken(null));
+    dispatch(clearToken());
+    dispatch(setUser(null));
+    dispatch(deleteUser());
+    toast.success("Logout successfully");
+    navigate("/");
+  } catch (err) {
+    console.log("logout err", err);
+    toast.error("logout failed");
   }
 };

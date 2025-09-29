@@ -2,8 +2,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOff } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
+import { login } from "../../../../services/operations/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -13,7 +18,8 @@ const LoginForm = () => {
 
   const formSubmit = async (data) => {
     console.log("LOGIN DATA", data);
-    reset(); // Reset the form after submission
+    await login(data, navigate, dispatch);
+    // reset();
   };
 
   const [type, setType] = useState("password");
@@ -48,7 +54,7 @@ const LoginForm = () => {
           <p className="mb-1 font-medium">Password</p>
           <input
             type={type}
-            className="FormStyle border p-2 rounded pr-10" 
+            className="FormStyle border p-2 rounded pr-10"
             {...register("password", { required: "Password is required" })}
           />
           {errors.password && (
@@ -57,7 +63,6 @@ const LoginForm = () => {
             </span>
           )}
 
-         
           <span
             className="absolute right-3 top-[55px] cursor-pointer text-xl text-white"
             onClick={togglePassword}

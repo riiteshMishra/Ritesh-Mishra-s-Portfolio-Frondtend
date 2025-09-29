@@ -10,21 +10,24 @@ import Login from "./assets/pages/Login";
 import Footer from "./assets/Components/common/Footer";
 import Blogs from "./assets/pages/Blogs";
 import PageNotFound from "./assets/pages/PageNotFound";
+import { useSelector } from "react-redux";
+import Dashboard from "./assets/pages/Dashboard";
 
 const App = () => {
+  const { token } = useSelector((state) => state.auth);
   return (
     <div className="min-h-screen bg-gray-950 ">
       <NavBar />
       <Routes>
-        <Route path="*" element={<PageNotFound/>}/>
+        <Route path="*" element={<PageNotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/blogs" element={<Blogs/>} />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact-us" element={<Contact />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login/>} />
-
+        {!token && <Route path="/signup" element={<Signup />} />}
+        {!token && <Route path="/login" element={<Login />} />}
+        {token && <Route path="/dashboard/profile" element={<Dashboard />} />}
       </Routes>
       {/* <Footer/> */}
     </div>
