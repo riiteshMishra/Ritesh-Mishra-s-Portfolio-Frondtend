@@ -9,12 +9,14 @@ import Signup from "./assets/pages/Signup";
 import Login from "./assets/pages/Login";
 import Footer from "./assets/Components/common/Footer";
 import Blogs from "./assets/pages/Blogs";
+import PageNotFound from "./assets/pages/PageNotFound";
 
 const App = () => {
   return (
     <div className="min-h-screen bg-gray-950 ">
       <NavBar />
       <Routes>
+        <Route path="*" element={<PageNotFound/>}/>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs/>} />
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login/>} />
+
       </Routes>
       {/* <Footer/> */}
     </div>

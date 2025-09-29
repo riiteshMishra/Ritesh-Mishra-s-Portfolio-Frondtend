@@ -3,13 +3,26 @@ import { useState } from "react";
 import { ACCOUNT_TYPE } from "../../../../utils/utilsData";
 import { IoEyeOff } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
-import { sendOtp } from "../../../../services/operations/auth";
+import { login, sendOtp, signup } from "../../../../services/operations/auth";
+import {  useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+
 
 const SignupForm = () => {
   const account = Object.values(ACCOUNT_TYPE);
   const [otpSent, setOtpSent] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   const [confirmPasswordType, setConfirmPasswordType] = useState("password");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // send otp api
+  const sendOtpHandler = async () => {
+    const email = watch("email");
+    if (!email) return toast.error("Please enter email first");
+    await sendOtp(email);
+    setOtpSent(true);
+  };
 
   const {
     register,
@@ -18,15 +31,10 @@ const SignupForm = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const email = watch("email");
   const [accountType, setAccountType] = useState(account[0]);
   const password = watch("password");
-
-  const submitHandler = (data) => {
-    console.log("SIGN-UP FORM DATA", data);
-    reset();
-    setOtpSent(false); // reset OTP state
-  };
 
   const toggleConfirmPassword = () => {
     return setConfirmPasswordType((prev) =>
@@ -36,13 +44,18 @@ const SignupForm = () => {
   const togglePassword = () =>
     setPasswordType((prev) => (prev === "password" ? "text" : "password"));
 
-  // send otp api
-  const sendOtpHandler = async () => {
-    console.log("email in handler", email);
-    const otp = await sendOtp(email);
-    setOtpSent(true);
-    return otp;
+  const submitHandler = async (data) => {
+    const formData = new FormData();
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("confirmPassword", data.confirmPassword);
+    formData.append("otp", data.otp);
+    formData.append("accountType", accountType);
+    await signup(formData, navigate, dispatch);
   };
+
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-4xl mb-6">Sign-up</h1>
