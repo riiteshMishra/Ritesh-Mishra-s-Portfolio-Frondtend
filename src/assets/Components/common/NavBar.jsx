@@ -19,7 +19,7 @@ const NavBar = () => {
   const smallRoutes = [
     {
       id: 1,
-      path: "/dashboard/profile",
+      path: "/dashboard/my-profile",
       route: "dashboard",
       actions: () => {},
     },
@@ -35,10 +35,10 @@ const NavBar = () => {
   ];
   const [slideBar, setSlideBar] = useState(false);
   return (
-    <div className="bg-gray-800 h-[60px] relative z-10 border-b-[1px] border-richblack-600 top-0  ">
-      <nav className="text-white container py-4  flex items-center justify-between">
+    <div className="bg-gray-800 h-[60px]  z-10 border-b-[1px] border-richblack-600 top-0  ">
+      <nav className="text-white container py-4  flex items-center justify-between flex-wrap">
         <Link to={"/"}>Ritesh Mishra</Link>
-        <ul className="sm:flex gap-4 hidden">
+        <ul className="md:flex gap-4 hidden">
           {navbarLinks.map((li) => (
             <li key={li.id} className=" capitalize">
               <NavLink
@@ -53,7 +53,8 @@ const NavBar = () => {
           ))}
         </ul>
 
-        <div className="relative flex items-center gap-x-4 z-20">
+        {/* image route */}
+        <div className="flex items-center gap-x-4 z-20">
           {token ? (
             <Link onClick={() => setIsActive((prev) => !prev)}>
               <div className="flex items-center">
@@ -88,7 +89,7 @@ const NavBar = () => {
               </div>
             </div>
           )}
-          <div className="inline-block sm:hidden">
+          <div className="inline-block md:hidden">
             {slideBar ? (
               <GiCrossMark onClick={() => setSlideBar((prev) => !prev)} />
             ) : (
@@ -97,7 +98,7 @@ const NavBar = () => {
           </div>
 
           {isActive && (
-            <div className="absolute top-10 flex flex-col right-5 bg-richblack-900 rounded p-2 ">
+            <div className="absolute top-13 flex flex-col right-5 bg-richblack-900 rounded p-2 ">
               {smallRoutes.map((route) => (
                 <Link
                   to={route.path}

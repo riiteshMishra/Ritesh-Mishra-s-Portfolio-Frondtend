@@ -76,8 +76,8 @@ body {
 .light-capsule {
   background-image: radial-gradient(
     125% 125% at 50% 90%,
-    #1f2937 40%, /* dark gray background */
-    #4f46e5 100% /* darker purple */
+    #1f2937 40%,
+    /* dark gray background */ #4f46e5 100% /* darker purple */
   );
   border: 2px solid #fff; /* keep border white for contrast */
   border-radius: 9999px;

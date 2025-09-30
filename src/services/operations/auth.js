@@ -74,7 +74,7 @@ export const login = async (formData, navigate, dispatch) => {
     dispatch(setUser(response.data.user));
 
     toast.success("Login successfully");
-    navigate("/dashboard/profile");
+    navigate("/dashboard/my-profile");
   } catch (err) {
     console.log("LOGIN API ERROR RESPONSE..........", err);
     const errMessage =

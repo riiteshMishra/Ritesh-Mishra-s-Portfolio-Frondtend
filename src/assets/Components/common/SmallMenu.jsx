@@ -1,9 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { navbarLinks } from "../../Data/navbar";
 import { useSelector } from "react-redux";
-import { FaBarsStaggered } from "react-icons/fa6";
-import { GiCrossMark } from "react-icons/gi";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useState } from "react";
 
 const SmallMenu = ({ setSlideBar, slideBar }) => {
@@ -12,19 +9,19 @@ const SmallMenu = ({ setSlideBar, slideBar }) => {
   const { isActive, setIsActive } = useState(false);
 
   const smallRoutes = [
-    { id: 1, path: "/dashboard/profile", route: "dashboard" },
+    { id: 1, path: "/dashboard/my-profile", route: "dashboard" },
     { id: 2, path: "/logout", route: "logout" },
   ];
   return (
     <div
-      className="absolute top-[60px] left-0 right-0 select-none flex flex-col min-h-screen sm:hidden backdrop-blur-3xl bg-black/30 transition-all duration-300 z-30"
+      className="absolute top-[60px] -left-5 -right-5 select-none flex flex-col min-h-screen md:hidden backdrop-blur-3xl transition-all duration-300 z-10"
       onClick={() => setSlideBar(false)}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="px-10 pt-10 w-fit h-fit bg-[#ffffff18]"
+        className="sm:px-10 flex sm:items-center justify-center gap-4"
       >
-        <ul className="flex flex-col text-3xl text-richblack-100 gap-4">
+        <ul className=" flex flex-col sm:flex-row text-3xl text-richblack-100 gap-5 py-10">
           {navbarLinks.map((li) => (
             <li key={li.id}>
               <NavLink
@@ -44,12 +41,9 @@ const SmallMenu = ({ setSlideBar, slideBar }) => {
           ))}
         </ul>
 
-        <div className="mt-4 relative">
+        {/* <div className=" relative">
           {token && (
-            <Link
-              to={"/dashboard/profile"}
-              
-            >
+            <Link to={"/dashboard/profile"}>
               <div className="flex items-center">
                 <img
                   src={user.image}
@@ -60,9 +54,7 @@ const SmallMenu = ({ setSlideBar, slideBar }) => {
               </div>
             </Link>
           )}
-
-          
-        </div>
+        </div> */}
       </div>
     </div>
   );

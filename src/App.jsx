@@ -12,9 +12,17 @@ import Blogs from "./assets/pages/Blogs";
 import PageNotFound from "./assets/pages/PageNotFound";
 import { useSelector } from "react-redux";
 import Dashboard from "./assets/pages/Dashboard";
+import Profile from "./assets/Components/core/Dashboard/Profile/Profile";
+import EditProfile from "./assets/Components/core/Dashboard/Profile/EditProfile";
+import { ACCOUNT_TYPE } from "./utils/utilsData";
+import LikedBlogs from "./assets/Components/core/Dashboard/Blog/LikedBlogs";
+import Settings from "./assets/Components/core/Dashboard/Settings/Index";
+import CreateBlogs from "./assets/Components/core/Dashboard/Blog/create-blog/Index";
+import MyBlog from "./assets/Components/core/Dashboard/Blog/create-blog/MyBlog";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
   return (
     <div className="min-h-screen bg-gray-950 ">
       <NavBar />
@@ -27,7 +35,23 @@ const App = () => {
         <Route path="/contact-us" element={<Contact />} />
         {!token && <Route path="/signup" element={<Signup />} />}
         {!token && <Route path="/login" element={<Login />} />}
-        {token && <Route path="/dashboard/profile" element={<Dashboard />} />}
+        // Dashboard
+        {token && (
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="settings" element={<Settings />}>
+              {/* <Route path=""/> */}
+            </Route>
+            <Route path="my-profile" element={<Profile />} />
+            <Route path="liked-blogs" element={<LikedBlogs />} />
+            // ONLY FOR ADMIN
+            {user?.accountType === ACCOUNT_TYPE.ADMIN && (
+              <>
+                <Route path="create-blog" element={<CreateBlogs />} />
+                <Route path="my-blogs" element={<MyBlog />} />
+              </>
+            )}
+          </Route>
+        )}
       </Routes>
       {/* <Footer/> */}
     </div>
