@@ -7,3 +7,19 @@ export const authEndPoints = {
   GENERATE_RESET_PASSWORD_TOKEN: "/auth/generate-reset-password-token",
   RESET_PASSWORD_API: "/auth/reset-password/:token",
 };
+
+// blogs api
+export const blogsEndPoints = {
+  CREATE_BLOG_API: "/create-blog",
+  UPDATE_BLOG_API: "/update-blog",
+  DELETE_BLOG_API: "/delete-blog/:blogId",
+  GET_ALL_BLOGS: "/get-all-blogs",
+};
+
+// categories
+export const categoryEndPoints = {
+  CREATE_CATEGORY_API: "/create-category",
+  UPDATE_CATEGORY_API: "/update-category",
+  DELETE_CATEGORY_API: "/delete-category",
+  GET_ALL_CATEGORIES_API: "/category/find-all-categories",
+};

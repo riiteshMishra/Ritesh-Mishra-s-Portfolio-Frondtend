@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
-import { authEndPoints } from "../allApis";
+import { authEndPoints, blogsEndPoints, categoryEndPoints } from "../allApis";
 import { clearToken, setToken } from "../../slices/auth";
 import { deleteUser, setUser } from "../../slices/profile";
 
@@ -99,4 +99,60 @@ export const logout = async (navigate, dispatch) => {
     console.log("logout err", err);
     toast.error("logout failed");
   }
+};
+
+// create blog
+export const createBlog = async (formData, token) => {
+  const toastId = toast.loading("Creating blog...");
+  let result = null;
+
+  try {
+    const response = await apiConnector(
+      "POST",
+      blogsEndPoints.CREATE_BLOG_API,
+      formData,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+
+    console.log("CREATE BLOG API RESPONSE:", response.data);
+    result = response.data;
+    toast.success("Blog created successfully!");
+  } catch (err) {
+    console.error("CREATE BLOG API ERROR:", err);
+    toast.error(err?.response?.data?.message || "Blog creation failed.");
+  } finally {
+    toast.dismiss(toastId);
+  }
+
+  return result;
+};
+
+// get categories
+export const getAllCategories = async () => {
+  const toastId = toast.loading("Fetching categories...");
+  let result = [];
+  try {
+    const response = await apiConnector(
+      "GET",
+      categoryEndPoints.GET_ALL_CATEGORIES_API
+    );
+
+    if (!response.data.success)
+      throw new Error(response.data.message || "Internal server error");
+    // console.log("GET ALL CATEGORIES API RESPONSE...", response);
+    result = response.data.allCategories;
+    toast.success("All categories fetched successfully!");
+  } catch (err) {
+    console.error("GET CATEGORIES API ERROR", err);
+    toast.error(err.message || "Failed to fetch categories");
+  } finally {
+    toast.dismiss(toastId);
+  }
+  return result;
 };
