@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const BlogCreateStep = () => {
-  const steps = [1, 2, 3];
+  const steps = [1, 2];
   const { step: blogStep } = useSelector((state) => state.blog);
 
   return (

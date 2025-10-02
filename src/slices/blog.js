@@ -30,8 +30,11 @@ const blogSlice = createSlice({
       state.blog = null;
       localStorage.removeItem("blogData");
     },
+    setStep: (state, actions) => {
+      state.step = actions.payload;
+    },
   },
 });
 
-export const { setBlog, updateBlog, deleteBlog } = blogSlice.actions;
+export const { setBlog, updateBlog, deleteBlog ,setStep} = blogSlice.actions;
 export default blogSlice.reducer;

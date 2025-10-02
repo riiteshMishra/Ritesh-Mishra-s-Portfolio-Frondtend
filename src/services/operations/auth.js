@@ -4,29 +4,37 @@ import { authEndPoints, blogsEndPoints, categoryEndPoints } from "../allApis";
 import { clearToken, setToken } from "../../slices/auth";
 import { deleteUser, setUser } from "../../slices/profile";
 
-// Send OTP function
+//  Error Handler
+const getErrorMessage = (err, fallback = "Something went wrong") =>
+  err?.response?.data?.message || err.message || fallback;
+
+// --------------------- Auth ---------------------
+
+// Send OTP
 export const sendOtp = async (email) => {
-  const toastId = toast.loading("Sending otp...");
+  const toastId = toast.loading("Sending OTP...");
   try {
     const response = await apiConnector("POST", authEndPoints.SEND_OTP_API, {
       email,
     });
-    // console.log("OTP sending response", response);
-    console.table(response.data);
+
+    if (!response.data.success)
+      throw new Error(response.data.message || "OTP send failed");
+
     toast.success("OTP sent successfully");
+    return response.data;
   } catch (err) {
-    console.log("Error while sending OTP:", err);
-    toast.error(err?.response?.data?.message || "Send OTP error");
+    console.error("SEND OTP ERROR:", err);
+    toast.error(getErrorMessage(err, "Send OTP error"));
     throw err;
   } finally {
     toast.dismiss(toastId);
-    return;
   }
 };
 
-// signup data
-export const signup = async (formData, navigate, dispatch) => {
-  const toastId = toast.loading("Submitting your data");
+// Signup
+export const signup = async (formData, navigate) => {
+  const toastId = toast.loading("Submitting your data...");
   let result;
   try {
     const response = await apiConnector(
@@ -35,23 +43,24 @@ export const signup = async (formData, navigate, dispatch) => {
       formData
     );
 
-    if (!response.data.success) return toast.error("Sign up failed");
+    if (!response.data.success)
+      throw new Error(response.data.message || "Signup failed");
 
     result = response.data;
-    toast.success("Signup successfully");
+    toast.success("Signup successful");
     navigate("/login");
   } catch (err) {
-    const errMessage = err.response.data.message || "Signup Failed";
-    toast.error(errMessage);
-    console.log("SIGNUP API RESPONSE.........", err);
+    console.error("SIGNUP ERROR:", err);
+    toast.error(getErrorMessage(err, "Signup failed"));
   } finally {
     toast.dismiss(toastId);
-    return result;
   }
+  return result;
 };
-// login function
+
+// Login
 export const login = async (formData, navigate, dispatch) => {
-  const toastId = toast.loading("Please hold on, attempt to login");
+  const toastId = toast.loading("Attempting login...");
   let result;
   try {
     const response = await apiConnector(
@@ -60,48 +69,42 @@ export const login = async (formData, navigate, dispatch) => {
       formData
     );
 
-    // validation
-    if (!response.data.success) return toast.error("Login failed");
-
-    console.log("LOGIN API RESPONSE.........", response);
+    if (!response.data.success)
+      throw new Error(response.data.message || "Login failed");
 
     result = response.data;
+    dispatch(setToken(result.token));
+    dispatch(setUser(result.user));
 
-    // SET TOKEN
-    dispatch(setToken(response.data.token));
-
-    // SET PROFILE DATA
-    dispatch(setUser(response.data.user));
-
-    toast.success("Login successfully");
+    toast.success("Login successful");
     navigate("/dashboard/my-profile");
   } catch (err) {
-    console.log("LOGIN API ERROR RESPONSE..........", err);
-    const errMessage =
-      err.message || err.response.data.message || "Login failed";
-    toast.error(errMessage);
+    console.error("LOGIN ERROR:", err);
+    toast.error(getErrorMessage(err, "Login failed"));
   } finally {
     toast.dismiss(toastId);
-    return result;
   }
+  return result;
 };
 
-// logout function
+// Logout
 export const logout = async (navigate, dispatch) => {
   try {
     dispatch(setToken(null));
     dispatch(clearToken());
     dispatch(setUser(null));
     dispatch(deleteUser());
-    toast.success("Logout successfully");
+    toast.success("Logout successful");
     navigate("/");
   } catch (err) {
-    console.log("logout err", err);
-    toast.error("logout failed");
+    console.error("LOGOUT ERROR:", err);
+    toast.error("Logout failed");
   }
 };
 
-// create blog
+// --------------------- Blog ---------------------
+
+// Create Blog
 export const createBlog = async (formData, token) => {
   const toastId = toast.loading("Creating blog...");
   let result = null;
@@ -112,20 +115,18 @@ export const createBlog = async (formData, token) => {
       blogsEndPoints.CREATE_BLOG_API,
       formData,
       {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`, // ✅ direct header
       }
     );
 
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
+    if (!response.data.success)
+      throw new Error(response.data.message || "Blog creation failed");
 
-    console.log("CREATE BLOG API RESPONSE:", response.data);
-    result = response.data;
+    result = response.data.blog;
     toast.success("Blog created successfully!");
   } catch (err) {
-    console.error("CREATE BLOG API ERROR:", err);
-    toast.error(err?.response?.data?.message || "Blog creation failed.");
+    console.error("CREATE BLOG ERROR:", err);
+    toast.error(getErrorMessage(err, "Blog creation failed"));
   } finally {
     toast.dismiss(toastId);
   }
@@ -133,9 +134,38 @@ export const createBlog = async (formData, token) => {
   return result;
 };
 
-// get categories
+// Update Blog
+export const updateBlog = async (formData, token) => {
+  const toastId = toast.loading("Updating blog...");
+  let result;
+
+  try {
+    const response = await apiConnector(
+      "PUT",
+      blogsEndPoints.UPDATE_BLOG_API,
+      formData,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    if (!response.data.success)
+      throw new Error(response.data.message || "Blog update failed");
+
+    result = response.data;
+    toast.success("Blog updated successfully!");
+  } catch (err) {
+    console.error("UPDATE BLOG ERROR:", err);
+    toast.error(getErrorMessage(err, "Blog update failed"));
+  } finally {
+    toast.dismiss(toastId);
+  }
+
+  return result;
+};
+
+// Get All Categories
 export const getAllCategories = async () => {
-  const toastId = toast.loading("Fetching categories...");
   let result = [];
   try {
     const response = await apiConnector(
@@ -144,15 +174,13 @@ export const getAllCategories = async () => {
     );
 
     if (!response.data.success)
-      throw new Error(response.data.message || "Internal server error");
-    // console.log("GET ALL CATEGORIES API RESPONSE...", response);
+      throw new Error(response.data.message || "Failed to fetch categories");
+
     result = response.data.allCategories;
-    toast.success("All categories fetched successfully!");
+    console.log("Categories fetched successfully", result);
   } catch (err) {
-    console.error("GET CATEGORIES API ERROR", err);
-    toast.error(err.message || "Failed to fetch categories");
-  } finally {
-    toast.dismiss(toastId);
+    console.error("GET CATEGORIES ERROR:", err);
+    toast.error(getErrorMessage(err, "Failed to fetch categories"));
   }
   return result;
 };

@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { getAllCategories } from "../../../../../../services/operations/auth";
+import {
+  createBlog,
+  getAllCategories,
+} from "../../../../../../services/operations/auth";
 import Thumbnail from "./Thumbnail";
+import { useDispatch, useSelector } from "react-redux";
+import { setBlog, setStep } from "../../../../../../slices/blog";
+import Tags from "./Tags";
+import { useNavigate } from "react-router-dom";
 
 const BlogInfo = () => {
+  const { token } = useSelector((state) => state.auth);
   const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -12,17 +22,27 @@ const BlogInfo = () => {
     setValue,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.table(data);
-    // TODO: dispatch to Redux or move to next step
+  const onSubmit = async (data) => {
+    // console.table(data);
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("slug", data.slug);
+    formData.append("categoryId", data.categoryId);
+    formData.append("content", data.content);
+    formData.append("thumbnail", data.thumbnail);
+    formData.append("tags", data.tags);
+    const blog = await createBlog(formData, token);
+    dispatch(setBlog(blog));
+   
+    dispatch(setStep(2));
   };
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const categories = await getAllCategories();
-        console.log("categories", categories);
-        setCategories(categories); // agar state me store karna ho
+        // console.log("categories", categories);
+        setCategories(categories);
       } catch (err) {
         console.error("Failed to fetch categories:", err);
       }
@@ -95,18 +115,11 @@ const BlogInfo = () => {
         </label>
 
         {/* Thumbnail */}
-        {/* <label className="flex flex-col">
-          <span>Thumbnail</span>
-          <input
-            type="file"
-            {...register("thumbnail", { required: "Thumbnail is required" })}
-            className=" FormStyle"
-          />
-          {errors.thumbnail && (
-            <span className="text-red-500">{errors.thumbnail.message}</span>
-          )}
-        </label> */}
         <Thumbnail setValue={setValue} register={register} />
+
+        {/* tags */}
+        <Tags setValue={setValue} register={register} />
+
         <button
           type="submit"
           className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700"

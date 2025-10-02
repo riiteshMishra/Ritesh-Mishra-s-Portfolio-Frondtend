@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import BlogCreateStep from "./BlogCreateStep";
 import BlogInfo from "./BlogInfo";
 import { useForm } from "react-hook-form";
+import BlogStatus from "./BlogStatus";
+import { useEffect } from "react";
 
 const CreateBlogs = () => {
   const { step } = useSelector((state) => state.blog);
@@ -13,8 +15,8 @@ const CreateBlogs = () => {
 
         {/* form se data fetch */}
         {step === 1 && <BlogInfo />}
-        {/* {step === 2 && <></>}
-        {step === 3 && <></>} */}
+        {step === 2 && <BlogStatus  />}
+        {/* {step === 3 && <></>} */}
       </div>
     </section>
   );
@@ -23,6 +25,6 @@ const CreateBlogs = () => {
 export default CreateBlogs;
 
 // isame main steps se kaam krunga
-// pahale step me thumbnail,title,slug lunga
-// second step me content, categoryId,tags
+// pahale step me thumbnail,title,slug ,content, categoryId, tags lunga
+// second step me
 // last step me publish krna hai ki nhi

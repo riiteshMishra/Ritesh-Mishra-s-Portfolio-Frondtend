@@ -10,8 +10,8 @@ export const authEndPoints = {
 
 // blogs api
 export const blogsEndPoints = {
-  CREATE_BLOG_API: "/create-blog",
-  UPDATE_BLOG_API: "/update-blog",
+  CREATE_BLOG_API: "/blogs/create-blog",
+  UPDATE_BLOG_API: "blogs/update-blog",
   DELETE_BLOG_API: "/delete-blog/:blogId",
   GET_ALL_BLOGS: "/get-all-blogs",
 };
