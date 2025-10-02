@@ -115,7 +115,7 @@ export const createBlog = async (formData, token) => {
       blogsEndPoints.CREATE_BLOG_API,
       formData,
       {
-        Authorization: `Bearer ${token}`, // ✅ direct header
+        Authorization: `Bearer ${token}`,
       }
     );
 
@@ -199,6 +199,23 @@ export const adminBlogs = async (token) => {
   } catch (err) {
     console.log("ADMIN BLOGS API ERROR RESPONSE", err);
     toast.error("Failed to get admin blogs");
+  } finally {
+    return result;
+  }
+};
+
+// Get all blogs
+export const fetchAllBlogs = async () => {
+  let result = [];
+  try {
+    const response = await apiConnector("GET", blogsEndPoints.GET_ALL_BLOGS);
+
+    if (!response.data.success) throw new Error("Invalid response");
+    console.log("ALL PUBLISHED BLOG API RESPONSE", response);
+    result = response.data.allBlogs;
+    toast.success("All published blogs fetched");
+  } catch (err) {
+    toast.error(getErrorMessage(err, "some thing went wrong"));
   } finally {
     return result;
   }
