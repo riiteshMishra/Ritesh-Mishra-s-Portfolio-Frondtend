@@ -7,7 +7,7 @@ const Edit = ({ text, path, Icon }) => {
       to={path}
       className="h-fit w-fit flex items-center gap-2 hover:text-amber-400 bg-cyan-700 rounded py-1 px-4 hover:scale-105 transition-all duration-200"
     >
-      <p>Edit</p>
+      <p>{text ? text : "edit"}</p>
       <BiSolidEditAlt />
     </Link>
   );

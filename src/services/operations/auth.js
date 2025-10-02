@@ -184,3 +184,22 @@ export const getAllCategories = async () => {
   }
   return result;
 };
+
+// Get Admin blogs
+export const adminBlogs = async (token) => {
+  let result = [];
+  try {
+    const response = await apiConnector("GET", blogsEndPoints.GET_USER_BLOGS);
+
+    if (!response.data.success) throw new Error("Invalid response");
+
+    console.log("USER BLOGS API RESPONSE", response);
+    result = response.data.blog;
+    toast.success("User blogs fetched successfully");
+  } catch (err) {
+    console.log("ADMIN BLOGS API ERROR RESPONSE", err);
+    toast.error("Failed to get admin blogs");
+  } finally {
+    return result;
+  }
+};

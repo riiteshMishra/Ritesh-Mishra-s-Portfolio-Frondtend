@@ -14,6 +14,7 @@ export const blogsEndPoints = {
   UPDATE_BLOG_API: "blogs/update-blog",
   DELETE_BLOG_API: "/delete-blog/:blogId",
   GET_ALL_BLOGS: "/get-all-blogs",
+  GET_USER_BLOGS:"/blogs/user-blogs"
 };
 
 // categories
