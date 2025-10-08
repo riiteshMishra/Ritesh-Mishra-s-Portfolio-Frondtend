@@ -2,12 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { fetchAllBlogs } from "../../services/operations/auth";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
+import { FaHeart, FaComment } from "react-icons/fa";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const loadingRef = useRef(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchPublishedBlogs = async () => {
       try {
@@ -32,12 +34,12 @@ const Blogs = () => {
         opacity: 0.3,
         scale: 1.2,
         duration: 0.8,
-        repeat: -1, // infinite
+        repeat: -1,
         yoyo: true,
         ease: "power2.inOut",
       });
     } else {
-      gsap.killTweensOf(loadingRef.current); // stop animation after loading
+      gsap.killTweensOf(loadingRef.current);
       if (loadingRef.current) {
         gsap.set(loadingRef.current, { opacity: 1, scale: 1 });
       }
@@ -47,8 +49,9 @@ const Blogs = () => {
   return (
     <section className="ProjectPage">
       <div className="max-w-[1300px] mx-auto p-6 rounded-lg">
-        {/* Blogs */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <h1 className="text-center text-6xl Bebas">Blogs</h1>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-10">
           {loading ? (
             <div
               ref={loadingRef}
@@ -57,7 +60,7 @@ const Blogs = () => {
               Loading...
             </div>
           ) : blogs.length === 0 ? (
-            <div className="col-span-full text-center text-lg text-gray-300">
+            <div className="col-span-full text-center text-4xl text-gray-300">
               Currently we don’t have any blogs
             </div>
           ) : (
@@ -80,11 +83,23 @@ const Blogs = () => {
                   <p className="text-sm text-gray-400 mb-2">{blog?.slug}</p>
 
                   {/* substring to limit content preview */}
-                  <p className="text-sm text-gray-300">
+                  <p className="text-sm text-gray-300 mb-3">
                     {blog?.content
                       ? blog.content.substring(0, 100) + "..."
                       : "No description available."}
                   </p>
+
+                  {/* Likes & Comments */}
+                  <div className="flex items-center gap-6 text-gray-300">
+                    <div className="flex items-center gap-1">
+                      <FaHeart className="text-red-500" />
+                      <span>{blog?.likes?.length ?? 0}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <FaComment className="text-blue-400" />
+                      <span>{blog?.comments?.length ?? 0}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))
