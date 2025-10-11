@@ -9,6 +9,7 @@ import { BiSolidLike } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { BiCommentDetail } from "react-icons/bi";
 import CommentModal from "./CommentModal";
+import CommentUi from "./CommentUi";
 
 const ViewBlog = () => {
   const [blogData, setBlogData] = useState(null);
@@ -90,7 +91,7 @@ const ViewBlog = () => {
         Blog not found 😔
       </div>
     );
-console.log(commentModal)
+  // console.log("blogData.comments", blogData.comments);
   return (
     <section className="min-h-screen bg-[#0b0b0b] text-white py-10 px-4 ">
       <div className="max-w-4xl mx-auto">
@@ -178,7 +179,12 @@ console.log(commentModal)
         </div>
       </div>
 
-      {commentModal && <CommentModal setCommentModal={setCommentModal} />}
+      <div className="my-4">
+        <CommentUi comments={blogData.comments} />
+      </div>
+      {commentModal && (
+        <CommentModal setCommentModal={setCommentModal} blogId={blogId} />
+      )}
     </section>
   );
 };

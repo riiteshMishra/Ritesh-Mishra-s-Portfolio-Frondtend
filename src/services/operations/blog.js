@@ -19,7 +19,7 @@ export const getBlogById = async (blogId) => {
       return toast.error(getErrorMessage("Invalid response"));
     // console.log("GET BLOG BY ID API RESPONSE", response);
     result = response.data.blog;
-    toast.success("Blog fetched successful");
+    // toast.success("Blog fetched successful");
   } catch (err) {
     console.log("GET BLOG BY ID API ERROR RESPONSE", err);
     toast.error(getErrorMessage(err.message));
@@ -49,3 +49,38 @@ export const toggleBlogLike = async (userId, blogId) => {
     return result;
   }
 };
+
+// add comment
+export const addComment = async (userId, blogId, formData) => {
+  let result = [];
+  try {
+    const response = await apiConnector(
+      "POST",
+      `${blogsFunctionEndpoints.ADD_COMMENT_API.replace(":blogId", blogId)}`,
+      formData
+    );
+
+    console.log("ADD COMMENT API RESPONSE", response);
+
+    if (!response.data.success) throw new Error("Invalid response");
+
+    result = response.data;
+    toast.success("Comment added successfully");
+  } catch (err) {
+    toast.error(getErrorMessage(err));
+  } finally {
+    return result;
+  }
+};
+
+// // GET ALL COMMENTS FOR SINGLE BLOG
+// export const getAllCommentsById = async (blogId)=>{
+//   let result =[];
+//   try{
+// const response = await apiConnector("GET",blogsEndPoints)
+//   }catch(err){
+//    toast.error(getErrorMessage(err))
+//   }finally{
+//     return result
+//   }
+// }

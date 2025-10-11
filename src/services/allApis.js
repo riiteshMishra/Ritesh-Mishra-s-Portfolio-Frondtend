@@ -30,4 +30,7 @@ export const categoryEndPoints = {
 export const blogsFunctionEndpoints = {
   // GET_BLOG_BY_ID: "/blogs/blog-details/",
   TOGGLE_BLOG_LIKE: "/blogs/toggle-blog-like/",
+  ADD_COMMENT_API: "/blogs/blog/:blogId/comment",
+  UPDATE_COMMENT_API: "/blogs/update-comment/:blogId", // PENDING
+  DELETE_COMMENT_API: "/blogs/delete-comment", // PENDING
 };
