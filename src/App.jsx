@@ -19,6 +19,7 @@ import LikedBlogs from "./assets/Components/core/Dashboard/Blog/LikedBlogs";
 import Settings from "./assets/Components/core/Dashboard/Settings/Index";
 import CreateBlogs from "./assets/Components/core/Dashboard/Blog/create-blog/Index";
 import MyBlog from "./assets/Components/core/Dashboard/Blog/create-blog/MyBlog";
+import ViewBlog from "./assets/Components/core/Dashboard/Blog/view-blog/ViewBlog";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="blogs/blog/:blogId" element={<ViewBlog />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact-us" element={<Contact />} />
         {!token && <Route path="/signup" element={<Signup />} />}
@@ -48,7 +50,6 @@ const App = () => {
               <>
                 <Route path="create-blog" element={<CreateBlogs />} />
                 <Route path="my-blogs" element={<MyBlog />} />
-                
               </>
             )}
           </Route>
