@@ -16,6 +16,7 @@ export const blogsEndPoints = {
   GET_ALL_BLOGS: "blogs/get-all-blogs",
   GET_USER_BLOGS: "/blogs/user-blogs",
   GET_BLOG_BY_ID: "/blogs/blog-details/",
+  GET_ALL_LIKED_BLOGS: "/blogs/get-liked-blogs",
 };
 
 // categories

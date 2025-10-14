@@ -73,14 +73,25 @@ export const addComment = async (userId, blogId, formData) => {
   }
 };
 
-// // GET ALL COMMENTS FOR SINGLE BLOG
-// export const getAllCommentsById = async (blogId)=>{
-//   let result =[];
-//   try{
-// const response = await apiConnector("GET",blogsEndPoints)
-//   }catch(err){
-//    toast.error(getErrorMessage(err))
-//   }finally{
-//     return result
-//   }
-// }
+// get all liked blogs
+export const getAllLikedBlogs = async () => {
+  try {
+    const response = await apiConnector(
+      "GET",
+      blogsEndPoints.GET_ALL_LIKED_BLOGS
+    );
+
+    if (!response.data?.success) {
+      throw new Error("Invalid response");
+    }
+
+    console.log("GET LIKED BLOGS API RESPONSE", response);
+
+    return response.data.likedBlogsDetails || [];
+  } catch (err) {
+    console.log("GET ALL LIKED BLOG API ERROR", err);
+    toast.error(getErrorMessage(err));
+    return []; 
+  }
+};
+
