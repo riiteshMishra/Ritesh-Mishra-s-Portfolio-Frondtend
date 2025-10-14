@@ -35,3 +35,7 @@ export const blogsFunctionEndpoints = {
   UPDATE_COMMENT_API: "/blogs/update-comment/:blogId", // PENDING
   DELETE_COMMENT_API: "/blogs/delete-comment", // PENDING
 };
+
+export const profileEndpoints = {
+  UPDATE_PROFILE_PICTURE: "/profile/update-profile-picture",
+};

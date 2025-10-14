@@ -1,6 +1,11 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
-import { authEndPoints, blogsEndPoints, categoryEndPoints } from "../allApis";
+import {
+  authEndPoints,
+  blogsEndPoints,
+  categoryEndPoints,
+  profileEndpoints,
+} from "../allApis";
 import { clearToken, setToken } from "../../slices/auth";
 import { deleteUser, setUser } from "../../slices/profile";
 
@@ -216,6 +221,31 @@ export const fetchAllBlogs = async () => {
     toast.success("All published blogs fetched");
   } catch (err) {
     toast.error(getErrorMessage(err, "some thing went wrong"));
+  } finally {
+    return result;
+  }
+};
+
+// update picture
+export const updatePicture = async (data, dispatch) => {
+  console.log("data", data);
+  let result = [];
+  try {
+    const response = await apiConnector(
+      "POST",
+      profileEndpoints.UPDATE_PROFILE_PICTURE,
+      data
+    );
+    console.log("UPDATE PICTURE API RESPONSE", response);
+    if (!response.data.success) throw new Error("Invalid response");
+
+    result = response.data.user;
+    // console.log("result", result);
+    dispatch(setUser(result));
+    toast.success("picture updated successful");
+  } catch (err) {
+    console.log("UPDATE PICTURE API ERROR", err);
+    toast.error(getErrorMessage(err));
   } finally {
     return result;
   }
