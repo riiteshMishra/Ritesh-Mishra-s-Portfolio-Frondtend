@@ -40,3 +40,8 @@ export const profileEndpoints = {
   UPDATE_PROFILE_PICTURE: "/profile/update-profile-picture",
   UPDATE_PROFILE_DETAILS: "/profile/update-profile",
 };
+
+// contact - us 
+export const contactUsEndpoints = {
+  RAISE_REQUEST:"/profile/create-request"
+}

@@ -1,41 +1,51 @@
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { raiseRequest } from "../../../../services/operations/contact-us";
+import { useState } from "react";
 
 const ContactForm = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
+  const postRequest = async (data) => {
+    setLoading(true);
+    const result = await raiseRequest(data);
+    setLoading(false);
+    reset();
+  };
 
- const onSubmit = (data) => {
-   const sanitizedData = {
-     firstName: data.firstName
-       .trim()
-       .replace(/</g, "&lt;")
-       .replace(/>/g, "&gt;"),
-     lastName: data.lastName.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-     email: data.email.trim(),
-     contactNumber: data.contactNumber.trim(),
-     message: data.message.trim(),
-   };
+  const onSubmit = async (data) => {
+    const sanitizedData = {
+      firstName: data.firstName
+        .trim()
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;"),
+      lastName: data.lastName
+        .trim()
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;"),
+      email: data.email.trim(),
+      contactNumber: data.contactNumber.trim(),
+      message: data.message.trim(),
+    };
 
-   const formData = new FormData();
-   formData.append(
-     "clientName",
-     `${sanitizedData.firstName} ${sanitizedData.lastName}`
-   );
-   formData.append("email", sanitizedData.email);
-   formData.append("contactNumber", sanitizedData.contactNumber);
-   formData.append("message", sanitizedData.message);
+    const formData = new FormData();
+    formData.append("firstName", sanitizedData.firstName);
+    formData.append("lastName", sanitizedData.lastName);
+    formData.append("email", sanitizedData.email);
+    formData.append("contactNumber", sanitizedData.contactNumber);
+    formData.append("message", sanitizedData.message);
 
-   console.log("Sanitized Form Data:", Object.fromEntries(formData.entries()));
-
-   // Show success toast
-   toast.success("Form submitted successfully!");
- };
-
+    console.log("Sanitized Form Data:", Object.fromEntries(formData.entries()));
+    await postRequest(formData);
+    // Show success toast
+    // toast.success("Form submitted successfully!");
+  };
 
   return (
     <section className="w-full max-w-[500px] flex flex-col backdrop-blur-3xl px-5 py-2 ">
@@ -48,7 +58,7 @@ const ContactForm = () => {
         <div className="sm:flex justify-between gap-4">
           {/* First Name */}
           <label className="flex flex-col gap-2 sm:w-[48%]">
-            <p>First Name</p> 
+            <p>First Name</p>
             <input
               type="text"
               {...register("firstName", { required: true })}
@@ -100,7 +110,7 @@ const ContactForm = () => {
               {...register("contactNumber", {
                 required: "Contact Number is required",
                 pattern: {
-                  value: /^[6-9]\d{9}$/, 
+                  value: /^[6-9]\d{9}$/,
                   message: "Enter a valid 10-digit number",
                 },
               })}
@@ -123,7 +133,8 @@ const ContactForm = () => {
         </label>
         <button
           type="submit"
-          className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-full transition"
+          disabled={loading}
+          className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-full transition cursor-pointer"
         >
           Submit
         </button>
