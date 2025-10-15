@@ -115,7 +115,7 @@ const AddSocialLinks = () => {
           className={`mt-6 px-6 py-2 rounded ${
             loading
               ? "bg-gray-400 cursor-not-allowed"
-              : "bg-slate-500 hover:bg-lime-400 hover:text-black"
+              : "bg-slate-500 hover:bg-lime-400 hover:text-black cursor-pointer"
           } text-white`}
         >
           {loading ? "Saving..." : "Save Links"}
