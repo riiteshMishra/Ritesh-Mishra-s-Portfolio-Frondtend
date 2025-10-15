@@ -247,7 +247,7 @@ const ProfileDetails = () => {
         </label>
 
         {/* SUBMIT BUTTON */}
-        <Button text="Update Profile" />
+        <Button text="Update Profile" customClasses={"max-w-[180px]"}/>
       </form>
     </section>
   );
