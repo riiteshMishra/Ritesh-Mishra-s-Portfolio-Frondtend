@@ -38,4 +38,5 @@ export const blogsFunctionEndpoints = {
 
 export const profileEndpoints = {
   UPDATE_PROFILE_PICTURE: "/profile/update-profile-picture",
+  UPDATE_PROFILE_DETAILS: "/profile/update-profile",
 };

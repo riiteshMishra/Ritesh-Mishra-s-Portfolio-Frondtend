@@ -250,3 +250,5 @@ export const updatePicture = async (data, dispatch) => {
     return result;
   }
 };
+
+
