@@ -6,24 +6,28 @@ export const projects = [
     id: 1,
     name: "Portfolio Website",
     description: "My personal website made with React and Tailwind.",
-    image: "/projects/portfolio.png",
+    image:
+      "https://res.cloudinary.com/dwpplwqzs/image/upload/v1760594878/Portfolio-site/iwfattakau2yvgbq7rqg.png",
     technologies: {
       frontend: ["React", "Tailwind CSS", "HTML", "CSS"],
-      backend: ["None"],
+      backend: ["NodeJs", "ExpressJs", "MongoDb"],
     },
-    github: "https://github.com/ritesh/portfolio",
-    live: "https://ritesh-portfolio.com",
+    github:
+      "https://github.com/riiteshMishra/Ritesh-Mishra-s-Portfolio-Frondtend",
+    live: "https://ritesh-mishra-s-portfolio-frondtend.vercel.app/",
   },
   {
     id: 2,
-    name: "E-commerce App",
-    description: "A simple online store made using React and Node.js.",
-    image: "/projects/ecommerce.png",
+    name: "Study notion course selling platform",
+    description:
+      "A simple online course selling platform made using React and Node.js.",
+    image:
+      "https://res.cloudinary.com/dwpplwqzs/image/upload/v1760595477/Portfolio-site/uu4metgc7quh6c2ldkw7.png",
     technologies: {
       frontend: ["React", "Tailwind CSS"],
       backend: ["Node.js", "Express", "MongoDB"],
     },
-    github: "https://github.com/ritesh/ecommerce",
-    live: "https://ritesh-ecommerce.com",
+    github: "https://github.com/riiteshMishra/megaFrontend",
+    live: "https://study-notion-rho-pied.vercel.app/",
   },
 ];
