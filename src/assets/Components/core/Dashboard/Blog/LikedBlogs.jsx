@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { getAllLikedBlogs } from "../../../../../services/operations/blog";
 import Loader from "../../../common/Loader";
 import { FaHeart, FaBookOpen } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const LikedBlogs = () => {
   const [likedBlogs, setLikedBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const { token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   useEffect(() => {
+    if (!token) navigate("/login");
     const fetchLikedBlogs = async () => {
       setLoading(true);
       const result = await getAllLikedBlogs(token);
@@ -17,7 +19,7 @@ const LikedBlogs = () => {
       setLoading(false);
     };
     fetchLikedBlogs();
-  }, []);
+  }, [token]);
 
   return (
     <section className="min-h-screen py-10 px-4">

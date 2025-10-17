@@ -79,6 +79,7 @@ export const getAllLikedBlogs = async (token) => {
     const response = await apiConnector(
       "GET",
       blogsEndPoints.GET_ALL_LIKED_BLOGS,
+      null,
       {
         Authorization: `Bearer ${token}`,
       }
