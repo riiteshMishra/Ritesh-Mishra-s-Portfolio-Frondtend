@@ -74,11 +74,14 @@ export const addComment = async (userId, blogId, formData) => {
 };
 
 // get all liked blogs
-export const getAllLikedBlogs = async () => {
+export const getAllLikedBlogs = async (token) => {
   try {
     const response = await apiConnector(
       "GET",
-      blogsEndPoints.GET_ALL_LIKED_BLOGS
+      blogsEndPoints.GET_ALL_LIKED_BLOGS,
+      {
+        Authorization: `Bearer ${token}`,
+      }
     );
 
     if (!response.data?.success) {
@@ -91,7 +94,6 @@ export const getAllLikedBlogs = async () => {
   } catch (err) {
     console.log("GET ALL LIKED BLOG API ERROR", err);
     toast.error(getErrorMessage(err));
-    return []; 
+    return [];
   }
 };
-
