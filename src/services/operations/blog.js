@@ -1,8 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { blogsEndPoints, blogsFunctionEndpoints } from "../allApis";
-import { useSelector } from "react-redux";
-const { token } = useSelector((state) => state.auth);
+
 //  Error Handler
 const getErrorMessage = (err, fallback = "Something went wrong") =>
   err?.response?.data?.message || err.message || fallback;
@@ -75,14 +74,11 @@ export const addComment = async (userId, blogId, formData) => {
 };
 
 // get all liked blogs
-export const getAllLikedBlogs = async (token) => {
+export const getAllLikedBlogs = async () => {
   try {
     const response = await apiConnector(
       "GET",
-      blogsEndPoints.GET_ALL_LIKED_BLOGS,
-      {
-        Authorization: `Bearer ${token}`,
-      }
+      blogsEndPoints.GET_ALL_LIKED_BLOGS
     );
 
     if (!response.data?.success) {
@@ -95,6 +91,7 @@ export const getAllLikedBlogs = async (token) => {
   } catch (err) {
     console.log("GET ALL LIKED BLOG API ERROR", err);
     toast.error(getErrorMessage(err));
-    return [];
+    return []; 
   }
 };
+
