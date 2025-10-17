@@ -81,7 +81,7 @@ export const getAllLikedBlogs = async (token) => {
       blogsEndPoints.GET_ALL_LIKED_BLOGS,
       null,
       {
-        Authorization: `Bearer ${token}`,
+        Authorization:`Bearer ${token}`,
       }
     );
 
