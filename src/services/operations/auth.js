@@ -194,7 +194,9 @@ export const getAllCategories = async () => {
 export const adminBlogs = async (token) => {
   let result = [];
   try {
-    const response = await apiConnector("GET", blogsEndPoints.GET_USER_BLOGS);
+    const response = await apiConnector("GET", blogsEndPoints.GET_USER_BLOGS,{
+      Authorization:`Bearer ${token}`
+    });
 
     if (!response.data.success) throw new Error("Invalid response");
 
