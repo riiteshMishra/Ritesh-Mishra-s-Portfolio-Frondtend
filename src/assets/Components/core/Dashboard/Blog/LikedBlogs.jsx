@@ -3,15 +3,16 @@ import { getAllLikedBlogs } from "../../../../../services/operations/blog";
 import Loader from "../../../common/Loader";
 import { FaHeart, FaBookOpen } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const LikedBlogs = () => {
   const [likedBlogs, setLikedBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const { token } = useSelector((state) => state.auth);
   useEffect(() => {
     const fetchLikedBlogs = async () => {
       setLoading(true);
-      const result = await getAllLikedBlogs();
+      const result = await getAllLikedBlogs(token);
       setLikedBlogs(result);
       setLoading(false);
     };
