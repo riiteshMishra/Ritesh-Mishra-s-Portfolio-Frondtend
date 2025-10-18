@@ -18,7 +18,7 @@ const CommentModal = ({ setCommentModal, blogId }) => {
     try {
       // TODO: API call to submit comment
       // console.log("Submitted Comment:", data.commentText);
-      const result = await addComment(user._id, blogId, data,token);
+      await addComment( blogId, data,token);
       reset();
       setCommentModal(false);
     } catch (err) {
