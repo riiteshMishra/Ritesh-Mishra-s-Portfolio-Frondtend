@@ -6,7 +6,7 @@ import { setBlog, setStep } from "../../../../../../slices/blog";
 
 const BlogStatus = () => {
   const { blog } = useSelector((state) => state.blog);
-  //   const { token } = useSelector((state) => state.auth);
+    const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [isPublished, setIsPublished] = useState(blog?.isPublished || false);
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ const BlogStatus = () => {
     data.append("blogId", blog._id);
     data.append("isPublished", isPublished);
 
-    const result = await updateBlog(data);
+    const result = await updateBlog(data,token);
     dispatch(setStep(1));
     dispatch(setBlog(null));
     setLoading(false);

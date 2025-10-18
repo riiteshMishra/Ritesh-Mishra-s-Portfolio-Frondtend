@@ -3,10 +3,12 @@ import { adminBlogs } from "../../../../../../services/operations/auth";
 import { FiCheck, FiX } from "react-icons/fi";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MyBlog = () => {
   const [myBlogs, setMyBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   // Fetch user blogs on mount
@@ -14,7 +16,7 @@ const MyBlog = () => {
     const fetchUserBlogs = async () => {
       try {
         setLoading(true);
-        const result = await adminBlogs();
+        const result = await adminBlogs(token);
         setMyBlogs(result);
       } catch (error) {
         console.error("Error fetching blogs:", error);

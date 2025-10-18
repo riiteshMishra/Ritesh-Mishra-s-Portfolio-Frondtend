@@ -2,6 +2,8 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { blogsEndPoints, blogsFunctionEndpoints } from "../allApis";
 
+// { Authorization:`Bearer ${token}`}
+
 //  Error Handler
 const getErrorMessage = (err, fallback = "Something went wrong") =>
   err?.response?.data?.message || err.message || fallback;
@@ -28,13 +30,16 @@ export const getBlogById = async (blogId) => {
   }
 };
 
-export const toggleBlogLike = async (userId, blogId) => {
+export const toggleBlogLike = async (userId, blogId, token) => {
   let result = [];
   try {
     const response = await apiConnector(
       "POST",
       `${blogsFunctionEndpoints.TOGGLE_BLOG_LIKE}${blogId}`,
-      { userId: userId }
+      { userId: userId },
+      {
+        Authorization: `Bearer ${token}`,
+      }
     );
 
     console.log("TOGGLE BLOG API RESPONSE", response);
@@ -44,20 +49,23 @@ export const toggleBlogLike = async (userId, blogId) => {
     result = response.data;
   } catch (err) {
     console.log("TOGGLE BLOG LIKE API ERROR RESPONSE", err);
-    toast.error(err);
+    toast.error(getErrorMessage(err));
   } finally {
     return result;
   }
 };
 
 // add comment
-export const addComment = async (userId, blogId, formData) => {
+export const addComment = async (blogId, formData, token) => {
   let result = [];
   try {
     const response = await apiConnector(
       "POST",
       `${blogsFunctionEndpoints.ADD_COMMENT_API.replace(":blogId", blogId)}`,
-      formData
+      formData,
+      {
+        Authorization: `Bearer ${token}`,
+      }
     );
 
     console.log("ADD COMMENT API RESPONSE", response);
@@ -81,7 +89,7 @@ export const getAllLikedBlogs = async (token) => {
       blogsEndPoints.GET_ALL_LIKED_BLOGS,
       null,
       {
-        Authorization:`Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       }
     );
 

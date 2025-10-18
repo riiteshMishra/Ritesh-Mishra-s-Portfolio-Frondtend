@@ -194,7 +194,14 @@ export const getAllCategories = async () => {
 export const adminBlogs = async (token) => {
   let result = [];
   try {
-    const response = await apiConnector("GET", blogsEndPoints.GET_USER_BLOGS);
+    const response = await apiConnector(
+      "GET",
+      blogsEndPoints.GET_USER_BLOGS,
+      null,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
 
     if (!response.data.success) throw new Error("Invalid response");
 
@@ -227,14 +234,17 @@ export const fetchAllBlogs = async () => {
 };
 
 // update picture
-export const updatePicture = async (data, dispatch) => {
+export const updatePicture = async (data, dispatch,token) => {
   console.log("data", data);
   let result = [];
   try {
     const response = await apiConnector(
       "POST",
       profileEndpoints.UPDATE_PROFILE_PICTURE,
-      data
+      data,
+      {
+        Authorization: `Bearer ${token}`,
+      }
     );
     console.log("UPDATE PICTURE API RESPONSE", response);
     if (!response.data.success) throw new Error("Invalid response");
@@ -250,5 +260,3 @@ export const updatePicture = async (data, dispatch) => {
     return result;
   }
 };
-
-

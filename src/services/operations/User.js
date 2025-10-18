@@ -8,7 +8,7 @@ const getErrorMessage = (err, fallback = "Something went wrong") =>
   err?.response?.data?.message || err.message || fallback;
 
 // Update Profile API
-export const updateProfile = async (formData, dispatch) => {
+export const updateProfile = async (formData, dispatch, token) => {
   const toastId = toast.loading("Updating profile...");
   let result = null;
 
@@ -17,7 +17,10 @@ export const updateProfile = async (formData, dispatch) => {
     const response = await apiConnector(
       "POST",
       profileEndpoints.UPDATE_PROFILE_DETAILS,
-      formData
+      formData,
+      {
+        Authorization: `Bearer ${token}`,
+      }
     );
 
     console.log("UPDATE PROFILE API RESPONSE", response);

@@ -12,6 +12,7 @@ import { updateProfile } from "../../../../../services/operations/User";
 import toast from "react-hot-toast";
 
 const AddSocialLinks = () => {
+  const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,7 @@ const AddSocialLinks = () => {
 
     const payload = { socials };
 
-    const result = await updateProfile(payload, dispatch);
+    await updateProfile(payload, dispatch,token);
     setLoading(false);
   };
 

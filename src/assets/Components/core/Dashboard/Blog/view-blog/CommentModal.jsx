@@ -6,18 +6,19 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addComment } from "../../../../../../services/operations/blog";
 
-const CommentModal = ({ setCommentModal,blogId }) => {
+const CommentModal = ({ setCommentModal, blogId }) => {
   const { register, handleSubmit, reset } = useForm();
   const [submitLoading, setSubmitLoading] = React.useState(false);
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.profile);
+  const { token } = useSelector((state) => state.auth);
   const onSubmit = async (data) => {
     if (!user) return navigate("/login");
     setSubmitLoading(true);
     try {
       // TODO: API call to submit comment
       // console.log("Submitted Comment:", data.commentText);
-      const result = await addComment(user._id, blogId, data);
+      const result = await addComment(user._id, blogId, data,token);
       reset();
       setCommentModal(false);
     } catch (err) {

@@ -19,6 +19,7 @@ const ViewBlog = () => {
   const { blogId } = useParams();
   const { user } = useSelector((state) => state.profile);
   const [commentModal, setCommentModal] = useState(false);
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   // fetch blog details
@@ -43,7 +44,7 @@ const ViewBlog = () => {
     if (!user) return navigate("/login");
     setLikeLoading(true);
     try {
-      const response = await toggleBlogLike(user._id, blogId);
+      const response = await toggleBlogLike(user._id, blogId, token);
       const isLiked = response.liked;
 
       // Local state update after toggling like

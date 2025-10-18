@@ -7,6 +7,7 @@ import { updateProfile } from "../../../../../services/operations/User";
 
 const ProfileDetails = () => {
   const { user } = useSelector((state) => state.profile);
+  const { token } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ const ProfileDetails = () => {
 
   // FORM SUBMIT
   const onSubmit = async (data) => {
-    console.log("Profile Update Data (Before):", data);
+    // console.log("Profile Update Data (Before):", data);
 
     // SOCIALS OBJECT COMBINE KARNA
     const socials = {
@@ -42,10 +43,11 @@ const ProfileDetails = () => {
     delete finalData.github;
     delete finalData.linkedin;
 
-    console.log("Final Profile Data:", finalData);
+    // console.log("Final Profile Data:", finalData);
 
-    const result = await updateProfile(finalData, dispatch);
-    console.log("API RESPONSE", result);
+    await updateProfile(finalData, dispatch, token);
+
+    // console.log("API RESPONSE", result);
   };
 
   // DESTRUCTURE USER DATA
@@ -247,7 +249,7 @@ const ProfileDetails = () => {
         </label>
 
         {/* SUBMIT BUTTON */}
-        <Button text="Update Profile" customClasses={"max-w-[180px]"}/>
+        <Button text="Update Profile" customClasses={"max-w-[180px]"} />
       </form>
     </section>
   );

@@ -9,6 +9,7 @@ const ProfileImage = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ profileImage: "" });
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     const file = e.target.files[0];
@@ -22,7 +23,7 @@ const ProfileImage = () => {
     const updatedForm = new FormData();
     updatedForm.append("profileImage", data.profileImage);
     setLoading(true);
-    await updatePicture(updatedForm, dispatch);
+    await updatePicture(updatedForm, dispatch, token);
     setLoading(false);
     setImage(null);
   };
@@ -43,9 +44,7 @@ const ProfileImage = () => {
       <div className="flex flex-col items-center lg:flex-row  gap-10">
         <form onSubmit={handleSubmit}>
           <label>
-            <p className="capsule ">
-              {image ? "Selected" : "Select Image"}
-            </p>
+            <p className="capsule ">{image ? "Selected" : "Select Image"}</p>
             <input
               type="file"
               className="hidden"
