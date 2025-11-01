@@ -29,4 +29,11 @@ export const dashboardLinks = [
     icon: "FaBlog",
     type: ACCOUNT_TYPE.ADMIN, // Only for admins
   },
+  {
+    id: 5,
+    name: "Write Review",
+    path: "/dashboard/write-review",
+    icon: "FaStar",
+    type: ACCOUNT_TYPE.CLIENT,
+  },
 ];

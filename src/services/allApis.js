@@ -41,7 +41,13 @@ export const profileEndpoints = {
   UPDATE_PROFILE_DETAILS: "/profile/update-profile",
 };
 
-// contact - us 
+// contact - us
 export const contactUsEndpoints = {
-  RAISE_REQUEST:"/profile/create-request"
-}
+  RAISE_REQUEST: "/profile/create-request",
+};
+
+// reviews endpoints
+export const reviewsEndpoints = {
+  CREATE_REVIEW: "/reviews/create-review",
+  UPDATE_REVIEW: "/reviews/update-review",
+};

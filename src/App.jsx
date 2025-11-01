@@ -20,6 +20,8 @@ import Settings from "./assets/Components/core/Dashboard/Settings/Index";
 import CreateBlogs from "./assets/Components/core/Dashboard/Blog/create-blog/Index";
 import MyBlog from "./assets/Components/core/Dashboard/Blog/create-blog/MyBlog";
 import ViewBlog from "./assets/Components/core/Dashboard/Blog/view-blog/ViewBlog";
+import WriteReview from "./assets/Components/core/Dashboard/Write-a-review";
+import EditReview from "./assets/Components/core/Dashboard/Write-a-review/EditReview";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
@@ -40,16 +42,22 @@ const App = () => {
         // Dashboard
         {token && (
           <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="settings" element={<Settings />}>
-              {/* <Route path=""/> */}
-            </Route>
+            // FOR EVERY ONE
+            <Route path="settings" element={<Settings />} />
             <Route path="my-profile" element={<Profile />} />
             <Route path="liked-blogs" element={<LikedBlogs />} />
+            <Route path="edit-review" element={<EditReview />} />
             // ONLY FOR ADMIN
             {user?.accountType === ACCOUNT_TYPE.ADMIN && (
               <>
                 <Route path="create-blog" element={<CreateBlogs />} />
                 <Route path="my-blogs" element={<MyBlog />} />
+              </>
+            )}
+            // ONLY FOR CLIENTS
+            {user?.accountType === ACCOUNT_TYPE.CLIENT && (
+              <>
+                <Route path="write-review" element={<WriteReview />} />
               </>
             )}
           </Route>

@@ -23,11 +23,11 @@ export const sendOtp = async (email) => {
       email,
     });
 
+    console.log("SEND OTP RESPONSE", response);
     if (!response.data.success)
       throw new Error(response.data.message || "OTP send failed");
 
     toast.success("OTP sent successfully");
-    return response.data;
   } catch (err) {
     console.error("SEND OTP ERROR:", err);
     toast.error(getErrorMessage(err, "Send OTP error"));
@@ -234,7 +234,7 @@ export const fetchAllBlogs = async () => {
 };
 
 // update picture
-export const updatePicture = async (data, dispatch,token) => {
+export const updatePicture = async (data, dispatch, token) => {
   console.log("data", data);
   let result = [];
   try {
