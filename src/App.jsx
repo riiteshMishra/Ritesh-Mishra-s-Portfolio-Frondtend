@@ -46,7 +46,6 @@ const App = () => {
             <Route path="settings" element={<Settings />} />
             <Route path="my-profile" element={<Profile />} />
             <Route path="liked-blogs" element={<LikedBlogs />} />
-            <Route path="edit-review" element={<EditReview />} />
             // ONLY FOR ADMIN
             {user?.accountType === ACCOUNT_TYPE.ADMIN && (
               <>
@@ -58,6 +57,7 @@ const App = () => {
             {user?.accountType === ACCOUNT_TYPE.CLIENT && (
               <>
                 <Route path="write-review" element={<WriteReview />} />
+                <Route path="edit-review" element={<EditReview />} />
               </>
             )}
           </Route>

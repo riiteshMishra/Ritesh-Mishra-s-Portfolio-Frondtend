@@ -8,13 +8,19 @@ import toast from "react-hot-toast";
 import {
   createReview,
   getClientReview,
+  updateReview,
 } from "../../../../../services/operations/reviews";
 import { setReviewLoading } from "../../../../../slices/review";
+import { useNavigate } from "react-router-dom";
 
 const ReviewForm = () => {
   const { token } = useSelector((state) => state.auth);
+  const { editReview } = useSelector((state) => state.review);
   const [starValue, setStarValue] = useState(0);
-  const dispatch = useDispatch()
+  const { singleReview } = useSelector((state) => state.review);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { reviewLoading } = useSelector((state) => state.review);
   const {
     register,
@@ -22,7 +28,27 @@ const ReviewForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      projectName: "",
+      projectLink: "",
+      comment: "",
+      rating: 0,
+    },
+  });
+
+  //  jab edit kr rhe ho to
+  useEffect(() => {
+    if (editReview && singleReview) {
+      reset({
+        projectName: singleReview.projectName,
+        projectLink: singleReview.projectLink,
+        comment: singleReview.comment,
+        rating: singleReview.rating,
+      });
+      setStarValue(singleReview.rating);
+    }
+  }, [editReview, singleReview, reset]);
 
   // ⭐ Rating change handler
   const ratingChanged = (newRating) => {
@@ -32,24 +58,47 @@ const ReviewForm = () => {
 
   // Submit handler
   const submitHandler = async (data) => {
+    // star value
     if (starValue === 0)
       return toast.error("Please give a star rating before submitting");
 
-    const formData = new FormData();
-    formData.append("projectName", data.projectName);
-    formData.append("projectLink", data.projectLink);
-    formData.append("comment", data.comment);
-    formData.append("rating", starValue);
+    // review create krne ke liye
+    if (!editReview) {
+      const formData = new FormData();
+      formData.append("projectName", data.projectName);
+      formData.append("projectLink", data.projectLink);
+      formData.append("comment", data.comment);
+      formData.append("rating", starValue);
 
-    try {
-      dispatch(setReviewLoading(true));
-      await createReview(formData, token, dispatch);
-    } catch (err) {
-      console.log("error in submit handler", err);
-    } finally {
-      dispatch(setReviewLoading(false));
-      setStarValue(0);
-      reset();
+      try {
+        dispatch(setReviewLoading(true));
+        await createReview(formData, token, dispatch);
+      } catch (err) {
+        console.log("error in submit handler", err);
+      } finally {
+        dispatch(setReviewLoading(false));
+        setStarValue(0);
+        reset();
+      }
+    } else {
+      // review update krne ke liye
+      const formData = new FormData();
+      formData.append("projectName", data.projectName);
+      formData.append("projectLink", data.projectLink);
+      formData.append("comment", data.comment);
+      formData.append("rating", starValue);
+      formData.append("reviewId", singleReview?._id);
+      // api call
+      try {
+        dispatch(setReviewLoading(true));
+        await updateReview(formData, token, dispatch);
+      } catch (err) {
+        toast.error(err.message);
+      } finally {
+        dispatch(setReviewLoading(false));
+        setStarValue(0);
+        navigate("/dashboard/write-review");
+      }
     }
   };
   return (
@@ -69,6 +118,7 @@ const ReviewForm = () => {
           edit={true}
           filledIcon={<FaStar />}
           emptyIcon={<ImStarEmpty />}
+          defaultValue={2}
         />
       </label>
 
@@ -121,7 +171,7 @@ const ReviewForm = () => {
       {/* Hidden rating field */}
       <input type="hidden" {...register("rating")} value={starValue} />
 
-      {/* 🚀 Submit Button */}
+      {/*  Submit Button */}
       <button
         disabled={reviewLoading}
         type="submit"

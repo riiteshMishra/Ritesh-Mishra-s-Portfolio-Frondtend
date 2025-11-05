@@ -1,7 +1,11 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { reviewsEndpoints } from "../allApis";
-import { setSingleReview } from "../../slices/review";
+import {
+  clearSingleReview,
+  setEditReview,
+  setSingleReview,
+} from "../../slices/review";
 // import { setSingleReview } from "../../slices/review";
 
 // get error message
@@ -53,6 +57,33 @@ export const getClientReview = async (token) => {
     result = response?.data?.data;
   } catch (err) {
     console.log("Error in getClientReview:", err);
+    toast.error(getErrorMessage(err));
+  } finally {
+    return result;
+  }
+};
+
+// update review
+export const updateReview = async (formData, token, dispatch) => {
+  let result;
+  try {
+    const response = await apiConnector(
+      "POST",
+      reviewsEndpoints.UPDATE_REVIEW,
+      formData,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    console.log("UPDATE REVIEW API RESPONSE", response);
+    result = response?.data?.data;
+    dispatch(setSingleReview(null));
+    dispatch(clearSingleReview());
+    dispatch(setSingleReview(result));
+    toast.success("review updated successful");
+  } catch (err) {
+    console.log("UPDATE REVIEW API ERROR RESPONSE", err);
     toast.error(getErrorMessage(err));
   } finally {
     return result;
