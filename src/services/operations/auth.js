@@ -8,6 +8,7 @@ import {
 } from "../allApis";
 import { clearToken, setToken } from "../../slices/auth";
 import { deleteUser, setUser } from "../../slices/profile";
+import { clearAllReviews, clearSingleReview } from "../../slices/review";
 
 //  Error Handler
 const getErrorMessage = (err, fallback = "Something went wrong") =>
@@ -99,6 +100,8 @@ export const logout = async (navigate, dispatch) => {
     dispatch(clearToken());
     dispatch(setUser(null));
     dispatch(deleteUser());
+    dispatch(clearAllReviews());
+    dispatch(clearSingleReview())
     toast.success("Logout successful");
     navigate("/");
   } catch (err) {

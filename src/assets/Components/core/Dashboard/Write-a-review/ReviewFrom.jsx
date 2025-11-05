@@ -3,17 +3,19 @@ import { ImStarEmpty } from "react-icons/im";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { createReview } from "../../../../../services/operations/reviews";
+import {
+  createReview,
+  getClientReview,
+} from "../../../../../services/operations/reviews";
 import { setReviewLoading } from "../../../../../slices/review";
 
 const ReviewForm = () => {
   const { token } = useSelector((state) => state.auth);
   const [starValue, setStarValue] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch()
   const { reviewLoading } = useSelector((state) => state.review);
-  const dispatch = useDispatch();
   const {
     register,
     setValue,
@@ -28,7 +30,7 @@ const ReviewForm = () => {
     setValue("rating", newRating);
   };
 
-  //  Submit handler
+  // Submit handler
   const submitHandler = async (data) => {
     if (starValue === 0)
       return toast.error("Please give a star rating before submitting");
@@ -50,7 +52,6 @@ const ReviewForm = () => {
       reset();
     }
   };
-
   return (
     <form
       className="flex flex-col gap-4 text-white"
@@ -103,7 +104,7 @@ const ReviewForm = () => {
         )}
       </label>
 
-      {/*  Comment */}
+      {/* Comment */}
       <label className="flex flex-col gap-y-4">
         <p className="text-[clamp(1rem,2.4vw,3rem)]">Comment</p>
         <textarea
@@ -122,14 +123,14 @@ const ReviewForm = () => {
 
       {/* 🚀 Submit Button */}
       <button
-        disabled={loading}
+        disabled={reviewLoading}
         type="submit"
         className="bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-md px-4 py-2 
            font-medium shadow-md hover:shadow-xl 
            active:scale-95 transition-all duration-200 ease-in-out 
            cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:opacity-60"
       >
-        {loading ? "Submitting..." : "Submit"}
+        {reviewLoading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
