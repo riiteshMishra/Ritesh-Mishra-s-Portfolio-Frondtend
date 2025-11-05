@@ -20,7 +20,7 @@ const ReviewCard = () => {
       </h2>
 
       {/* Review Cards Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto place-content-center ">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto place-content-center grid-cols-1">
         {singleReview && (
           <div
             key={singleReview?._id}
