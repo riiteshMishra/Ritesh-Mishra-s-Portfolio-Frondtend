@@ -21,6 +21,7 @@ const LikedBlogs = () => {
     fetchLikedBlogs();
   }, [token]);
 
+  
   return (
     <section className="min-h-screen py-10 px-4">
       <div className="max-w-[1100px] mx-auto">
@@ -30,7 +31,7 @@ const LikedBlogs = () => {
         </h1>
 
         {loading ? (
-          <div className="flex justify-center items-center h-[60vh]">
+          <div className="flex justify-center items-center relative  overflow-hidden ">
             <Loader />
           </div>
         ) : likedBlogs.length === 0 ? (

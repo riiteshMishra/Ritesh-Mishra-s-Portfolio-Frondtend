@@ -17,9 +17,9 @@ const LoginForm = () => {
   } = useForm();
 
   const formSubmit = async (data) => {
-    console.log("LOGIN DATA", data);
+    // console.log("LOGIN DATA", data);
     await login(data, navigate, dispatch);
-    // reset();
+    reset();
   };
 
   const [type, setType] = useState("password");
