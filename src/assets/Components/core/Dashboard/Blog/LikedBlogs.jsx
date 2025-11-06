@@ -21,18 +21,15 @@ const LikedBlogs = () => {
     fetchLikedBlogs();
   }, [token]);
 
-  
   return (
-    <section className="min-h-screen py-10 px-4">
-      <div className="max-w-[1100px] mx-auto">
-        {/* Section Title */}
-        <h1 className="text-4xl font-bold text-center text-white mb-10 flex justify-center items-center gap-2 drop-shadow-lg">
-          <FaHeart className="text-red-400 animate-pulse" /> Your Liked Blogs
-        </h1>
-
+    <section className=" py-10 px-4 overflow-hidden">
+      <div className="max-w-[1100px] mx-auto h-fit">
         {loading ? (
-          <div className="flex justify-center items-center relative  overflow-hidden ">
-            <Loader />
+          <div className=" ">
+            <p className="text-2xl text-center text-amber-400">Getting your liked blogs...</p>
+            <div className="flex justify-center items-center overflow-hidden max-h-[300px] relative">
+              <Loader />
+            </div>
           </div>
         ) : likedBlogs.length === 0 ? (
           <div className="text-center text-white text-lg mt-20 drop-shadow-md">
