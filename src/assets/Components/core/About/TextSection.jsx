@@ -8,7 +8,7 @@ const TextSection = () => {
     <div className="text-center px-4">
       <ModernText
         text={intro}
-        customClasses="mt-6 text-3xl sm:text-4xl md:text-5xl bg-gradient-to-t from-[#4b4c7a] via-[#eb92fb] to-[#c855bc] inline-block scale-x-120"
+        customClasses=" text-3xl sm:text-4xl md:text-5xl bg-gradient-to-t from-[#4b4c7a] via-[#eb92fb] to-[#c855bc] inline-block"
       />
 
       <p className="text-base sm:text-lg text-richblack-200 italic mt-2">
