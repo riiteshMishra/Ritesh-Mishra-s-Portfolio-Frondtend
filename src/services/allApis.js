@@ -51,4 +51,5 @@ export const reviewsEndpoints = {
   CREATE_REVIEW: "/reviews/create-review",
   UPDATE_REVIEW: "/reviews/update-review",
   GET_CLIENT_REVIEW: "/reviews/get-client-review",
+  GET_AUTHORIZED_REVIEWS: "/reviews/get-all-reviews",
 };

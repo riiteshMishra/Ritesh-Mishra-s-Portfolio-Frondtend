@@ -41,7 +41,7 @@ export const createReview = async (FormData, token, dispatch) => {
   }
 };
 
-// get client review
+// user ne jo review diya hai wo db se fetch
 export const getClientReview = async (token) => {
   let result;
   try {
@@ -84,6 +84,30 @@ export const updateReview = async (formData, token, dispatch) => {
     toast.success("review updated successful");
   } catch (err) {
     console.log("UPDATE REVIEW API ERROR RESPONSE", err);
+    toast.error(getErrorMessage(err));
+  } finally {
+    return result;
+  }
+};
+
+// get resolved reviews or authorized reviews
+export const getAuthorizedReviews = async (token) => {
+  let result;
+  try {
+    const response = await apiConnector(
+      "GEt",
+      reviewsEndpoints.GET_AUTHORIZED_REVIEWS,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    console.log("PUBLISHED BLOGS API RESPONSE", response);
+
+    result = response?.data?.top10Reviews;
+    toast.success("review fetched");
+  } catch (err) {
+    console.log("AUTHORIZED REVIEW API ERROR", err);
     toast.error(getErrorMessage(err));
   } finally {
     return result;

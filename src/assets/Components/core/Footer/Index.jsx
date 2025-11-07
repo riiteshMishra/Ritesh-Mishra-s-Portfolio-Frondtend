@@ -4,7 +4,7 @@ import UseFullLinks from "./UseFullLinks";
 
 const Footer = () => {
   return (
-    <footer className=" bg-gray-900 text-white py-12">
+    <footer className="text-white py-12">
       <div className="container  ">
         <div className="grid gap-8 md:gap-10 lg:gap-16 sm:grid-cols-2 lg:grid-cols-3">
           <Intro />
