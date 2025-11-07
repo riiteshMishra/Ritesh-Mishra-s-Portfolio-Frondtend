@@ -7,7 +7,6 @@ import Contact from "./assets/pages/Contact";
 import NavBar from "./assets/Components/common/NavBar";
 import Signup from "./assets/pages/Signup";
 import Login from "./assets/pages/Login";
-import Footer from "./assets/Components/common/Footer";
 import Blogs from "./assets/pages/Blogs";
 import PageNotFound from "./assets/pages/PageNotFound";
 import { useSelector } from "react-redux";
@@ -63,7 +62,6 @@ const App = () => {
           </Route>
         )}
       </Routes>
-      {/* <Footer/> */}
     </div>
   );
 };
