@@ -26,7 +26,7 @@ const App = () => {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   return (
-    <div className="min-h-screen bg-gray-950 ">
+    <div className="min-h-screen bg-gray-950">
       <NavBar />
       <Routes>
         <Route path="*" element={<PageNotFound />} />

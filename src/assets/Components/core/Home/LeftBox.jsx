@@ -35,7 +35,7 @@ const LeftBox = () => {
       </div>
 
       <div className="flex sm:items-center gap-4 mt-10 flex-col sm:flex-row w-fit ">
-        <p className="Bebas text-4xl leading-6">Let’s work together</p>
+        <p className="Bebas text-4xl leading-6 text-white">Let’s work together</p>
         <HireMe />
       </div>
 
