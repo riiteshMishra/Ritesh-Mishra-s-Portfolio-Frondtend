@@ -22,7 +22,7 @@ const Intro = () => {
           {/* Buttons */}
           <div className="mt-6 flex flex-wrap gap-3 justify-between">
             <a
-              href="https://wa.me/918765432100" // <-- apna WhatsApp number daalna
+              href="https://wa.me/919565672752" // <-- apna WhatsApp number daalna
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-green-600 text-white font-medium shadow hover:bg-green-700 transition-all duration-200"
