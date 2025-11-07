@@ -1,5 +1,6 @@
 import Information from "../Components/core/Contact/Information";
 import ContactForm from "../Components/core/Contact/ContactForm";
+import Footer from "../Components/core/Footer/Index";
 
 const Contact = () => {
   return (
@@ -10,6 +11,7 @@ const Contact = () => {
           <ContactForm />
         </div>
       </div>
+      <Footer/>
     </section>
   );
 };

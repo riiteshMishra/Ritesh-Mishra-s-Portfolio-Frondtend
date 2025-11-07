@@ -105,7 +105,7 @@ export const getAuthorizedReviews = async (token) => {
     console.log("PUBLISHED BLOGS API RESPONSE", response);
 
     result = response?.data?.top10Reviews;
-    toast.success("review fetched");
+    // toast.success("review fetched");
   } catch (err) {
     console.log("AUTHORIZED REVIEW API ERROR", err);
     toast.error(getErrorMessage(err));
