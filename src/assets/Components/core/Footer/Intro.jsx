@@ -1,10 +1,9 @@
-import React from "react";
-import { FaGithub, FaLinkedin, FaDownload, FaWhatsapp } from "react-icons/fa";
+import { FaDownload, FaWhatsapp } from "react-icons/fa";
 
 const Intro = () => {
   return (
     <section className=" px-6 max-w-[400px] h-fit w-fit">
-      <div className="shadow-lg rounded-2xl">
+      <div className="rounded-2xl">
         {/* Text Content */}
         <div>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
@@ -22,7 +21,9 @@ const Intro = () => {
           {/* Buttons */}
           <div className="mt-6 flex flex-wrap gap-3 justify-between">
             <a
-              href="https://wa.me/919565672752" // <-- apna WhatsApp number daalna
+              href={`https://wa.me/919565672752?text=${encodeURIComponent(
+                "Hey Ritesh! 👋 I saw your portfolio and wanted to connect with you."
+              )}`}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-green-600 text-white font-medium shadow hover:bg-green-700 transition-all duration-200"
