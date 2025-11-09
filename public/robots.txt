@@ -1,3 +1,12 @@
 User-agent: *
 Allow: /
+
 Sitemap: https://riteshmishra.online/sitemap.xml
+
+# Developer Info
+# Author: Ritesh Mishra (Full Stack Web Developer)
+# Location: Inhata, Gorakhpur, Kushinagar, Sukrauli, Padrona, Uttar Pradesh
+
+# Optional: block internal folders
+Disallow: /admin/
+Disallow: /private/
