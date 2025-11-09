@@ -6,9 +6,7 @@ const Intro = () => {
   const role = "Full Stack Developer — MERN";
   const description =
     "I build responsive web apps and enjoy turning complex problems into simple, beautiful interfaces.";
-  const avatarUrl =
-    "https://res.cloudinary.com/dwpplwqzs/image/upload/v1761921343/Portfolio-site/ykoigldelvk63mygiopw.jpg";
-  const resumeUrl = "https://drive.google.com"; // apna resume link yahan daalna
+  const resumeUrl = "https://drive.google.com"; // yaha resume link yahan daalna hain
   const whatsappUrl =
     "https://wa.me/919565672752?text=Hi%20Ritesh!%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect.";
 
