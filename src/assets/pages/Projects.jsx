@@ -1,6 +1,9 @@
 import { projects } from "../Data/projectspage";
-
+import { useEffect } from "react";
 const ProjectsPage = () => {
+     useEffect(() => {
+       document.title = "Ritesh | Mishra | Projects";
+     }, []);
   return (
     <section className="container mx-auto py-10 text-white">
       <h1 className="text-4xl font-bold text-center mb-10">My Projects</h1>

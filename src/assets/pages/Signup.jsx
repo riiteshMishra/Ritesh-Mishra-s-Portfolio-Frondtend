@@ -1,7 +1,10 @@
 import React from "react";
 import SignupForm from "../Components/core/Auth/SignupForm";
-
+import { useEffect } from "react";
 const Signup = () => {
+     useEffect(() => {
+       document.title = "Ritesh | Mishra | sign-up";
+     }, []);
   return (
     <section className="SignupPage flex items-center justify-center ">
       <div className="container px-4 flex flex-col md:flex-row items-center gap-10 justify-center">

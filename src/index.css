@@ -120,7 +120,6 @@ body {
 .ProjectPage {
   background: radial-gradient(125% 125% at 50% 10%, #000000 40%, #2b092b 100%);
   color: white;
-  min-height: calc(100vh - 60px);
 }
 
 .ContactPage {
@@ -143,7 +142,7 @@ body {
   background-size: 20px 20px, 30px 30px, 25px 25px;
   background-position: 0 0, 10px 10px, 15px 5px;
   color: white;
-  min-height: calc(100vh - 60px);
+ 
 }
 
 .collaborate {

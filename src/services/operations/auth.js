@@ -228,7 +228,7 @@ export const fetchAllBlogs = async () => {
     if (!response.data.success) throw new Error("Invalid response");
     console.log("ALL PUBLISHED BLOG API RESPONSE", response);
     result = response.data.allBlogs;
-    toast.success("All published blogs fetched");
+    // toast.success("All published blogs fetched");
   } catch (err) {
     toast.error(getErrorMessage(err, "some thing went wrong"));
   } finally {

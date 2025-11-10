@@ -3,9 +3,13 @@ import TextSection from "../Components/core/About/TextSection";
 import SkillsSection from "../Components/core/About/SkillsSection";
 import Footer from "../Components/core/Footer/Index";
 import Intro from "../Components/core/About/QuickIntro";
+import { useEffect } from "react";
 
 const About = () => {
   // 2 * PI * r
+  useEffect(() => {
+    document.title = "Ritesh | Mishra | About";
+  }, []);
 
   return (
     <main className="AboutPage overflow-hidden">

@@ -5,12 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { FaHeart, FaComment } from "react-icons/fa";
 import Loader from "../Components/common/Loader";
 import { TypeAnimation } from "react-type-animation";
+import Footer from "../Components/core/Footer/Index";
 
 const Blogs = () => {
+
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const loadingRef = useRef(null);
   const navigate = useNavigate();
+  useEffect(() => {
+    document.title = "Ritesh | Mishra | Blogs";
+  }, []);
 
   useEffect(() => {
     const fetchPublishedBlogs = async () => {
@@ -29,7 +34,7 @@ const Blogs = () => {
     fetchPublishedBlogs();
   }, []);
 
-  // 🔹 GSAP animation for loading text
+  // GSAP animation for loading text
   useEffect(() => {
     if (loading && loadingRef.current) {
       gsap.to(loadingRef.current, {
@@ -124,7 +129,10 @@ const Blogs = () => {
             </div>
           )}
         </div>
+        <div className="border-b-[1px] rounded-full border-b-gray-800"></div>
       </div>
+      {/* footer */}
+      <Footer/>
     </section>
   );
 };
