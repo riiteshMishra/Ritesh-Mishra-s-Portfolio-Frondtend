@@ -9,39 +9,40 @@ const LeftBox = () => {
   return (
     <article className="w-full md:w-[48%] flex flex-col">
       <header>
-        <ModernText
-          text={heading}
-          customClasses="text-[3.3rem] bg-clip-text bg-gradient-to-r from-[#f6f6d9] via-[#47e4e0] to-[#5f81e4] "
-        />
-
-        <div className="Bebas text-yellow-300 capitalize mt-5">
+        <h1 className="text-[3.3rem] bg-clip-text bg-gradient-to-r from-[#f6f6d9] via-[#47e4e0] to-[#5f81e4] lg:text-left text-center ModernText playfair">
+          {heading}
+        </h1>
+        <div className="lg:text-left playfair font-bold text-center flex flex-col">
+          <span className="lg:text-left playfair font-bold text-center text-yellow-300 text-4xl">
+            I'm a
+          </span>
           <TypeAnimation
             sequence={homepageTexts.role.flatMap((r) => [r, 1000])}
             speed={50}
             style={{ fontSize: "2rem" }}
             repeat={Infinity}
+            className="text-gray-300 font-bold"
           />
         </div>
       </header>
 
-      <p className="text-lg py-4 text-gray-400">{description}</p>
+      {/* description */}
+      <p className="text-lg py-4 text-gray-400 lg:text-left text-center font-ro">
+        {description}
+      </p>
 
-      <div className="flex sm:flex-row flex-col gap-4 mt-5">
-        {/* <p className="Bebas capitalize tracking-wider text-3xl leading-3 flex items-center">
-                Skills
-                <IoIosArrowRoundForward className=" font-bold tracking-wider text-3xl leading-3" />
-              </p> */}
+      <div className="flex sm:flex-row flex-col gap-4 mt-5 items-center justify-center sm:justify-start">
         <Skill />
       </div>
 
-      <div className="flex sm:items-center gap-4 mt-10 flex-col sm:flex-row w-fit ">
-        <p className="Bebas text-4xl leading-6 text-white">Let’s work together</p>
+      {/* <div className="flex gap-4 mt-10 justify-center  flex-col items-center md:items-start">
+        <p className="playfair text-4xl  text-white">Let’s work together</p>
         <HireMe />
-      </div>
+      </div> */}
 
-      <div className="mt-12">
+      {/* <div className="mt-12 flex items-center justify-center sm:justify-start">
         <SocialMedia />
-      </div>
+      </div> */}
     </article>
   );
 };

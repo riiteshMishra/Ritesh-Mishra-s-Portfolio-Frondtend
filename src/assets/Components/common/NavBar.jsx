@@ -35,7 +35,7 @@ const NavBar = () => {
   ];
   const [slideBar, setSlideBar] = useState(false);
   return (
-    <div className="bg-gray-800 h-[60px]  z-10 border-b-[1px] border-richblack-600 top-0  ">
+    <div className="bg-gray-800 h-[60px]  z-10 border-b-[1px] border-richblack-600 top-0 sticky">
       <nav className="text-white container py-4  flex items-center justify-between flex-wrap">
         <Link to={"/"}>Ritesh Mishra</Link>
         <ul className="md:flex gap-4 hidden">

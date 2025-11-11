@@ -24,15 +24,19 @@ const Testimonials = () => {
     getApprovedReviews();
   }, []);
   return (
-    <section className=" text-white py-12">
+    <section className=" text-white py-12 border-t-[1px] border-cyan-700 ">
       <div className="container">
-        <p className="text-center capitalize text-2xl my-2">
-          <strong>original reviews by our clients</strong>
+        <p className="text-center capitalize text-3xl my-2">
+          <strong className="">
+            {" "}
+            My Satisfied Clients <br />
+            Testimonials
+          </strong>
         </p>
 
         {/* swiper */}
         <div className=" text-white ">
-          <SwiperComponent  reviews={reviews} loading={loading}/>
+          <SwiperComponent reviews={reviews} loading={loading} />
         </div>
       </div>
     </section>
