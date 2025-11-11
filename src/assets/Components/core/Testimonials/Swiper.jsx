@@ -15,7 +15,6 @@ import Loader from "../../common/Loader";
 const SwiperComponent = ({ reviews, loading }) => {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
-
   const onAutoplayTimeLeft = (s, time, progress) => {
     if (progressCircle.current && progressContent.current) {
       progressCircle.current.style.setProperty("--progress", 1 - progress);
@@ -27,7 +26,7 @@ const SwiperComponent = ({ reviews, loading }) => {
   if (!reviews) return;
   return (
     <div className="w-full flex justify-center items-center">
-      <div className="w-full max-w-[1080px] h-full ">
+      <div className="w-full max-w-[1080px] h-full relative overflow-hidden">
         {loading ? (
           <Loader />
         ) : (

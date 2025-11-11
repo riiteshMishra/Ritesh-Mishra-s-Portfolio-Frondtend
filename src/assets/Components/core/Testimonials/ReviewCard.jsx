@@ -38,7 +38,7 @@ const ReviewCard = ({ review }) => {
       </p>
 
       {/* client project and link */}
-      <div className="flex items-center capitalize gap-2 group">
+      <div className="flex items-center capitalize gap-2 group w-fit">
         <a
           href={projectLink}
           target="_blank"
