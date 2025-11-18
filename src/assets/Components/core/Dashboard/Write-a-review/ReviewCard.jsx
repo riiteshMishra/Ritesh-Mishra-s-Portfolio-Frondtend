@@ -57,7 +57,7 @@ const ReviewCard = () => {
 
             {/* Comment */}
             <p className="text-gray-200 text-sm italic mb-4">
-              "{singleReview?.comment}"
+              {singleReview?.comment}
             </p>
 
             {/* Project Details */}
