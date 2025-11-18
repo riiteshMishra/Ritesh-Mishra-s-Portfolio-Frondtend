@@ -8,7 +8,9 @@ const DummyReview = () => {
   const navigate = useNavigate();
   const clickHandler = () => {
     if (!user) return navigate("/login");
-    navigate("/dashboard/write-review");
+    user?.accountType === "Client"
+      ? navigate("/dashboard/write-review")
+      : alert("This feature is only for Clients.")
   };
   return (
     <div className="flex flex-col items-center justify-center bg-gray-800 text-white md:px-50 md:py-10 border-[1px] rounded-2xl border-gray-600 p-8">
