@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import ReviewCard from "./ReviewCard";
 import Loader from "../../common/Loader";
+import DummyReview from "./DummyReview";
 
 const SwiperComponent = ({ reviews, loading }) => {
   const progressCircle = useRef(null);
@@ -23,12 +24,14 @@ const SwiperComponent = ({ reviews, loading }) => {
   };
 
   // review value mount krte hain yaha se
-  // if (!reviews) return;
+  if (!reviews) return;  
   return (
     <div className="w-full flex justify-center items-center">
       <div className="w-full max-w-[1080px] h-full relative overflow-hidden">
         {loading ? (
           <Loader />
+        ) : reviews?.length === 0 ? (
+          <DummyReview />
         ) : (
           <Swiper
             spaceBetween={30}

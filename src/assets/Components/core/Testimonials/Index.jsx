@@ -39,13 +39,8 @@ const Testimonials = () => {
         </p>
 
         {/* swiper */}
-        {reviews.length === 0 ? (
-          <DummyReview />
-        ) : (
-          <div className=" text-white ">
-            <SwiperComponent reviews={reviews} loading={loading} />
-          </div>
-        )}
+
+        <SwiperComponent reviews={reviews} loading={loading} />
       </div>
     </section>
   );
