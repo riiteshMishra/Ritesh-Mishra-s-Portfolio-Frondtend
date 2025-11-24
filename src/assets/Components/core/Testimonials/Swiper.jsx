@@ -23,7 +23,7 @@ const SwiperComponent = ({ reviews, loading }) => {
   };
 
   // review value mount krte hain yaha se
-  if (!reviews) return;
+  // if (!reviews) return;
   return (
     <div className="w-full flex justify-center items-center">
       <div className="w-full max-w-[1080px] h-full relative overflow-hidden">
