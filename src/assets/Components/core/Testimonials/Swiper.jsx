@@ -12,8 +12,10 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import ReviewCard from "./ReviewCard";
 import Loader from "../../common/Loader";
 import DummyReview from "./DummyReview";
+import { useSelector } from "react-redux";
 
-const SwiperComponent = ({ reviews, loading }) => {
+const SwiperComponent = ({ loading }) => {
+  const { testimonials } = useSelector((state) => state.home);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -23,14 +25,12 @@ const SwiperComponent = ({ reviews, loading }) => {
     }
   };
 
-  // review value mount krte hain yaha se
-  if (!reviews) return;  
   return (
     <div className="w-full flex justify-center items-center">
       <div className="w-full max-w-[1080px] h-full relative overflow-hidden">
         {loading ? (
           <Loader />
-        ) : reviews?.length === 0 ? (
+        ) : testimonials?.length === 0 ? (
           <DummyReview />
         ) : (
           <Swiper
@@ -50,7 +50,7 @@ const SwiperComponent = ({ reviews, loading }) => {
           >
             {/* yaha pr backend se review fetch krke lagana hai */}
 
-            {reviews.map((review) => (
+            {testimonials.map((review) => (
               <SwiperSlide key={review?._id}>
                 <ReviewCard review={review} />
               </SwiperSlide>

@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import SwiperComponent from "./Swiper";
 import { getAuthorizedReviews } from "../../../../services/operations/reviews";
-import { useSelector } from "react-redux";
-import DummyReview from "./DummyReview";
+import { useDispatch, useSelector } from "react-redux";
 
 const Testimonials = () => {
   const { token } = useSelector((state) => state.auth);
+  const { isLoaded } = useSelector((state) => state.home);
   const [loading, setLoading] = useState(false);
-  const [reviews, setReviews] = useState([]);
+  const dispatch = useDispatch();
   // get approved reviews
   useEffect(() => {
     const getApprovedReviews = async () => {
       try {
         setLoading(true);
-        const result = await getAuthorizedReviews(token);
-        if (result) setReviews(result);
+        if (!isLoaded) await getAuthorizedReviews(token, dispatch);
       } catch (err) {
         console.log(err);
       } finally {
@@ -23,16 +22,13 @@ const Testimonials = () => {
     };
 
     getApprovedReviews();
-  }, []);
-
-  // if (reviews.length === 0) return <DummyReview />;
+  }, [token, dispatch]);
 
   return (
     <section className=" text-white py-12 border-t-[1px] border-cyan-700 ">
       <div className="container">
         <p className="text-center capitalize text-3xl my-2">
           <strong className="">
-            {" "}
             My Satisfied Clients <br />
             Testimonials
           </strong>
@@ -40,7 +36,7 @@ const Testimonials = () => {
 
         {/* swiper */}
 
-        <SwiperComponent reviews={reviews} loading={loading} />
+        <SwiperComponent loading={loading} />
       </div>
     </section>
   );

@@ -6,6 +6,7 @@ import {
   setEditReview,
   setSingleReview,
 } from "../../slices/review";
+import { setTestimonials } from "../../slices/home";
 // import { setSingleReview } from "../../slices/review";
 
 // get error message
@@ -91,7 +92,7 @@ export const updateReview = async (formData, token, dispatch) => {
 };
 
 // get resolved reviews or authorized reviews
-export const getAuthorizedReviews = async (token) => {
+export const getAuthorizedReviews = async (token, dispatch) => {
   let result;
   try {
     const response = await apiConnector(
@@ -105,6 +106,7 @@ export const getAuthorizedReviews = async (token) => {
     console.log("PUBLISHED BLOGS API RESPONSE", response);
 
     result = response?.data?.top10Reviews;
+    dispatch(setTestimonials(result));
     // toast.success("review fetched");
   } catch (err) {
     console.log("AUTHORIZED REVIEW API ERROR", err);

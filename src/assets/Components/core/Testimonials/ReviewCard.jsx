@@ -32,13 +32,13 @@ const ReviewCard = ({ review }) => {
 
       {/* comment */}
       <p className="my-4">
-        {comment.substring().length > 100
-          ? `${comment.substring(0, 100)}...`
+        {comment.substring().length > 150
+          ? `${comment.substring(0, 150)}...`
           : comment}
       </p>
 
       {/* client project and link */}
-      <div className="flex items-center capitalize gap-2 group w-fit">
+      <div className="flex items-center capitalize gap-2 group w-fit mb-4">
         <a
           href={projectLink}
           target="_blank"
@@ -52,11 +52,14 @@ const ReviewCard = ({ review }) => {
 
       {/* client and name */}
       <div className="flex items-center gap-6">
-        <img
-          src={image}
-          alt={firstName}
-          className="w-25 h-25 rounded-full my-4"
-        />
+        <div className="w-24 h-24 overflow-hidden rounded-full">
+          <img
+            src={image}
+            alt={firstName}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
         <div className=" flex flex-col">
           <div className="text-2xl capitalize space-x-3">
             <span>{firstName}</span>
@@ -65,7 +68,7 @@ const ReviewCard = ({ review }) => {
 
           <p className="text-right text-green-400 my-2 h-fit w-fit rounded-xl px-4 border-gray-500 border-[1px] text-xs relative py-1 flex">
             Verified
-            <AiFillLike className="absolute -right-2 -top-2" fontSize={18} />
+            <AiFillLike className="absolute -right-1 -top-1" fontSize={12} />
           </p>
         </div>
       </div>

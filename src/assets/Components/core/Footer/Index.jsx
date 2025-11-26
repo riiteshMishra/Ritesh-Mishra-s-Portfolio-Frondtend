@@ -12,7 +12,7 @@ const Footer = () => {
           <UseFullLinks />
         </div>
         <div className=" h-1 mx-auto border-gray-400 border-b-2 py-4"></div>
-        <p className="mt-4 text-gray-500 text-center text-xl">
+        <p className="mt-4 text-gray-500 text-center text-xs">
           © {new Date().getFullYear()} Ritesh Mishra. All rights reserved.
         </p>
       </div>
