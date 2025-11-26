@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
     <section className="text-white flex flex-col sm:flex-row  gap-y-2 ">
       {/* left aside */}
-      <aside className="sm:w-[250px] w-full    bg-gray-800 py-2">
+      <aside className="sm:w-[250px] w-full    bg-gray-800 py-2 ">
         <Sidebar />
       </aside>
 

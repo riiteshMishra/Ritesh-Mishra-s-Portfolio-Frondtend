@@ -21,12 +21,13 @@ import MyBlog from "./assets/Components/core/Dashboard/Blog/create-blog/MyBlog";
 import ViewBlog from "./assets/Components/core/Dashboard/Blog/view-blog/ViewBlog";
 import WriteReview from "./assets/Components/core/Dashboard/Write-a-review";
 import EditReview from "./assets/Components/core/Dashboard/Write-a-review/EditReview";
+import OverlayBar from "./assets/Components/core/Home/overlay-navigatore/Index";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   return (
-    <div className="min-h-screen bg-gray-950 relative">
+    <div className="min-h-screen bg-gray-950 relative z-0">
       <NavBar />
       <Routes>
         <Route path="*" element={<PageNotFound />} />
@@ -62,6 +63,7 @@ const App = () => {
           </Route>
         )}
       </Routes>
+      <OverlayBar/>
     </div>
   );
 };

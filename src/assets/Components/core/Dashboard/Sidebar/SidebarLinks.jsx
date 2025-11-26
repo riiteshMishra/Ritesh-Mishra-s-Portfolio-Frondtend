@@ -1,5 +1,3 @@
-// SidebarLinks.jsx
-import React from "react";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa"; // sab fa icons import
 
