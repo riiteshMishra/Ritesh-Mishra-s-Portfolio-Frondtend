@@ -115,3 +115,49 @@ export const getAuthorizedReviews = async (token, dispatch) => {
     return result;
   }
 };
+
+// get non approved reviews
+export const getNonApprovedReviews = async (token, dispatch) => {
+  let result = [];
+  try {
+    const response = await apiConnector(
+      "GET",
+      reviewsEndpoints.GET_NON_APPROVED_REVIEWS,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    console.log("NON APPROVED REVIEW API RESPONSE", response);
+
+    result = response.data.data;
+  } catch (err) {
+    console.log("Non approved reviews api error", err);
+    toast.error(getErrorMessage(err));
+  } finally {
+    return result;
+  }
+};
+
+// toggle reviews
+export const toggleReview = async (token, reviewId) => {
+  let result;
+  try {
+    const response = await apiConnector(
+      "POST",
+      reviewsEndpoints.TOGGLE_REVIEW,
+      { reviewId: reviewId },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+    console.log("TOGGLE REVIEW RESPONSE", response);
+    result = response.data.data;
+    toast.success("Review Approved successfully");
+  } catch (err) {
+    console.log("Toggle review api error response", err);
+    toast.error(getErrorMessage(err));
+  } finally {
+    return result;
+  }
+};

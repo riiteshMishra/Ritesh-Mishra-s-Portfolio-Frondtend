@@ -4,13 +4,10 @@ import { dashboardLinks } from "../../../../Data/dashboard-links";
 import SidebarLinks from "./SidebarLinks";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const { user } = useSelector((state) => state.profile);
+const { user } = useSelector((state) => state.profile);
 
   return (
-    <div className="sm:flex hidden flex-col gap-y-4 px-5 py-4">
+    <div className="flex flex-col gap-y-4 px-5 py-4">
       {/* Dashboard links */}
       <div className="flex flex-col gap-2 capitalize">
         {dashboardLinks.map((link) => {

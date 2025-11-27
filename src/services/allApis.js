@@ -52,4 +52,6 @@ export const reviewsEndpoints = {
   UPDATE_REVIEW: "/reviews/update-review",
   GET_CLIENT_REVIEW: "/reviews/get-client-review",
   GET_AUTHORIZED_REVIEWS: "/reviews/get-all-reviews",
+  GET_NON_APPROVED_REVIEWS: "/reviews/get-non-approved-reviews",
+  TOGGLE_REVIEW: "/reviews/toggle-review",
 };

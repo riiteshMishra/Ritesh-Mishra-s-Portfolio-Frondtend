@@ -36,4 +36,11 @@ export const dashboardLinks = [
     icon: "FaStar",
     type: ACCOUNT_TYPE.CLIENT,
   },
+  {
+    id: 6,
+    name: "User Reviews",
+    path: "/dashboard/user-reviews",
+    icon: "FaStar",
+    type: ACCOUNT_TYPE.ADMIN,
+  },
 ];
