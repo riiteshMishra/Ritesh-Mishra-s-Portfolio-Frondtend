@@ -123,6 +123,7 @@ export const getNonApprovedReviews = async (token, dispatch) => {
     const response = await apiConnector(
       "GET",
       reviewsEndpoints.GET_NON_APPROVED_REVIEWS,
+    null,
       {
         Authorization: `Bearer ${token}`,
       }
