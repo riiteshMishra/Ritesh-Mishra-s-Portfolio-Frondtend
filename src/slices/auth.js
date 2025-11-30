@@ -6,6 +6,7 @@ const initialState = {
   token: localStorage.getItem("token")
     ? JSON.parse(localStorage.getItem("token"))
     : null,
+  OtpSent: false,
 };
 
 const authSlice = createSlice({
@@ -26,9 +27,12 @@ const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem("token");
     },
+    otpSent: (state) => {
+      state.OtpSent = true;
+    },
   },
 });
 
-export const { setLoading, setToken, clearToken } = authSlice.actions;
+export const { setLoading, setToken, clearToken, otpSent } = authSlice.actions;
 
 export default authSlice.reducer;

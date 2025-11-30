@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { IoEyeOff } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
 import { login } from "../../../../services/operations/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
@@ -50,27 +50,33 @@ const LoginForm = () => {
         </label>
 
         {/* Password */}
-        <label className="flex flex-col mb-4 relative">
-          <p className="mb-1 font-medium">Password</p>
-          <input
-            type={type}
-            className="FormStyle border p-2 rounded pr-10"
-            {...register("password", { required: "Password is required" })}
-          />
-          {errors.password && (
-            <span className="text-red-500 text-sm mt-1">
-              {errors.password.message}
-            </span>
-          )}
+        <div className="relative mb-4">
+          <div>
+            <label className="flex flex-col  relative">
+              <p className="mb-1 font-medium">Password</p>
+              <input
+                type={type}
+                className="FormStyle border p-2 rounded pr-10"
+                {...register("password", { required: "Password is required" })}
+              />
+              {errors.password && (
+                <span className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </span>
+              )}
 
-          <span
-            className="absolute right-3 top-[55px] cursor-pointer text-xl text-white"
-            onClick={togglePassword}
-          >
-            {type === "password" ? <IoEyeOff /> : <IoMdEye />}
-          </span>
-        </label>
-
+              <span
+                className="absolute right-3 top-[55px] cursor-pointer text-xl text-white"
+                onClick={togglePassword}
+              >
+                {type === "password" ? <IoEyeOff /> : <IoMdEye />}
+              </span>
+            </label>
+          </div>
+          <Link className="absolute right-0 -bottom-2 text-blue-400" to={"/forgot-password"}>
+            forgot password
+          </Link>
+        </div>
         <button
           type="submit"
           className="w-full bg-[#73ff01] text-black font-semibold p-2 rounded hover:bg-[#01ffc8] transition-all"

@@ -6,7 +6,7 @@ import {
   categoryEndPoints,
   profileEndpoints,
 } from "../allApis";
-import { clearToken, setToken } from "../../slices/auth";
+import { clearToken, otpSent, setToken } from "../../slices/auth";
 import { deleteUser, setUser } from "../../slices/profile";
 import { clearAllReviews, clearSingleReview } from "../../slices/review";
 
@@ -101,7 +101,7 @@ export const logout = async (navigate, dispatch) => {
     dispatch(setUser(null));
     dispatch(deleteUser());
     dispatch(clearAllReviews());
-    dispatch(clearSingleReview())
+    dispatch(clearSingleReview());
     toast.success("Logout successful");
     navigate("/");
   } catch (err) {
@@ -261,5 +261,27 @@ export const updatePicture = async (data, dispatch, token) => {
     toast.error(getErrorMessage(err));
   } finally {
     return result;
+  }
+};
+
+// _________________________forgot password ???___________________
+export const generateResetPasswordToken = async (email, dispatch) => {
+  const toastId = toast.loading("sending reset link");
+  let result;
+  try {
+    const response = await apiConnector(
+      "POST",
+      authEndPoints.GENERATE_RESET_PASSWORD_TOKEN,
+      { email }
+    );
+
+    console.log("generate reset password token api response", response);
+    if (response.data.success) dispatch(otpSent());
+    toast.success("Reset password link generated please check your email");
+  } catch (err) {
+    console.log("generate reset password token api error", err);
+    toast.error(getErrorMessage(err));
+  } finally {
+    toast.dismiss(toastId);
   }
 };

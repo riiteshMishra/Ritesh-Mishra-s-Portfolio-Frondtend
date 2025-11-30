@@ -23,6 +23,7 @@ import WriteReview from "./assets/Components/core/Dashboard/Write-a-review";
 import EditReview from "./assets/Components/core/Dashboard/Write-a-review/EditReview";
 import OverlayBar from "./assets/Components/core/Home/overlay-navigatore/Index";
 import NonApprovedReviews from "./assets/Components/core/Dashboard/Reviews/NonApprovedReviews";
+import ForgotPassword from "./assets/pages/ForgotPassword";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="blogs/blog/:blogId" element={<ViewBlog />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact-us" element={<Contact />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         {!token && <Route path="/signup" element={<Signup />} />}
         {!token && <Route path="/login" element={<Login />} />}
         // Dashboard
@@ -52,7 +54,7 @@ const App = () => {
               <>
                 <Route path="create-blog" element={<CreateBlogs />} />
                 <Route path="my-blogs" element={<MyBlog />} />
-                <Route path="user-reviews" element={<NonApprovedReviews/>} />
+                <Route path="user-reviews" element={<NonApprovedReviews />} />
               </>
             )}
             // ONLY FOR CLIENTS
