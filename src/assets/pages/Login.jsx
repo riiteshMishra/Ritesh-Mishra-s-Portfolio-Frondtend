@@ -1,5 +1,6 @@
 import LoginForm from "../Components/core/Auth/LoginForm";
 import { useEffect } from "react";
+import Footer from "../Components/core/Footer/Index";
 const Login = () => {
      useEffect(() => {
        document.title = "Ritesh | Mishra | login";
@@ -24,6 +25,7 @@ const Login = () => {
             <LoginForm />
           </div>
         </div>
+      <Footer/>
       </div>
     </section>
   );

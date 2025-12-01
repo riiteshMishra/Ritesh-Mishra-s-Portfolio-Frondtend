@@ -1,12 +1,13 @@
 import React from "react";
 import SignupForm from "../Components/core/Auth/SignupForm";
 import { useEffect } from "react";
+import Footer from "../Components/core/Footer/Index";
 const Signup = () => {
      useEffect(() => {
        document.title = "Ritesh | Mishra | sign-up";
      }, []);
   return (
-    <section className="SignupPage flex items-center justify-center ">
+    <section className="SignupPage flex items-center justify-center flex-col ">
       <div className="container px-4 flex flex-col md:flex-row items-center gap-10 justify-center">
         {/* Left Side - Info/Illustration */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-md py-10">
@@ -28,6 +29,8 @@ const Signup = () => {
           <SignupForm />
         </div>
       </div>
+
+        <Footer/>
     </section>
   );
 };

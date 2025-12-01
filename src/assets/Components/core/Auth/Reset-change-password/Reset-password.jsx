@@ -37,12 +37,9 @@ const ResetPassword = () => {
     formData.append("password", data.password);
     formData.append("confirmPassword", data.confirmPassword);
     setLoading(true);
-
-    const res = await resetPassword(formData, resetToken);
-    // console.log("response",res)
-    if (res.success) navigate("/login");
-
+    await resetPassword(formData, resetToken);
     setLoading(false);
+    navigate("/login");
   };
 
   const passwordValue = watch("password");

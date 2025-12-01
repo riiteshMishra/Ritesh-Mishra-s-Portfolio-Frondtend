@@ -291,9 +291,11 @@ export const resetPassword = async (formData, resetToken) => {
   try {
     const response = await apiConnector(
       "POST",
-      `${authEndPoints.RESET_PASSWORD_API}${resetToken}`,formData
+      `${authEndPoints.RESET_PASSWORD_API}${resetToken}`,
+      formData
     );
     console.log("reset password api response", response);
+    toast.success(response?.data?.message);
   } catch (err) {
     console.log("RESET PASSWORD API ERROR", err);
     toast.error(getErrorMessage(err));
