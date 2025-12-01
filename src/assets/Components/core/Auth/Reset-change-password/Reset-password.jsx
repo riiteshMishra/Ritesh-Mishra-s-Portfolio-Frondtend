@@ -37,13 +37,11 @@ const ResetPassword = () => {
     formData.append("password", data.password);
     formData.append("confirmPassword", data.confirmPassword);
     setLoading(true);
-    try {
-      const res = await resetPassword(formData, resetToken);
-      console.log("response",res)
-      if (res.success) navigate("/login");
-    } catch (err) {
-      alert(err.response?.data?.message || "Something went wrong");
-    }
+
+    const res = await resetPassword(formData, resetToken);
+    // console.log("response",res)
+    if (res.success) navigate("/login");
+
     setLoading(false);
   };
 
