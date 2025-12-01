@@ -24,6 +24,7 @@ import EditReview from "./assets/Components/core/Dashboard/Write-a-review/EditRe
 import OverlayBar from "./assets/Components/core/Home/overlay-navigatore/Index";
 import NonApprovedReviews from "./assets/Components/core/Dashboard/Reviews/NonApprovedReviews";
 import ForgotPassword from "./assets/pages/ForgotPassword";
+import ResetPassword from "./assets/Components/core/Auth/Reset-change-password/Reset-password";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
         {!token && <Route path="/signup" element={<Signup />} />}
         {!token && <Route path="/login" element={<Login />} />}
         // Dashboard

@@ -264,7 +264,7 @@ export const updatePicture = async (data, dispatch, token) => {
   }
 };
 
-// _________________________forgot password ???___________________
+// ___________forgot password for logged out user________________
 export const generateResetPasswordToken = async (email, dispatch) => {
   const toastId = toast.loading("sending reset link");
   let result;
@@ -283,5 +283,19 @@ export const generateResetPasswordToken = async (email, dispatch) => {
     toast.error(getErrorMessage(err));
   } finally {
     toast.dismiss(toastId);
+  }
+};
+
+// reset password for logged out user
+export const resetPassword = async (formData, resetToken) => {
+  try {
+    const response = await apiConnector(
+      "POST",
+      `${authEndPoints.RESET_PASSWORD_API}${resetToken}`,formData
+    );
+    console.log("reset password api response", response);
+  } catch (err) {
+    console.log("RESET PASSWORD API ERROR", err);
+    toast.error(getErrorMessage(err));
   }
 };

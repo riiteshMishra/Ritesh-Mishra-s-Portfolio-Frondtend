@@ -5,7 +5,7 @@ export const authEndPoints = {
   LOG_IN_API: "/auth/log-in",
   CHANGE_PASSWORD_API: "/auth/change-password",
   GENERATE_RESET_PASSWORD_TOKEN: "/auth/generate-reset-password-token",
-  RESET_PASSWORD_API: "/auth/reset-password/:token",
+  RESET_PASSWORD_API: "/auth/reset-password/",
 };
 
 // blogs api
