@@ -5,7 +5,7 @@ Sitemap: https://riteshmishra.online/sitemap.xml
 
 # Developer Info
 # Author: Ritesh Mishra (Full Stack Web Developer)
-# Location: Inhata, Gorakhpur, Kushinagar, Sukrauli, Padrona, Uttar Pradesh
+# Location: Hata, Gorakhpur, Kushinagar, Sukrauli, Padrauna, Uttar Pradesh
 
 # Optional: block internal folders
 Disallow: /admin/
