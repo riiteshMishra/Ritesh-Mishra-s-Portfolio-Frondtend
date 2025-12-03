@@ -1,4 +1,5 @@
 import { ACCOUNT_TYPE } from "../../../../../utils/utilsData";
+import { FaHome, FaUser, FaBlog, FaFolderOpen, FaPhone } from "react-icons/fa";
 
 export const navigationData = [
   // ----- Common Navigation -----
@@ -48,5 +49,38 @@ export const navigationData = [
     name: "settings",
     path: "/dashboard/settings",
     icon: "FaCog",
+  },
+];
+
+export const openRoutes = [
+  {
+    id: 1,
+    name: "home",
+    path: "/",
+    icon: FaHome,
+  },
+  {
+    id: 2,
+    name: "about",
+    path: "/about",
+    icon: FaUser,
+  },
+  {
+    id: 3,
+    name: "blogs",
+    path: "/blogs",
+    icon: FaBlog,
+  },
+  {
+    id: 4,
+    name: "projects",
+    path: "/projects",
+    icon: FaFolderOpen, 
+  },
+  {
+    id: 5,
+    name: "contact",
+    path: "/contact-us",
+    icon: FaPhone, 
   },
 ];
