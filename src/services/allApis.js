@@ -55,3 +55,11 @@ export const reviewsEndpoints = {
   GET_NON_APPROVED_REVIEWS: "/reviews/get-non-approved-reviews",
   TOGGLE_REVIEW: "/reviews/toggle-review",
 };
+
+// project endpoints
+export const projectsEndpoints = {
+  CREATE_PROJECT_API: "/projects/create-project",
+  UPDATE_PROJECT_API: "/project/update-project/:projectId",
+  DELETE_PROJECT_API: "/project/delete-project/:projectId",
+  GET_ALL_PROJECTS_API: "/project/get-all-projects",
+};

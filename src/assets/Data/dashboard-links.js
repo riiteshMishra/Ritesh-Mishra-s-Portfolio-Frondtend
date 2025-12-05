@@ -43,4 +43,11 @@ export const dashboardLinks = [
     icon: "FaStar",
     type: ACCOUNT_TYPE.ADMIN,
   },
+  {
+    id: 7,
+    name: "Create Project",
+    path: "/dashboard/create-project",
+    icon: "FaFolderPlus",
+    type: ACCOUNT_TYPE.ADMIN,
+  },
 ];

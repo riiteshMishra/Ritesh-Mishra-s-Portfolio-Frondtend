@@ -25,6 +25,7 @@ import OverlayBar from "./assets/Components/core/Home/overlay-navigatore/Index";
 import NonApprovedReviews from "./assets/Components/core/Dashboard/Reviews/NonApprovedReviews";
 import ForgotPassword from "./assets/pages/ForgotPassword";
 import ResetPassword from "./assets/Components/core/Auth/Reset-change-password/Reset-password";
+import CreateProject from "./assets/Components/core/Dashboard/Projects/Index";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
@@ -57,6 +58,7 @@ const App = () => {
                 <Route path="create-blog" element={<CreateBlogs />} />
                 <Route path="my-blogs" element={<MyBlog />} />
                 <Route path="user-reviews" element={<NonApprovedReviews />} />
+                <Route path="create-project" element={<CreateProject/>}/>
               </>
             )}
             // ONLY FOR CLIENTS

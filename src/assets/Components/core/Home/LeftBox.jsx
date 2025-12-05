@@ -1,9 +1,6 @@
 import Skill from "./Skills";
 import { TypeAnimation } from "react-type-animation";
-import HireMe from "./HireMe";
-import SocialMedia from "./SocialMedia";
 import { homepageTexts } from "../../../Data/homepage";
-import ModernText from "../../common/ModernText";
 const LeftBox = () => {
   const { heading, role, runningText, description } = homepageTexts;
   return (

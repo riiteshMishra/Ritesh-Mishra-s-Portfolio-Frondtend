@@ -56,7 +56,7 @@ const Intro = () => {
               alt={name}
               width="300"
               height="300"
-              fetchpriority="high"
+              fetchPriority="high"
               className="w-full h-full object-cover"
             />
           </div>
