@@ -4,6 +4,7 @@ import profileReducer from "../slices/profile";
 import blogReducer from "../slices/blog";
 import reviewReducer from "../slices/review";
 import homeReducer from "../slices/home";
+import projectReducer from "../slices/project";
 
 const rootReducer = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const rootReducer = configureStore({
     blog: blogReducer,
     review: reviewReducer,
     home: homeReducer,
+    project: projectReducer,
   },
 });
 

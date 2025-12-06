@@ -1,0 +1,26 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  projectData: localStorage.getItem("projectData")
+    ? JSON.parse(localStorage.getItem("projectData"))
+    : [],
+
+  isLoaded: false,
+};
+
+const projectSlice = createSlice({
+  name: "project",
+  initialState,
+  reducers: {
+    setProjectData: (state, action) => {
+      state.projectData = action.payload;
+      // local storage me set krne ke liye localStorage("key",value)  dena hota hai
+      if (Array.isArray(action.payload)) state.isLoaded = true;
+
+      localStorage.setItem("projectData", JSON.stringify(action.payload));
+    },
+  },
+});
+
+export const { setProjectData } = projectSlice.actions;
+export default projectSlice.reducer;

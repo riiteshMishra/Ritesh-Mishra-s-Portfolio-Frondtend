@@ -18,6 +18,7 @@ const CreateProjectForm = () => {
     handleSubmit,
     setValue,
     resetField,
+    reset,
   } = useForm();
 
   // Register thumbnail manually (custom onChange)
@@ -46,15 +47,16 @@ const CreateProjectForm = () => {
     formData.append("thumbnail", data.thumbnail);
     formData.append("projectName", data.name || "");
     formData.append("description", data.description || "");
-    formData.append("frontendTech", JSON.stringify(data.frontendTech || []));
-    formData.append("backendTech", JSON.stringify(data.backendTech || []));
+    data.frontendTech?.forEach((tech) => formData.append("frontendTech", tech));
+    data.backendTech?.forEach((tech) => formData.append("backendTech", tech));
     // formData.append("frontendTech", data.frontendTech);
     // formData.append("backendTech", data.backendTech);
+
     formData.append("gitHubLink", data.githubLink || "");
     formData.append("liveLink", data.liveLink || "");
-for (let [key, value] of formData.entries()) {
-  console.log(key, value);
-}
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(key, value);
+    // }
 
     try {
       setLoading(true);
@@ -62,6 +64,7 @@ for (let [key, value] of formData.entries()) {
     } catch (err) {
       console.log("error while creating project", err);
     } finally {
+      // reset();
       setLoading(false);
     }
   };

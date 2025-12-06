@@ -61,5 +61,5 @@ export const projectsEndpoints = {
   CREATE_PROJECT_API: "/projects/create-project",
   UPDATE_PROJECT_API: "/project/update-project/:projectId",
   DELETE_PROJECT_API: "/project/delete-project/:projectId",
-  GET_ALL_PROJECTS_API: "/project/get-all-projects",
+  GET_ALL_PROJECTS_API: "/projects/get-all-projects",
 };
