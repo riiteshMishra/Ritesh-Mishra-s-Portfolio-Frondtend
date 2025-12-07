@@ -31,7 +31,7 @@ const YourProjects = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="relative min-h-[calc(100vh-60px)] overflow-hidden flex flex-col items-center justify-start px-4 pb-12 pt-4">
+    <div className="relative min-h-[calc(100vh-60px)] overflow-hidden flex flex-col items-center justify-start px-2 pb-12 pt-4">
       {/* Header */}
       <div className="text-center mb-10 animate-fadeIn">
         <div className="flex items-center justify-center gap-3 text-white">
@@ -61,7 +61,7 @@ const YourProjects = () => {
 
       {/* Projects Grid */}
       {projectData?.length > 0 && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 animate-fadeInSlow">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 animate-fadeInSlow">
           {projectData.map((project) => (
             <ProjectCard key={project._id} project={project} />
           ))}
