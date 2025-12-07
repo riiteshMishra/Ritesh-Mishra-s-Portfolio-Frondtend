@@ -6,6 +6,7 @@ const initialState = {
     : [],
 
   isLoaded: false,
+  edit: false,
 };
 
 const projectSlice = createSlice({

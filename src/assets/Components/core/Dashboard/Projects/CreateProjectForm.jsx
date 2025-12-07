@@ -21,9 +21,9 @@ const CreateProjectForm = () => {
     reset,
   } = useForm();
 
-  // Register thumbnail manually (custom onChange)
+  // Register thumbnail manually
   useEffect(() => {
-    register("thumbnail", { required: true });
+    register("thumbnail", { required: "Thumbnail is required" });
   }, [register]);
 
   // HANDLE IMAGE UPLOAD
@@ -47,24 +47,29 @@ const CreateProjectForm = () => {
     formData.append("thumbnail", data.thumbnail);
     formData.append("projectName", data.name || "");
     formData.append("description", data.description || "");
-    data.frontendTech?.forEach((tech) => formData.append("frontendTech", tech));
-    data.backendTech?.forEach((tech) => formData.append("backendTech", tech));
-    // formData.append("frontendTech", data.frontendTech);
-    // formData.append("backendTech", data.backendTech);
-
     formData.append("gitHubLink", data.githubLink || "");
-    formData.append("liveLink", data.liveLink || "");
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(key, value);
-    // }
+    if (data.liveLink) formData.append("liveLink", data.liveLink || "");
+    const frontendArray = Array.isArray(data.frontendTech)
+      ? data.frontendTech
+      : data.frontendTech
+      ? [data.frontendTech]
+      : [];
+    const backendArray = Array.isArray(data.backendTech)
+      ? data.backendTech
+      : data.backendTech
+      ? [data.backendTech]
+      : [];
 
+    frontendArray.forEach((tech) => formData.append("frontendTech", tech));
+    backendArray.forEach((tech) => formData.append("backendTech", tech));
     try {
       setLoading(true);
       await createProject(formData, token, dispatch);
     } catch (err) {
       console.log("error while creating project", err);
     } finally {
-      // reset();
+      setImage("");
+      reset();
       setLoading(false);
     }
   };
@@ -87,7 +92,7 @@ const CreateProjectForm = () => {
         "
       >
         {/* Thumbnail Upload */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center relative">
           <label className="cursor-pointer">
             <input
               type="file"
@@ -174,17 +179,16 @@ const CreateProjectForm = () => {
         {/* Live link */}
         <div className="flex flex-col gap-1 w-full">
           <label>
-            <p className="text-xl text-white">Live Link</p>
+            <p className="text-xl text-white">
+              Live Link <span className=" text-blue-300">(optional)</span>
+            </p>
             <input
               type="text"
-              {...register("liveLink", { required: true })}
+              {...register("liveLink")}
               className="form-style"
               placeholder="https://yourproject.vercel.app"
             />
           </label>
-          {errors.liveLink && (
-            <p className="text-red-400 text-sm">Live link required</p>
-          )}
         </div>
 
         {/* Submit */}
