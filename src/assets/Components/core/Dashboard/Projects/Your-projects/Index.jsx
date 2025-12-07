@@ -1,37 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { getAllProjects } from "../../../../../../services/operations/project";
-import ProjectCard from "./ProjectCard";
-import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../../../common/Loader";
-
-// Icons
 import { FaFolderOpen, FaCode } from "react-icons/fa";
 import { CiFaceSmile } from "react-icons/ci";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import ProjectCards from "./ProjectCards";
 
 const YourProjects = () => {
-  const { projectData, isLoaded } = useSelector((state) => state.project);
+  const { projectData } = useSelector((state) => state.project);
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchAllProjects = async () => {
-      try {
-        setLoading(true);
-        await getAllProjects(dispatch);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (!isLoaded) fetchAllProjects();
-  }, [isLoaded, dispatch]);
-
-  if (loading) return <Loader />;
-
   return (
-    <div className="relative min-h-[calc(100vh-60px)] overflow-hidden flex flex-col items-center justify-start px-2 pb-12 pt-4">
+    <div className="relative min-h-[calc(100vh-60px)] overflow-hidden flex flex-col items-center justify-start px-4 pb-12 pt-4">
       {/* Header */}
       <div className="text-center mb-10 animate-fadeIn">
         <div className="flex items-center justify-center gap-3 text-white">
@@ -59,14 +36,7 @@ const YourProjects = () => {
         </div>
       )}
 
-      {/* Projects Grid */}
-      {projectData?.length > 0 && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 animate-fadeInSlow">
-          {projectData.map((project) => (
-            <ProjectCard key={project._id} project={project} />
-          ))}
-        </div>
-      )}
+      <ProjectCards loading={loading} setLoading={setLoading} />
     </div>
   );
 };

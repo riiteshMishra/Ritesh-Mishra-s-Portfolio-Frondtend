@@ -58,17 +58,17 @@ const ProjectCard = ({ project }) => {
       </div>
 
       {/* Content */}
-      <div className="p-6 text-white">
-        <h2 className="text-3xl font-semibold mb-3 capitalize bg-gradient-to-r from-pink-400 to-blue-400 text-transparent bg-clip-text">
+      <div className=" p-2 px-4 text-white">
+        <h2 className="text-3xl font-semibold mb-1 capitalize bg-gradient-to-r from-pink-400 to-blue-400 text-transparent bg-clip-text">
           {project.projectName}
         </h2>
 
-        <p className="text-white/80 text-sm mb-5 line-clamp-3">
+        <p className="text-white/80 text-sm mb-2 line-clamp-3">
           {project.description}
         </p>
 
         {/* Frontend Stack */}
-        <div>
+        <div className="border-t-2 border-gray-700 pt-1">
           <p className="font-medium text-xl text-white mb-2">Frontend Stack</p>
 
           {!project?.frontendTech?.length ? (
@@ -90,13 +90,13 @@ const ProjectCard = ({ project }) => {
         </div>
 
         {/* Backend Stack */}
-        <div className="mt-4">
+        <div className="mt-2">
           <p className="font-medium text-xl text-white mb-2">Backend Stack</p>
 
           {!project?.backendTech?.length ? (
             <div className="text-white/60 italic">No stack added</div>
           ) : (
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-x-2 flex-wrap">
               {project.backendTech.map((tech, idx) => (
                 <span
                   key={idx}
@@ -112,7 +112,7 @@ const ProjectCard = ({ project }) => {
         </div>
 
         {/* Links */}
-        <div className="flex items-center justify-between mt-6">
+        <div className="flex items-center justify-between my-4">
           <a
             href={project.gitHubLink}
             target="_blank"

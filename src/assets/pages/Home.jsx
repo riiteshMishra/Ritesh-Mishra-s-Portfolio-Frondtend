@@ -3,6 +3,7 @@ import LeftBox from "../Components/core/Home/LeftBox";
 import Footer from "../Components/core/Footer/Index";
 import Testimonials from "../Components/core/Testimonials/Index";
 import { useEffect } from "react";
+import ProjectSection from "../Components/core/Home/Project-section/Index";
 const Home = () => {
   // bg-[#ff000025]   min-h-[calc(100vh-60)]
   useEffect(() => {
@@ -20,8 +21,9 @@ const Home = () => {
             <RightBox />
           </div>
         </section>
+        <ProjectSection />
+        <Testimonials />
       </main>
-      <Testimonials />
       <Footer />
     </section>
   );

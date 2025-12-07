@@ -25,7 +25,7 @@ const Testimonials = () => {
   }, [token, dispatch]);
 
   return (
-    <section className=" text-white py-12 border-t-[1px] border-cyan-700 ">
+    <section className=" text-white py-12 ">
       <div className="container">
         <p className="text-center capitalize text-3xl my-2">
           <strong className="">

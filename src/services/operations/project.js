@@ -38,7 +38,6 @@ export const getAllProjects = async (dispatch) => {
     console.log("GET ALL PROJECTS API RESPONSE", response);
     result = response?.data?.data;
     dispatch(setProjectData(result));
-    toast.success(response?.data?.message);
   } catch (err) {
     console.log("GET ALL PROJECTS API ERROR RESPONSE", err);
     toast.error(getErrorMessage(err));

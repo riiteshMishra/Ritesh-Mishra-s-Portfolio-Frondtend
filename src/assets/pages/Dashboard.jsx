@@ -4,9 +4,9 @@ import Sidebar from "../Components/core/Dashboard/Sidebar/Sidebar";
 
 const Dashboard = () => {
   return (
-    <section className="text-white flex flex-col sm:flex-row  gap-y-2 ">
+    <section className="text-white flex flex-col sm:flex-row">
       {/* left aside */}
-      <aside className="sm:w-[250px] w-full    bg-gray-800 py-2 ">
+      <aside className="sm:w-[250px] w-full bg-gray-800 py-2 hidden sm:block">
         <Sidebar />
       </aside>
 
