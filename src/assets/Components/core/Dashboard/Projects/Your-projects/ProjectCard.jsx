@@ -1,8 +1,13 @@
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { ACCOUNT_TYPE } from "../../../../../../utils/utilsData";
+import { SlLike } from "react-icons/sl";
+import { BiCommentEdit } from "react-icons/bi";
 
 const ProjectCard = ({ project }) => {
+  const { user } = useSelector((state) => state.profile);
   return (
     <div
       className="
@@ -11,14 +16,15 @@ const ProjectCard = ({ project }) => {
         rounded-2xl shadow-xl overflow-hidden 
         hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(0,255,200,0.3)]
         transition-all duration-500
+        max-w-[500px] h-fit w-fit
       "
     >
       {/* Thumbnail */}
-      <div className="relative">
+      <div className="relative max-w-[500px] max-h-[300px] ">
         <img
           src={project.thumbnail}
           alt={project.projectName}
-          className="h-48 w-full object-cover brightness-95 hover:brightness-110 transition-all duration-300"
+          className=" object-cover brightness-95 hover:brightness-110 transition-all duration-300"
         />
 
         {/* edit btn */}
@@ -33,10 +39,17 @@ const ProjectCard = ({ project }) => {
     border-[1px] border-black
   "
         >
-          <BiSolidEditAlt
-            className="text-xl text-green-400 drop-shadow-[0_0_5px_rgb(0,255,120)]"
-            title="edit"
-          />
+          {user?.accountType === ACCOUNT_TYPE.ADMIN ? (
+            <BiSolidEditAlt
+              className="text-xl text-green-400 drop-shadow-[0_0_5px_rgb(0,255,120)]"
+              title="edit"
+            />
+          ) : (
+            <SlLike
+              className="text-xl text-green-400 drop-shadow-[0_0_5px_rgb(0,255,120)]"
+              title="like"
+            />
+          )}
         </button>
 
         {/* delete btn */}
@@ -50,10 +63,17 @@ const ProjectCard = ({ project }) => {
     hover:bg-red-500/30 hover:shadow-[0_0_20px_rgba(255,50,50,0.5)]  border-[1px] border-black
   "
         >
-          <MdDelete
-            className="text-xl text-white drop-shadow-[0_0_5px_rgb(255,50,50)]"
-            title="delete"
-          />
+          {user?.accountType === ACCOUNT_TYPE.ADMIN ? (
+            <MdDelete
+              className="text-xl text-white drop-shadow-[0_0_5px_rgb(255,50,50)]"
+              title="delete"
+            />
+          ) : (
+            <BiCommentEdit
+              className="text-xl text-white drop-shadow-[0_0_5px_rgb(255,50,50)]"
+              title="comment"
+            />
+          )}
         </button>
       </div>
 
@@ -96,7 +116,7 @@ const ProjectCard = ({ project }) => {
           {!project?.backendTech?.length ? (
             <div className="text-white/60 italic">No stack added</div>
           ) : (
-            <div className="flex gap-x-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap">
               {project.backendTech.map((tech, idx) => (
                 <span
                   key={idx}

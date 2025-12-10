@@ -12,8 +12,8 @@ const Home = () => {
   return (
     <section>
       <main className="HomePage">
-        <section className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between py-12 ">
+        <section className="container ">
+          <div className="flex flex-col md:flex-row justify-between py-12 max-w-[1200px] mx-auto">
             {/* left box */}
             <LeftBox />
 
