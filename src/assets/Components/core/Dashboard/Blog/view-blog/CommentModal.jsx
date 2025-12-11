@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../../../common/Button";
 import Loader from "../../../../common/Loader";
@@ -16,9 +16,7 @@ const CommentModal = ({ setCommentModal, blogId }) => {
     if (!user) return navigate("/login");
     setSubmitLoading(true);
     try {
-      // TODO: API call to submit comment
-      // console.log("Submitted Comment:", data.commentText);
-      await addComment( blogId, data,token);
+      await addComment(blogId, data, token);
       reset();
       setCommentModal(false);
     } catch (err) {
@@ -27,16 +25,22 @@ const CommentModal = ({ setCommentModal, blogId }) => {
       setSubmitLoading(false);
     }
   };
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   if (submitLoading) return <Loader />;
 
   return (
     <div
       onClick={() => setCommentModal(false)}
-      className="absolute top-0 left-0 right-0 bottom-0 backdrop-blur-sm grid place-content-center z-30 scroll-smooth"
+      className="fixed top-0 left-0 right-0 bottom-0 backdrop-blur-sm grid place-content-center z-5 scroll-smooth "
     >
       <div
-        className="h-[clamp(300px,50vh,600px)] bg-black/50 w-[clamp(300px,50vw,600px)] rounded-xl border-[1px] border-black p-4"
+        className="h-[clamp(300px,5vh,600px)] bg-black/50 w-[clamp(300px,50vw,600px)] rounded-xl border-[1px] border-black p-4"
         onClick={(e) => e.stopPropagation()}
       >
         <p className="text-4xl capitalize mb-2">Add Comment</p>

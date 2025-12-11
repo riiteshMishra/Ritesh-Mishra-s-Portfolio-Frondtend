@@ -8,14 +8,11 @@ import { TypeAnimation } from "react-type-animation";
 import Footer from "../Components/core/Footer/Index";
 
 const Blogs = () => {
-
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const loadingRef = useRef(null);
   const navigate = useNavigate();
-  useEffect(() => {
-    document.title = "Ritesh | Mishra | Blogs";
-  }, []);
+  document.title = "Ritesh | Mishra | Blogs";
 
   useEffect(() => {
     const fetchPublishedBlogs = async () => {
@@ -54,7 +51,7 @@ const Blogs = () => {
   }, [loading]);
 
   return (
-    <section className="ProjectPage">
+    <section className=" min-h-[calc(100vh-60px)] overflow-x-hidden overflow-y-auto">
       <div className="max-w-[1300px] mx-auto p-6 rounded-lg">
         <div>
           {loading ? (
@@ -92,11 +89,11 @@ const Blogs = () => {
                   onClick={() => navigate(`blog/${blog?._id}`)}
                 >
                   {/* Thumbnail */}
-                  <img
+                  {/* <img
                     src={blog?.thumbnail}
                     alt={blog?.title}
                     className="w-full h-48 object-cover"
-                  />
+                  /> */}
 
                   {/* Blog details */}
                   <div className="p-4">
@@ -132,7 +129,7 @@ const Blogs = () => {
         <div className="border-b-[1px] rounded-full border-b-gray-800"></div>
       </div>
       {/* footer */}
-      <Footer/>
+      <Footer />
     </section>
   );
 };

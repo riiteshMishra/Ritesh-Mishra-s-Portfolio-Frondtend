@@ -5,9 +5,24 @@ import { useSelector } from "react-redux";
 import { ACCOUNT_TYPE } from "../../../../../../utils/utilsData";
 import { SlLike } from "react-icons/sl";
 import { BiCommentEdit } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ProjectCard = ({ project }) => {
   const { user } = useSelector((state) => state.profile);
+  const navigate = useNavigate();
+  const editHandler = () => {
+    toast.success("edited");
+  };
+  const likeHandler = () => {
+    toast.success("liked");
+  };
+  const deleteHandler = () => {
+    toast.success("deleted");
+  };
+  const commentHandler = () => {
+    toast.success("commented");
+  };
   return (
     <div
       className="
@@ -38,6 +53,9 @@ const ProjectCard = ({ project }) => {
     hover:bg-green-500/30 hover:shadow-[0_0_20px_rgba(0,255,120,0.5)]
     border-[1px] border-black
   "
+          onClick={() =>
+            user?.accountType === "Admin" ? editHandler() : likeHandler()
+          }
         >
           {user?.accountType === ACCOUNT_TYPE.ADMIN ? (
             <BiSolidEditAlt
@@ -62,6 +80,9 @@ const ProjectCard = ({ project }) => {
     hover:scale-110 hover:-rotate-6 
     hover:bg-red-500/30 hover:shadow-[0_0_20px_rgba(255,50,50,0.5)]  border-[1px] border-black
   "
+          onClick={() =>
+            user?.accountType === "Admin" ? deleteHandler() : commentHandler()
+          }
         >
           {user?.accountType === ACCOUNT_TYPE.ADMIN ? (
             <MdDelete
