@@ -1,17 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { RxCross2 } from "react-icons/rx";
 
 const BackendTechInput = ({ setValue }) => {
   const [backendTech, setBackendTech] = useState([]);
   const [typedWord, setTypedWord] = useState("");
+  const [valueChanged, setValueChanged] = useState(false);
+  const [backendArr, setBackendArr] = useState([]);
+  const backendRef = useRef(null);
 
   const handleChange = (e) => {
-    setTypedWord(e.target.value);
+    const value = e.target.value;
+    setTypedWord(value);
+
+    // phone me key handle nhi hoti
+    const arr = value
+      .toLowerCase()
+      .split(",")
+      .map((v) => v.trim())
+      .filter((v) => v !== "");
+
+    setBackendArr(arr);
   };
 
   const handleKey = (event) => {
     const cleanWord = typedWord.toLowerCase().trim();
 
+    // ENTER or COMMA → Add tag
     if (event.key === "Enter" || event.key === ",") {
       event.preventDefault();
 
@@ -19,21 +33,25 @@ const BackendTechInput = ({ setValue }) => {
 
       setBackendTech((prev) => [...prev, cleanWord]);
       setTypedWord("");
+      setValueChanged(true); // FIX: user changed value
     }
 
+    // BACKSPACE → Remove last tag
     if (event.key === "Backspace" && typedWord === "") {
       setBackendTech((prev) => prev.slice(0, prev.length - 1));
+      setValueChanged(true); // FIX
     }
   };
 
   const removeTag = (index) => {
     setBackendTech((prev) => prev.filter((_, i) => i !== index));
+    setValueChanged(true); // FIX
   };
 
+  // set the value
   useEffect(() => {
-    setValue("backendTech", backendTech); // RHF field name
-  }, [backendTech, setValue]);
-
+    setValue("backendTech", valueChanged ? backendTech : backendArr);
+  }, [backendTech, backendArr, valueChanged, setValue]);
   return (
     <div className="flex flex-col gap-2 w-full">
       <label>
@@ -46,6 +64,7 @@ const BackendTechInput = ({ setValue }) => {
           value={typedWord}
           onChange={handleChange}
           onKeyDown={handleKey}
+          // ref={backendRef}
         />
       </label>
 

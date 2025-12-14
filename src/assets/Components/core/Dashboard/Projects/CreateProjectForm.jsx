@@ -43,12 +43,11 @@ const CreateProjectForm = () => {
   // SUBMIT FORM
   const onSubmit = async (data) => {
     const formData = new FormData();
-
     formData.append("thumbnail", data.thumbnail);
     formData.append("projectName", data.name || "");
     formData.append("description", data.description || "");
     formData.append("gitHubLink", data.githubLink || "");
-    if (data.liveLink) formData.append("liveLink", data.liveLink || "");
+
     const frontendArray = Array.isArray(data.frontendTech)
       ? data.frontendTech
       : data.frontendTech
@@ -62,14 +61,15 @@ const CreateProjectForm = () => {
 
     frontendArray.forEach((tech) => formData.append("frontendTech", tech));
     backendArray.forEach((tech) => formData.append("backendTech", tech));
+
     try {
       setLoading(true);
       await createProject(formData, token, dispatch);
     } catch (err) {
       console.log("error while creating project", err);
     } finally {
-      setImage("");
-      reset();
+      // setImage("");
+      // reset();
       setLoading(false);
     }
   };

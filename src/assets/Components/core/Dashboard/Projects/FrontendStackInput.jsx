@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { RxCross2 } from "react-icons/rx";
 
 const FrontendStackInput = ({ setValue }) => {
   const [frontendTech, setFrontendTech] = useState([]);
   const [typedWord, setTypedWord] = useState("");
+  const [valueChanged, setValueChanged] = useState(false);
+  const [frontendArr, setFrontendArr] = useState([]);
+  // const frontendRef = useRef(null);
 
   const handleChange = (e) => {
-    setTypedWord(e.target.value);
+    const value = e.target.value;
+    setTypedWord(value);
+
+    const arr = value
+      .toLowerCase()
+      .trim()
+      .split(",")
+      .map((i) => i.trim())
+      .filter((i) => i != "");
+
+    setFrontendArr(arr);
   };
 
   const handleKey = (event) => {
-    const cleanWord = typedWord.toString().toLowerCase().trim();
+    const cleanWord = typedWord.toLowerCase().trim();
 
     if (event.key === "Enter" || event.key === ",") {
       event.preventDefault();
@@ -19,22 +32,26 @@ const FrontendStackInput = ({ setValue }) => {
 
       setFrontendTech((prev) => [...prev, cleanWord]);
       setTypedWord("");
+      setFrontendArr([]);
+      setValueChanged(true);
     }
 
     // Backspace → delete last tag when input empty
-    if (event.key === "Backspace" && typedWord === "")
+    if (event.key === "Backspace" && typedWord === "") {
       setFrontendTech((prev) => prev.slice(0, prev.length - 1));
+      setValueChanged(true);
+    }
   };
 
   // Remove tag
   const removeTag = (index) => {
     setFrontendTech((prev) => prev.filter((_, i) => i !== index));
+    setValueChanged(true);
   };
-
+  //  value set
   useEffect(() => {
-    setValue("frontendTech", frontendTech);
-  }, [frontendTech, setValue]);
-
+    setValue("frontendTech", valueChanged ? frontendTech : frontendArr);
+  }, [frontendTech, frontendArr, valueChanged, setValue]);
   return (
     <div className="flex flex-col gap-2 w-full">
       <label>
@@ -47,6 +64,7 @@ const FrontendStackInput = ({ setValue }) => {
           value={typedWord}
           onChange={handleChange}
           onKeyDown={handleKey}
+          // ref={frontendRef}
         />
       </label>
 
@@ -61,7 +79,7 @@ const FrontendStackInput = ({ setValue }) => {
               transition-all duration-300
               hover:bg-[#219ebc] hover:shadow-lg
               animate-fadeIn
-               capitalize
+              capitalize
             "
           >
             <p className="text-sm">{tech}</p>
