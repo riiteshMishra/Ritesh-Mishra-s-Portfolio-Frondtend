@@ -11,7 +11,7 @@ const Home = () => {
   }, []);
   return (
     <section>
-      <main className="HomePage">
+      <main className="HomePage overflow-x-hidden overflow-y-auto">
         <section className="container ">
           <div className="flex flex-col md:flex-row justify-between py-12 max-w-[1200px] mx-auto">
             {/* left box */}
