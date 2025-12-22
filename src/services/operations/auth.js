@@ -185,8 +185,7 @@ export const getAllCategories = async () => {
     if (!response.data.success)
       throw new Error(response.data.message || "Failed to fetch categories");
 
-    result = response.data.allCategories;
-    console.log("Categories fetched successfully", result);
+    result = response?.data?.data;
   } catch (err) {
     console.error("GET CATEGORIES ERROR:", err);
     toast.error(getErrorMessage(err, "Failed to fetch categories"));
