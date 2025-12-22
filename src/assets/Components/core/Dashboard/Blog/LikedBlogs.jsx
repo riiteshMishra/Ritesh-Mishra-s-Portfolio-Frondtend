@@ -4,6 +4,7 @@ import Loader from "../../../common/Loader";
 import { FaHeart, FaBookOpen } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import EmptyLikedBlogs from "../../../common/fallback_ui/LikedBlogs";
 
 const LikedBlogs = () => {
   const [likedBlogs, setLikedBlogs] = useState([]);
@@ -11,34 +12,40 @@ const LikedBlogs = () => {
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!token) navigate("/login");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     const fetchLikedBlogs = async () => {
-      setLoading(true);
-      const result = await getAllLikedBlogs(token);
-      setLikedBlogs(result);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const result = await getAllLikedBlogs(token);
+        setLikedBlogs(result || []);
+      } catch (error) {
+        console.error("Failed to fetch liked blogs", error);
+        setLikedBlogs([]);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchLikedBlogs();
   }, [token]);
 
   return (
-    <section className=" py-10 px-4 overflow-hidden">
+    <section className=" py-10 px-4 overflow-x-hidden overflow-y-auto min-h-[calc(100vh-60px)]">
       <div className="max-w-[1100px] mx-auto h-fit">
         {loading ? (
           <div className=" ">
-            <p className="text-2xl text-center text-amber-400">Getting your liked blogs...</p>
+            <p className="text-xl text-center text-amber-400 animate-pulse">
+              Fetching your liked blogs...
+            </p>
+
             <div className="flex justify-center items-center overflow-hidden max-h-[300px] relative">
               <Loader />
             </div>
           </div>
         ) : likedBlogs.length === 0 ? (
-          <div className="text-center text-white text-lg mt-20 drop-shadow-md">
-            You haven’t liked any blogs yet.
-            <br />
-            <span className="font-semibold text-pink-200">
-              Go explore and like some awesome posts!
-            </span>
-          </div>
+          <EmptyLikedBlogs />
         ) : (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {likedBlogs.map((blog, idx) => (

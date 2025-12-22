@@ -210,7 +210,7 @@ export const adminBlogs = async (token) => {
     if (!response.data.success) throw new Error("Invalid response");
 
     console.log("USER BLOGS API RESPONSE", response);
-    result = response.data.blog;
+    result = response.data.blog ? response.data.blog : [];
     toast.success("User blogs fetched successfully");
   } catch (err) {
     console.log("ADMIN BLOGS API ERROR RESPONSE", err);

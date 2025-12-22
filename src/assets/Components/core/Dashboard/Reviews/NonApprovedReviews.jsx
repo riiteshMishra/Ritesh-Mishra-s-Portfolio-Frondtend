@@ -8,6 +8,7 @@ import { FaStar } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import Loader from "../../../common/Loader";
 import AnimatedNoReview from "./AnimatedNoReview";
+import EmptyUserReviews from "../../../common/fallback_ui/UserReviews";
 
 const NonApprovedReviews = () => {
   const [loading, setLoading] = useState(false);
@@ -32,34 +33,31 @@ const NonApprovedReviews = () => {
   }, [token]);
 
   // APPROVE HANDLER
-const handleApprove = async (reviewId) => {
-  try {
-    setApproveLoadingId(reviewId);
-    await toggleReview(token, reviewId);
+  const handleApprove = async (reviewId) => {
+    try {
+      setApproveLoadingId(reviewId);
+      await toggleReview(token, reviewId);
 
-    setReviews((prev) => prev.filter((r) => r._id !== reviewId));
-    toast.success("Review Approved");
-  } catch (err) {
-    console.log(err);
-  } finally {
-    setApproveLoadingId(null);
-  }
-};
-
+      setReviews((prev) => prev.filter((r) => r._id !== reviewId));
+      toast.success("Review Approved");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setApproveLoadingId(null);
+    }
+  };
 
   return (
     <section className="min-h-[70vh] text-white p-4">
-      <h1 className="text-4xl font-semibold mb-6">User Reviews</h1>
-
       {/*  Loader */}
       {loading && (
-        <div className="w-full flex justify-center py-10">
+        <div className="w-full flex justify-center py-10 overflow-hidden">
           <Loader />
         </div>
       )}
 
       {/*  Empty State */}
-      {!loading && reviews.length === 0 && <AnimatedNoReview />}
+      {!loading && reviews.length === 0 && <EmptyUserReviews />}
 
       {/*  Review Cards */}
       <div className="grid gap-6 mt-6">

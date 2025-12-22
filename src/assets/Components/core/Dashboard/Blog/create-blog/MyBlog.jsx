@@ -4,6 +4,8 @@ import { FiCheck, FiX } from "react-icons/fi";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import EmptyMyBlogs from "../../../../common/fallback_ui/Myblogs";
+import Loader from "../../../../common/Loader";
 
 const MyBlog = () => {
   const [myBlogs, setMyBlogs] = useState([]);
@@ -28,22 +30,19 @@ const MyBlog = () => {
 
     fetchUserBlogs();
   }, []);
-
   return (
     <section className="text-white py-8">
-      <div className="max-w-[1150px] mx-auto px-4">
+      <div className="max-w-[1150px] mx-auto px-4 relative overflow-hidden">
         {/* Blogs container */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
           {loading ? (
-            <div className="col-span-full text-center text-4xl animate-pulse">
-              Loading...
-            </div>
-          ) : myBlogs.length === 0 ? (
+            <Loader />
+          ) : myBlogs?.length === 0 ? (
             <div className="col-span-full text-center text-lg text-gray-400">
-              You haven’t created any blogs yet.
+              <EmptyMyBlogs />
             </div>
           ) : (
-            myBlogs.map((blog) => (
+            myBlogs?.map((blog) => (
               <div
                 key={blog?._id}
                 className="bg-gray-800 hover:bg-gray-700 transition rounded-xl shadow-lg overflow-hidden group"
