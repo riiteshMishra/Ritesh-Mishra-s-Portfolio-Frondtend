@@ -102,6 +102,7 @@ export const logout = async (navigate, dispatch) => {
     dispatch(deleteUser());
     dispatch(clearAllReviews());
     dispatch(clearSingleReview());
+    localStorage.clear();
     toast.success("Logout successful");
     navigate("/");
   } catch (err) {

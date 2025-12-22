@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProjectCards from "../../Dashboard/Projects/Your-projects/ProjectCards";
 import { useSelector } from "react-redux";
+import NoProjects from "./NoProjects";
 
 const ProjectSection = () => {
   const [showMore, setShowMore] = useState(false);
@@ -22,7 +23,9 @@ const ProjectSection = () => {
             <p className="text-center  text-gray-300 mb-5">
               These are the projects made by me. They show my skills.
             </p>
-            {projectData.length <= 3 ? (
+            {projectData.length === 0 ? (
+              <NoProjects />
+            ) : projectData.length <= 3 ? (
               <ProjectCards loading={loading} setLoading={setLoading} />
             ) : (
               <>
