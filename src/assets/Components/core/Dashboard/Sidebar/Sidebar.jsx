@@ -2,7 +2,7 @@ import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { dashboardLinks } from "../../../../Data/dashboard-links";
 import SidebarLinks from "./SidebarLinks";
-import Menu from "./Additionnal";
+import Menu from "./Additional";
 
 const Sidebar = () => {
   const { user } = useSelector((state) => state.profile);
