@@ -72,3 +72,27 @@ export const deleteCategory = async (categoryId, token, dispatch) => {
     toast.error(errorMessage(err));
   }
 };
+
+export const updateCategory = async (formData, token, dispatch) => {
+  let result = [];
+  try {
+    const response = await apiConnector(
+      "POST",
+      categoryEndPoints.UPDATE_CATEGORY_API,
+      formData,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    console.log("UPDATE CATEGORY API RESPONSE", response);
+
+    result = response?.data?.data;
+    toast.success("Category updated");
+  } catch (err) {
+    console.log("UPDATE CATEGORY API ERROR RESPONSE", err);
+    toast.error(errorMessage(err));
+  } finally {
+    return result;
+  }
+};

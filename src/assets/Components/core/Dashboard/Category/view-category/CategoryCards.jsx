@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory } from "../../../../../../services/operations/category";
+import {
+  setCategoryData,
+  setCategoryEdit,
+} from "../../../../../../slices/category";
 
-const CategoryCards = ({ categories, setModalData }) => {
+const CategoryCards = ({ categories, setModalData, setCreate }) => {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const confirmHandler = async (categoryId) => {
@@ -12,6 +16,17 @@ const CategoryCards = ({ categories, setModalData }) => {
     } finally {
       setModalData(null);
     }
+  };
+
+  const handleClick = (categoryData) => {
+    // console.log("categoryDAta", categoryData);
+    // const formData = new FormData();
+    // formData.append("categoryId", categoryData?._id);
+    // formData.append("categoryName", categoryData?.categoryName);
+    // formData.append("description", categoryData?.description);
+    dispatch(setCategoryData(categoryData));
+    setCreate(true);
+    dispatch(setCategoryEdit(true));
   };
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -32,14 +47,17 @@ const CategoryCards = ({ categories, setModalData }) => {
 
           <div className="mt-4 flex gap-3 text-sm">
             {/* Edit */}
-            <button className="py-1.5 px-4 rounded-md bg-black text-blue-400 hover:scale-105 active:scale-95 transition">
+            <button
+              className="py-1.5 px-4 rounded-md bg-black text-blue-400 hover:scale-105 active:scale-95 transition cursor-pointer"
+              onClick={() => handleClick(cat)}
+            >
               Edit
             </button>
 
             {/* Delete */}
             <button
               className="py-1.5 px-4 rounded-md text-red-400 hover:bg-red-500/10
-                         hover:scale-105 active:scale-95 transition"
+                         hover:scale-105 active:scale-95 transition cursor-pointer"
               onClick={() =>
                 setModalData({
                   title: "Delete Category",

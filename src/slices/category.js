@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  categoryData: "",
+  categoryData: [],
   categoryLoading: false,
   categoryEdit: false,
   categories: localStorage.getItem("categories")
@@ -21,9 +21,13 @@ const categorySlice = createSlice({
     setCategoryEdit: (state, actions) => {
       state.categoryEdit = Boolean(actions.payload);
     },
+    setCategoryData: (state, actions) => {
+      state.categoryData = actions.payload;
+    },
   },
 });
 
-export const { setCategories, setCategoryEdit } = categorySlice.actions;
+export const { setCategories, setCategoryEdit, setCategoryData } =
+  categorySlice.actions;
 
 export default categorySlice.reducer;

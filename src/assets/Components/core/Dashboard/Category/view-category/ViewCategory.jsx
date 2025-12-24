@@ -42,7 +42,11 @@ const ViewCategory = ({ setCreate }) => {
       {categories.length === 0 ? (
         <CategoriesNotFound setCreate={setCreate} />
       ) : (
-        <CategoryCards categories={categories} setModalData={setModalData} />
+        <CategoryCards
+          categories={categories}
+          setModalData={setModalData}
+          setCreate={setCreate}
+        />
       )}
 
       {/* pop up */}
