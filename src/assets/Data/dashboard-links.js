@@ -57,4 +57,11 @@ export const dashboardLinks = [
     icon: "FaFolderOpen",
     type: ACCOUNT_TYPE.ADMIN,
   },
+  {
+    id: 9,
+    name: "Category",
+    path: "/dashboard/category",
+    icon: "FaEdit",
+    type: ACCOUNT_TYPE.ADMIN,
+  },
 ];

@@ -21,9 +21,9 @@ export const blogsEndPoints = {
 
 // categories
 export const categoryEndPoints = {
-  CREATE_CATEGORY_API: "/create-category",
-  UPDATE_CATEGORY_API: "/update-category",
-  DELETE_CATEGORY_API: "/delete-category",
+  CREATE_CATEGORY_API: "category/create-category",
+  UPDATE_CATEGORY_API: "category/update-category",
+  DELETE_CATEGORY_API: "category/delete-category",
   GET_ALL_CATEGORIES_API: "/category/find-all-categories",
 };
 

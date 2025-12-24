@@ -27,6 +27,7 @@ import ForgotPassword from "./assets/pages/ForgotPassword";
 import ResetPassword from "./assets/Components/core/Auth/Reset-change-password/Reset-password";
 import CreateProject from "./assets/Components/core/Dashboard/Projects/Index";
 import YourProjects from "./assets/Components/core/Dashboard/Projects/Your-projects/Index";
+import Category from "./assets/Components/core/Dashboard/Category/Index";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
@@ -61,6 +62,7 @@ const App = () => {
                 <Route path="user-reviews" element={<NonApprovedReviews />} />
                 <Route path="create-project" element={<CreateProject />} />
                 <Route path="your-projects" element={<YourProjects />} />
+                <Route path="category" element={<Category />} />
               </>
             )}
             // ONLY FOR CLIENTS
