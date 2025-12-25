@@ -24,7 +24,7 @@ const SkillsSection = () => {
 
       {pageData.map((section, secIdx) => (
         <article key={secIdx} className="flex flex-col gap-y-6">
-          <h3 className="text-center text-4xl Bebas inline-block scale-x-150">
+          <h3 className="skill text-center text-4xl Bebas inline-block scale-x-150">
             {section.title}
           </h3>
 

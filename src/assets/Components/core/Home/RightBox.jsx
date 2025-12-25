@@ -7,7 +7,7 @@ const RightBox = () => {
       <div className="mt-13">
         {/* dev image with effect */}
         <img
-          src="https://res.cloudinary.com/dwpplwqzs/image/upload/v1758948559/Portfolio-site/sees9qxv9tmbifoauvxz.jpg"
+          src="/ritesh_mishra.jpeg"
           loading="lazy"
           alt="developer-image"
           className="devImage rounded-xl h-[400px]"
