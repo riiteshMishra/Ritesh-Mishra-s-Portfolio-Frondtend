@@ -28,6 +28,7 @@ import ResetPassword from "./assets/Components/core/Auth/Reset-change-password/R
 import CreateProject from "./assets/Components/core/Dashboard/Projects/Index";
 import YourProjects from "./assets/Components/core/Dashboard/Projects/Your-projects/Index";
 import Category from "./assets/Components/core/Dashboard/Category/Index";
+import Notification from "./assets/Components/core/Dashboard/Notification/Index";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
@@ -63,6 +64,7 @@ const App = () => {
                 <Route path="create-project" element={<CreateProject />} />
                 <Route path="your-projects" element={<YourProjects />} />
                 <Route path="category" element={<Category />} />
+                <Route path="notification" element={<Notification />} />
               </>
             )}
             // ONLY FOR CLIENTS

@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { contactUsEndpoints } from "../allApis";
+import { setRequests } from "../../slices/contact-us";
 
 //  Error Handler
 const getErrorMessage = (err, fallback = "Something went wrong") =>
@@ -28,6 +29,30 @@ export const raiseRequest = async (data) => {
     toast.error(getErrorMessage(err));
   } finally {
     toast.dismiss(toastId);
+    return result;
+  }
+};
+
+// GET REQUESTS
+export const getRequests = async (token, dispatch) => {
+  let result = [];
+  try {
+    const response = await apiConnector(
+      "GET",
+      contactUsEndpoints.GET_ALL_REQUEST,
+      null,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+    console.log("GET CLIENT REQUESTS API RESPONSE", response);
+    result = response?.data?.data;
+    dispatch(setRequests(result));
+  } catch (err) {
+    console.log("GET CLIENT REQUEST API ERROR", err);
+    toast.error(getErrorMessage(err, "fetching client requests failed."));
+    return null;
+  } finally {
     return result;
   }
 };

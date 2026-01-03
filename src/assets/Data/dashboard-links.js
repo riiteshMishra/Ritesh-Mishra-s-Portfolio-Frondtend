@@ -64,4 +64,11 @@ export const dashboardLinks = [
     icon: "FaEdit",
     type: ACCOUNT_TYPE.ADMIN,
   },
+  {
+    id: 10,
+    name: "Notification",
+    path: "/dashboard/notification",
+    icon: "FaBell",
+    type: ACCOUNT_TYPE.ADMIN,
+  },
 ];
