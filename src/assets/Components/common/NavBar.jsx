@@ -7,6 +7,7 @@ import SmallMenu from "./SmallMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { logout } from "../../../services/operations/auth";
+import RequestNotification from "./RequestNotification/Index";
 
 const NavBar = () => {
   const { token } = useSelector((state) => state.auth);
@@ -56,16 +57,22 @@ const NavBar = () => {
         {/* image route */}
         <div className="flex items-center gap-x-4 z-20">
           {token ? (
-            <Link onClick={() => setIsActive((prev) => !prev)}>
-              <div className="flex items-center">
-                <img
-                  src={user.image}
-                  alt={"user avatar"}
-                  className="h-8 w-8 object-cover object-center rounded-full"
-                />{" "}
-                <MdOutlineKeyboardArrowDown className="font-bold text-lg" />
-              </div>
-            </Link>
+            <div className=" flex items-center gap-x-5">
+              {/*  notifications */}
+              <RequestNotification />
+
+              {/* user routes */}
+              <Link onClick={() => setIsActive((prev) => !prev)}>
+                <div className="flex items-center">
+                  <img
+                    src={user.image}
+                    alt={"user avatar"}
+                    className="h-8 w-8 object-cover object-center rounded-full"
+                  />{" "}
+                  <MdOutlineKeyboardArrowDown className="font-bold text-lg" />
+                </div>
+              </Link>
+            </div>
           ) : (
             <div>
               {/* SIGNUP LOGIN OR DASHBOARD LINKS */}

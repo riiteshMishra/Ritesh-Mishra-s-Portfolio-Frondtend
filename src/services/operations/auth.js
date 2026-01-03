@@ -213,7 +213,7 @@ export const adminBlogs = async (token) => {
     toast.success("User blogs fetched successfully");
   } catch (err) {
     console.log("ADMIN BLOGS API ERROR RESPONSE", err);
-    toast.error("Failed to get admin blogs");
+    toast.error(getErrorMessage(err,"Failed to get Admin Blogs"));
   } finally {
     return result;
   }
@@ -238,7 +238,6 @@ export const fetchAllBlogs = async () => {
 
 // update picture
 export const updatePicture = async (data, dispatch, token) => {
-  console.log("data", data);
   let result = [];
   try {
     const response = await apiConnector(

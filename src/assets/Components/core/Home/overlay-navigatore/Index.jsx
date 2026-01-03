@@ -8,7 +8,7 @@ const OverlayBar = () => {
 
   return (
     <div className="bg-gray-900 py-4 z-10  fixed -bottom-0 left-0 sm:hidden ">
-      <div className="flex justify-evenly  min-w-screen text-white/70">
+      <div className="flex justify-evenly text-white/70">
         {user
           ? dashboardLinks.map((link) => {
               const IconComponent = FaIcons[link.icon];

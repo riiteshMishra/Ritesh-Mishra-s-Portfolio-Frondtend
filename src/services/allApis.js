@@ -44,6 +44,8 @@ export const profileEndpoints = {
 // contact - us
 export const contactUsEndpoints = {
   RAISE_REQUEST: "/profile/create-request",
+  GET_ALL_REQUEST: "/profile/client-requests",
+  UPDATE_REQUEST: "/profile/form-status-update",
 };
 
 // reviews endpoints
