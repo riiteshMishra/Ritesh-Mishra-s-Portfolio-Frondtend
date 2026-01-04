@@ -9,6 +9,7 @@ import {
   FaTimesCircle,
   FaTrash,
 } from "react-icons/fa";
+import ConfirmationModal from "../../../common/ConfirmationModal";
 
 const listVariants = {
   hidden: {},
@@ -30,7 +31,8 @@ const RequestCards = () => {
   const { requests } = useSelector((state) => state.contact);
   const [filter, setFilter] = useState("all");
   const [fullMessage, setFullMessage] = useState({});
-
+  const [modalData, setModalData] = useState(null);
+  // Request
   if (!requests || requests.length === 0) {
     return (
       <motion.p
@@ -43,6 +45,7 @@ const RequestCards = () => {
     );
   }
 
+  // Filtering
   const filteredRequests = [...requests].filter((req) => {
     const status = req.status || "pending";
     if (filter === "pending") return status === "pending";
@@ -51,8 +54,45 @@ const RequestCards = () => {
     return true;
   });
 
+  // Resolve Handler
+  const resolveHandler = (id) => {
+    setModalData({
+      title: "Are you sure?",
+      description: "This action cannot be undone.",
+      confirmText: "Resolve",
+      cancelText: "Cancel",
+      onConfirm: () => {
+        // TODO: API call for resolve request
+        console.log("Resolved request:", id);
+        setModalData(null);
+      },
+      onCancel: () => setModalData(null),
+      loading: false,
+    });
+  };
+
+  // Reject Handler
+  const rejectHandler = (id) => {
+    setModalData({
+      title: "Are you sure?",
+      description: "This action cannot be undone.",
+      confirmText: "Reject",
+      cancelText: "Cancel",
+      onConfirm: () => {
+        // TODO: API call for reject request
+        console.log("Rejected request:", id);
+        setModalData(null);
+      },
+      onCancel: () => setModalData(null),
+      loading: false,
+    });
+  };
+
+  // Delete Handler
+  const deleteHandler = () => console.log("deleted");
+
   return (
-    <>
+    <div>
       {/* FILTER BAR */}
       <div className="flex gap-2 mb-5 flex-wrap">
         {["all", "pending", "resolved", "rejected"].map((key) => (
@@ -149,6 +189,7 @@ const RequestCards = () => {
                     <span>{req.contactNumber}</span>
                   </div>
 
+                  {/* Description */}
                   {req.message && (
                     <div className="mt-2 text-gray-300 bg-white/5 rounded-xl p-3 text-xs sm:text-sm leading-relaxed">
                       {fullMessage[req._id]
@@ -175,17 +216,21 @@ const RequestCards = () => {
                 <div className="mt-5 flex justify-end gap-3 flex-wrap">
                   {status === "pending" && (
                     <>
+                      {/* Resolve handler */}
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs text-green-400 hover:bg-green-500/10 transition cursor-pointer"
+                        onClick={() => resolveHandler(req?._id)}
                       >
                         <FaCheckCircle />
                         Resolve
                       </motion.button>
 
+                      {/* Reject handler */}
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs text-red-400 hover:bg-red-500/10 transition cursor-pointer"
+                        onClick={() => rejectHandler(req?._id)}
                       >
                         <FaTimesCircle />
                         Reject
@@ -193,10 +238,12 @@ const RequestCards = () => {
                     </>
                   )}
 
+                  {/* If Status Resolved or Rejected \\ Delete  */}
                   {(status === "resolved" || status === "rejected") && (
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs text-red-400 hover:bg-red-500/10 transition cursor-pointer"
+                      onClick={() => deleteHandler(req?._id)}
                     >
                       <FaTrash />
                       Delete
@@ -208,7 +255,10 @@ const RequestCards = () => {
           );
         })}
       </motion.div>
-    </>
+
+      {/* Confirmation Modal */}
+      {modalData && <ConfirmationModal modalData={modalData} />}
+    </div>
   );
 };
 

@@ -11,7 +11,7 @@ const Notification = () => {
       <div className="max-w-[1100px] mx-auto w-11/12">
         {/* Page Header */}
         <div className="mb-4">
-          <h1 className="text-xl font-semibold text-gray-100">Notifications</h1>
+          <h1 className="text-xl font-semibold text-gray-100 mt-5">Notifications</h1>
           <p className="text-sm text-gray-400">Client contact requests</p>
         </div>
 
@@ -21,7 +21,7 @@ const Notification = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="
-          max-w-[420px]
+          max-w-[800px]
           rounded-2xl
           border border-white/10
           bg-white/5
@@ -31,7 +31,7 @@ const Notification = () => {
         >
           {requestLoading ? <RequestSkeleton count={2} /> : <RequestCards />}
         </motion.div>
-      </div>
+      </div> 
     </div>
   );
 };
