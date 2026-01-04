@@ -1,9 +1,9 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Ritesh Mishra",
+  "short_name": "Mishra Ji",
   "start_url": "/",
   "scope": "/",
-  "orientation": "portrait",
+  "orientation": "any",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
@@ -12,13 +12,13 @@
       "src": "https://res.cloudinary.com/dwpplwqzs/image/upload/v1764738602/web-app-manifest-192x192_yy4wk5.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "https://res.cloudinary.com/dwpplwqzs/image/upload/v1764738766/web-app-manifest-512x512_qzkdjo.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }
