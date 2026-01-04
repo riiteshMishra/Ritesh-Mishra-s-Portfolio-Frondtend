@@ -29,6 +29,7 @@ const cardVariants = {
 const RequestCards = () => {
   const { requests } = useSelector((state) => state.contact);
   const [filter, setFilter] = useState("all");
+  const [fullMessage, setFullMessage] = useState({});
 
   if (!requests || requests.length === 0) {
     return (
@@ -150,7 +151,22 @@ const RequestCards = () => {
 
                   {req.message && (
                     <div className="mt-2 text-gray-300 bg-white/5 rounded-xl p-3 text-xs sm:text-sm leading-relaxed">
-                      {req.message}
+                      {fullMessage[req._id]
+                        ? req.message
+                        : req.message.substring(0, 100)}{" "}
+                      {req.message.length > 100 && (
+                        <span
+                          className="text-pink-400 cursor-pointer"
+                          onClick={() =>
+                            setFullMessage((prev) => ({
+                              ...prev,
+                              [req._id]: !prev[req._id],
+                            }))
+                          }
+                        >
+                          {fullMessage[req._id] ? "hide" : "show"}...
+                        </span>
+                      )}
                     </div>
                   )}
                 </div>
