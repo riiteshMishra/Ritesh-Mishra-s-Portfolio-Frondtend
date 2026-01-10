@@ -9,22 +9,23 @@ import RequestSkeleton from "../Loading";
 
 const Ui = ({ setPanelOpen }) => {
   const { token } = useSelector((state) => state.auth);
-  const { requestLoading } = useSelector((state) => state.contact);
+  const { requests } = useSelector((state) => state.contact);
   const [loading, setLoading] = useState(false);
+  const [apiLoading, setApiLoading] = useState(false);
   const dispatch = useDispatch();
 
   // API CALL
   useEffect(() => {
-    const fetchClientRequests = async () => {
-      setLoading(true);
-      await getRequests(token, dispatch);
-      setLoading(false);
-    };
+    if (!requests || requests.length === 0) {
+      const fetchClientRequests = async () => {
+        setLoading(true);
+        await getRequests(token, dispatch);
+        setLoading(false);
+      };
 
-    if (!requestLoading) {
       fetchClientRequests();
     }
-  }, [token]);
+  }, [token, dispatch, requests]);
 
   return (
     <motion.div

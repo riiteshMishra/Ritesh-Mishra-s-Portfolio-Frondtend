@@ -5,6 +5,9 @@ const initialState = {
   requests: localStorage.getItem("requests")
     ? JSON.parse(localStorage.getItem("requests"))
     : [],
+  adminRequests: localStorage.getItem("adminRequests")
+    ? JSON.parse(localStorage.getItem("adminRequests"))
+    : [],
 };
 
 const contactSlice = createSlice({
@@ -14,7 +17,7 @@ const contactSlice = createSlice({
     setRequests: (state, action) => {
       state.requests = action.payload;
       localStorage.setItem("requests", JSON.stringify(action.payload));
-      state.requestLoading = false;
+      // state.requestLoading = false;
     },
 
     setRequestLoading: (state, action) => {
