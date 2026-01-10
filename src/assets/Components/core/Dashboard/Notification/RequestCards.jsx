@@ -15,14 +15,13 @@ const RequestCards = () => {
 
   //  API CALL (only once when requests empty)
   useEffect(() => {
-    if (!requests || requests.length === 0) {
-      const fetchClientRequests = async () => {
-        setLoading(true);
-        await getRequests(token, dispatch);
-        setLoading(false);
-      };
-      fetchClientRequests();
-    }
+    const fetchClientRequests = async () => {
+      setLoading(true);
+      await getRequests(token, dispatch);
+      setLoading(false);
+    };
+
+    fetchClientRequests();
   }, [token, dispatch]);
 
   //  Loading state
