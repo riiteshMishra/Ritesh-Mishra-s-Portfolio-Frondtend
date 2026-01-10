@@ -27,7 +27,7 @@ const cardVariants = {
   },
 };
 
-const RequestCards = () => {
+const RequestCards = ({ setPanelOpen }) => {
   const { requests } = useSelector((state) => state.contact);
   const navigate = useNavigate();
   // Empty state
@@ -96,11 +96,13 @@ const RequestCards = () => {
               text-xs
               text-indigo-400
               hover:text-indigo-300
-              opacity-0
-              group-hover:opacity-100
+             cursor-pointer
               transition
             "
-            onClick={() => navigate("/dashboard/notification")}
+            onClick={() => {
+              navigate("/dashboard/notification");
+              return setPanelOpen(false);
+            }}
           >
             View details →
           </motion.button>

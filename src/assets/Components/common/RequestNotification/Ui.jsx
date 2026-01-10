@@ -69,7 +69,11 @@ const Ui = ({ setPanelOpen }) => {
 
       {/* Content */}
       <div className="mt-4">
-        {loading ? <RequestSkeleton count={5} /> : <RequestCards />}
+        {loading ? (
+          <RequestSkeleton count={5} />
+        ) : (
+          <RequestCards setPanelOpen={setPanelOpen} />
+        )}
       </div>
     </motion.div>
   );
