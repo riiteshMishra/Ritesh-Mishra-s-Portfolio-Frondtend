@@ -10,6 +10,15 @@ import {
   FaTimesCircle,
   FaTrash,
 } from "react-icons/fa";
+import {
+  contactRequestStatusUpdate,
+  deleteRequest,
+} from "../../../../../services/operations/contact-us";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeRequestById,
+  updateRequestById,
+} from "../../../../../slices/contact-us";
 
 const listVariants = {
   hidden: {},
@@ -29,17 +38,22 @@ const cardVariants = {
 const RequestCard = ({ filteredRequests }) => {
   const [fullMessage, setFullMessage] = useState({});
   const [modalData, setModalData] = useState(null);
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   // Resolve Handler
-  const resolveHandler = (id) => {
+  const resolveHandler = (data) => {
     setModalData({
       title: "Are you sure?",
       description: "This action cannot be undone.",
       confirmText: "Resolve",
       cancelText: "Cancel",
-      onConfirm: () => {
-        // TODO: API call for resolve request
-        console.log("Resolved request:", id);
+      onConfirm: async () => {
+        const formData = new FormData();
+        formData.append("requestId", data);
+        formData.append("status", "resolved");
+        const result = await contactRequestStatusUpdate(formData, token);
+        if (result) dispatch();
         setModalData(null);
       },
       onCancel: () => setModalData(null),
@@ -50,22 +64,53 @@ const RequestCard = ({ filteredRequests }) => {
   // Reject Handler
   const rejectHandler = (id) => {
     setModalData({
-      title: "Are you sure?",
-      description: "This action cannot be undone.",
+      title: "Reject this message?",
+      description:
+        "Are you sure you want to reject or ignore this message? This action cannot be undone.",
       confirmText: "Reject",
       cancelText: "Cancel",
-      onConfirm: () => {
-        // TODO: API call for reject request
-        console.log("Rejected request:", id);
+      onConfirm: async () => {
+        //  API CALL FOR REJECT MESSAGE
+        const formData = new FormData();
+        formData.append("requestId", id);
+        formData.append("status", "rejected");
+        const result = await contactRequestStatusUpdate(formData, token);
+
+        // dispatch
+        if (result?.success) dispatch(updateRequestById(result?.data));
         setModalData(null);
       },
       onCancel: () => setModalData(null),
-      loading: false,
+      loading: true,
     });
   };
 
   // Delete Handler
-  const deleteHandler = () => console.log("deleted");
+  const deleteHandler = (id) => {
+    setModalData({
+      title: "Delete this request?",
+      description:
+        "Are you sure you want to delete this request? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+      // API CALL
+      onConfirm: async () => {
+        try {
+          const formData = new FormData();
+          formData.append("requestIds", id);
+          const result = await deleteRequest(formData, token);
+          if (result?.success) {
+            dispatch(removeRequestById(id));
+          }
+        } finally {
+          setModalData(null);
+        }
+      },
+
+      onCancel: () => setModalData(null),
+      loading: true,
+    });
+  };
 
   return (
     <div>
@@ -172,7 +217,7 @@ const RequestCard = ({ filteredRequests }) => {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs text-green-400 hover:bg-green-500/10 transition cursor-pointer"
-                        onClick={() => resolveHandler(req?._id)}
+                        onClick={() => resolveHandler(req._id)}
                       >
                         <FaCheckCircle />
                         Resolve

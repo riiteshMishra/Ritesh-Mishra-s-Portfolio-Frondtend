@@ -26,7 +26,7 @@ const RequestCards = () => {
 
   //  Loading state
   if (loading) {
-    return <RequestSkeleton />;
+    return <RequestSkeleton count={5} />;
   }
 
   //  Still no data after API

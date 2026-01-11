@@ -16,7 +16,7 @@ const ContactForm = () => {
     setLoading(true);
     const result = await raiseRequest(data);
     setLoading(false);
-    reset();
+    // reset();
   };
 
   const onSubmit = async (data) => {

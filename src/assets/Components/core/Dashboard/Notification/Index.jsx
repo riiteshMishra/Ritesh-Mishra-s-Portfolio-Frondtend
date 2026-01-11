@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import RequestSkeleton from "../../../common/Loading";
 import RequestCards from "./RequestCards";
 
 const Notification = () => {

@@ -23,8 +23,28 @@ const contactSlice = createSlice({
     setRequestLoading: (state, action) => {
       state.requestLoading = action.payload;
     },
+    updateRequestById: (state, action) => {
+      const updatedRequest = action.payload;
+
+      state.requests.forEach((req) => {
+        if (req._id === updatedRequest._id) {
+          Object.assign(req, updatedRequest);
+        }
+      });
+
+      localStorage.setItem("requests", JSON.stringify(state.requests));
+    },
+    removeRequestById: (state, action) => {
+      console.log("action payload", action.payload);
+      state.requests = state.requests.filter(
+        (req) => req._id !== action.payload
+      );
+
+      localStorage.setItem("requests", JSON.stringify(state.requests));
+    },
   },
 });
 
-export const { setRequests, setRequestLoading } = contactSlice.actions;
+export const { setRequests, setRequestLoading, updateRequestById ,removeRequestById} =
+  contactSlice.actions;
 export default contactSlice.reducer;
