@@ -53,7 +53,7 @@ const RequestCard = ({ filteredRequests }) => {
         formData.append("requestId", data);
         formData.append("status", "resolved");
         const result = await contactRequestStatusUpdate(formData, token);
-        if (result) dispatch();
+        if (result.success) dispatch(updateRequestById(result?.data));
         setModalData(null);
       },
       onCancel: () => setModalData(null),
@@ -81,7 +81,7 @@ const RequestCard = ({ filteredRequests }) => {
         setModalData(null);
       },
       onCancel: () => setModalData(null),
-      loading: true,
+      loading: false,
     });
   };
 
@@ -108,7 +108,6 @@ const RequestCard = ({ filteredRequests }) => {
       },
 
       onCancel: () => setModalData(null),
-      loading: true,
     });
   };
 

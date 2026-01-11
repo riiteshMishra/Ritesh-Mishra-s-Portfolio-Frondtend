@@ -35,7 +35,7 @@ const contactSlice = createSlice({
       localStorage.setItem("requests", JSON.stringify(state.requests));
     },
     removeRequestById: (state, action) => {
-      console.log("action payload", action.payload);
+      // console.log("action payload", action.payload);
       state.requests = state.requests.filter(
         (req) => req._id !== action.payload
       );
@@ -45,6 +45,10 @@ const contactSlice = createSlice({
   },
 });
 
-export const { setRequests, setRequestLoading, updateRequestById ,removeRequestById} =
-  contactSlice.actions;
+export const {
+  setRequests,
+  setRequestLoading,
+  updateRequestById,
+  removeRequestById,
+} = contactSlice.actions;
 export default contactSlice.reducer;

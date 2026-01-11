@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const backdropVariants = {
   hidden: { opacity: 0 },
@@ -34,6 +35,7 @@ const modalVariants = {
 };
 
 const ConfirmationModal = ({ modalData }) => {
+  const [loading, setLoading] = useState(false);
   if (!modalData) return null;
 
   const {
@@ -43,9 +45,25 @@ const ConfirmationModal = ({ modalData }) => {
     cancelText = "Cancel",
     onConfirm = () => {},
     onCancel = () => {},
-    loading = false,
   } = modalData;
 
+  const handleConfirm = async () => {
+    try {
+      setLoading(true);
+      await onConfirm();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancel = async () => {
+    try {
+      setLoading(true);
+      await onCancel();
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <AnimatePresence>
       <motion.div
@@ -77,7 +95,7 @@ const ConfirmationModal = ({ modalData }) => {
           {/* Actions */}
           <div className="flex justify-end gap-3">
             <button
-              onClick={onCancel}
+              onClick={() => onCancel()}
               disabled={loading}
               className="
                 px-4 py-2 rounded-md text-gray-300
@@ -90,7 +108,7 @@ const ConfirmationModal = ({ modalData }) => {
             </button>
 
             <button
-              onClick={onConfirm}
+              onClick={() => handleConfirm()}
               disabled={loading}
               className="
                 px-4 py-2 rounded-md text-white
