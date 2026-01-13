@@ -145,7 +145,7 @@ const CreateProjectForm = () => {
             <p className="text-xl font-medium mb-1 text-white">Description</p>
             <textarea
               rows={5}
-              maxLength={1000}
+              maxLength={1500}
               {...register("description", { required: true })}
               className="form-style"
               placeholder="Explain your project..."
