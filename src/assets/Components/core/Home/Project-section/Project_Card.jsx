@@ -19,7 +19,7 @@ const Project_Card = ({ card_data }) => {
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 200, damping: 18 }}
       aria-label={`${card_data.projectName} full stack project`}
-      onClick={() => navigate("/projects")}
+      // onClick={() => navigate("/projects")}
     >
       {/* Thumbnail */}
       <motion.img
