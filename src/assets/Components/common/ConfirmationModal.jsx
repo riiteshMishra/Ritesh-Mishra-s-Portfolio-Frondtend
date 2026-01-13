@@ -56,14 +56,6 @@ const ConfirmationModal = ({ modalData }) => {
     }
   };
 
-  const handleCancel = async () => {
-    try {
-      setLoading(true);
-      await onCancel();
-    } finally {
-      setLoading(false);
-    }
-  };
   return (
     <AnimatePresence>
       <motion.div
@@ -72,7 +64,7 @@ const ConfirmationModal = ({ modalData }) => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        onClick={onCancel}
+        onClick={loading ? () => {} : () => onCancel()}
       >
         {/* Modal Card */}
         <motion.div
@@ -95,7 +87,7 @@ const ConfirmationModal = ({ modalData }) => {
           {/* Actions */}
           <div className="flex justify-end gap-3">
             <button
-              onClick={() => onCancel()}
+              onClick={onCancel}
               disabled={loading}
               className="
                 px-4 py-2 rounded-md text-gray-300

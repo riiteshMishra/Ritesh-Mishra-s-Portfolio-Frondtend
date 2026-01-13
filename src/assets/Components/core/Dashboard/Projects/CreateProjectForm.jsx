@@ -68,8 +68,8 @@ const CreateProjectForm = () => {
     } catch (err) {
       console.log("error while creating project", err);
     } finally {
-      // setImage("");
-      // reset();
+      setImage("");
+      reset();
       setLoading(false);
     }
   };
@@ -130,7 +130,7 @@ const CreateProjectForm = () => {
               placeholder="Enter project name"
               {...register("name", { required: true })}
               className="form-style"
-              maxLength={35}
+              maxLength={100}
             />
           </label>
 
@@ -145,7 +145,7 @@ const CreateProjectForm = () => {
             <p className="text-xl font-medium mb-1 text-white">Description</p>
             <textarea
               rows={5}
-              maxLength={500}
+              maxLength={1000}
               {...register("description", { required: true })}
               className="form-style"
               placeholder="Explain your project..."
