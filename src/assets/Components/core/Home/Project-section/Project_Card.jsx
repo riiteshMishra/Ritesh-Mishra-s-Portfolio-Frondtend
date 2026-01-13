@@ -47,7 +47,17 @@ const Project_Card = ({ card_data }) => {
             transition={{ duration: 0.25 }}
             className="text-sm text-zinc-400 whitespace-pre-line"
           >
-            {displayedText}
+            {displayedText} 
+            {/* See More / Less */}
+            {isLong && (
+              <button
+                onClick={() => setShowFull(!showFull)}
+                className="text-blue-400 text-sm hover:underline cursor-pointer"
+                aria-expanded={showFull}
+              >
+                {showFull ? "See Less" : "See More"}
+              </button>
+            )}
           </motion.p>
         </AnimatePresence>
 
@@ -59,17 +69,6 @@ const Project_Card = ({ card_data }) => {
           demonstrates real-world MERN stack development, REST API design,
           authentication, performance optimization, and scalable architecture.
         </p>
-
-        {/* See More / Less */}
-        {isLong && (
-          <button
-            onClick={() => setShowFull(!showFull)}
-            className="text-blue-400 text-sm hover:underline cursor-pointer"
-            aria-expanded={showFull}
-          >
-            {showFull ? "See Less" : "See More"}
-          </button>
-        )}
 
         {/* Frontend Tech */}
         <div>

@@ -54,8 +54,9 @@ export const projects = [
       "REST API Architecture",
       "Middleware-based Security",
     ],
-    gitHubLink: "https://github.com/riiteshMishra/portfolio",
-    liveLink: "https://your-portfolio-live-link.vercel.app/",
+    gitHubLink:
+      "https://github.com/riiteshMishra/Ritesh-Mishra-s-Portfolio-Frondtend",
+    liveLink: "https://www.riteshmishra.online",
     thumbnail:
       "https://res.cloudinary.com/dwpplwqzs/image/upload/v1768279032/Screenshot_2026-01-13_084048_dyaseb.png",
     createdAt: "2026-01-13T04:10:00.000Z",
