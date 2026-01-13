@@ -47,6 +47,7 @@ const CreateProjectForm = () => {
     formData.append("projectName", data.name || "");
     formData.append("description", data.description || "");
     formData.append("gitHubLink", data.githubLink || "");
+    formData.append("LiveLink", data.LiveLink);
 
     const frontendArray = Array.isArray(data.frontendTech)
       ? data.frontendTech
