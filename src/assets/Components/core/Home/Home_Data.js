@@ -32,5 +32,33 @@ export const projects = [
     createdAt: "2026-01-13T03:50:12.562Z",
     updatedAt: "2026-01-13T03:50:12.562Z",
   },
-  
+  {
+    id: "portfolio-001",
+    projectName: "Developer Portfolio – Personal Website",
+    description:
+      "A full-stack personal portfolio website built using React.js, Tailwind CSS, Framer Motion, and React Router on the frontend to create a modern, responsive, and animated user interface. The portfolio dynamically renders project data using reusable components and includes interactive features such as project cards with see-more/see-less functionality.\n\nOn the backend, the application uses Node.js and Express.js with a REST API architecture to manage project data. MongoDB is used for data storage, with proper schema design and CRUD operations implemented using Mongoose. The backend includes middleware-based validation, secure API routes, and clean separation of concerns.\n\nThis project demonstrates full-stack development skills with a focus on performance, scalability, maintainability, and real-world application structure.",
+    frontendTech: [
+      "React.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "React Router DOM",
+      "Axios",
+    ],
+    backendTech: [
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "Resend-Api",
+      "Secure Login (Account_Type_Based)",
+      "REST API Architecture",
+      "Middleware-based Security",
+    ],
+    gitHubLink: "https://github.com/riiteshMishra/portfolio",
+    liveLink: "https://your-portfolio-live-link.vercel.app/",
+    thumbnail:
+      "https://res.cloudinary.com/dwpplwqzs/image/upload/v1768279032/Screenshot_2026-01-13_084048_dyaseb.png",
+    createdAt: "2026-01-13T04:10:00.000Z",
+    updatedAt: "2026-01-13T04:10:00.000Z",
+  },
 ];
