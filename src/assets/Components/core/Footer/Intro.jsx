@@ -49,7 +49,7 @@ const Intro = () => {
         {/* Role */}
         <motion.p
           variants={itemVariants}
-          className="mt-2 text-lg text-slate-600"
+          className="mt-2 text-lg text-slate-400 font-bold"
         >
           Full Stack Developer
         </motion.p>
@@ -57,7 +57,7 @@ const Intro = () => {
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="mt-4 text-slate-700 max-w-2xl"
+          className="mt-4 text-slate-500 max-w-2xl"
         >
           I’m a passionate MERN Stack developer who loves building beautiful,
           responsive, and functional web applications. My goal is to create

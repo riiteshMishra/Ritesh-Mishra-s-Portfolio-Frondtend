@@ -53,14 +53,14 @@ const UseFullLinks = () => {
 
   return (
     <section
-      aria-labelledby="footer-useful-links"
+      aria-labelledby="footer-quick-links"
       className="h-fit w-fit px-6 max-w-[400px] flex flex-col items-center"
     >
       <h2
-        id="footer-useful-links"
+        id="footer-quick-links"
         className="text-3xl font-extrabold leading-tight mb-4 text-gray-100"
       >
-        Useful Links
+     Quick Links
       </h2>
 
       <motion.ul

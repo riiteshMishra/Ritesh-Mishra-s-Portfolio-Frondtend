@@ -30,7 +30,7 @@ const Footer = () => {
     <motion.footer
       role="contentinfo"
       aria-label="Website Footer"
-      className="text-white py-12 sm:py-16"
+      className="text-white"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
@@ -65,7 +65,7 @@ const Footer = () => {
           {/* Footer navigation */}
           <motion.nav aria-labelledby="footer-links" variants={itemVariants}>
             <h2 id="footer-links" className="sr-only">
-              Useful Links
+              Quick Links
             </h2>
             <UseFullLinks />
           </motion.nav>
