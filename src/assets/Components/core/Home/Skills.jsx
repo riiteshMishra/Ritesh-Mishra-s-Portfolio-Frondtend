@@ -5,7 +5,7 @@ const Skill = () => {
       name: "MongoDB",
       icon: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-mongodb-a-cross-platform-document-oriented-database-program-logo-color-tal-revivo.png",
     },
-    { 
+    {
       id: "2",
       name: "ExpressJs",
       icon: "https://img.icons8.com/ios/100/express-js.png",
@@ -23,7 +23,7 @@ const Skill = () => {
   ];
 
   return (
-    <div className="flex gap-6 flex-wrap justify-center items-center py-6">
+    <div className="flex gap-6 flex-wrap justify-around py-6 items-center">
       {skills.map((skill) => (
         <div
           key={skill.id}
@@ -65,4 +65,3 @@ export default Skill;
 //         </div>
 //       </div>
 //     ))}
-

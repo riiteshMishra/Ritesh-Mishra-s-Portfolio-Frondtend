@@ -13,7 +13,7 @@ const Home = () => {
     <section>
       <main className="HomePage overflow-x-hidden overflow-y-auto">
         <section className="container ">
-          <div className="flex flex-col md:flex-row justify-between max-w-[1200px] mx-auto">
+          <div className="flex flex-col md:flex-row justify-between max-w-[1200px] mx-auto min-h-[calc(100vh-60px)] flex-wrap">
             {/* left box */}
             <LeftBox />
 

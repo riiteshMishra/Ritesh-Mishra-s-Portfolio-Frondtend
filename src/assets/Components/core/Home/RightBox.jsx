@@ -1,10 +1,9 @@
 import { homepageTexts } from "../../../Data/homepage";
 
 const RightBox = () => {
-  const { heading, role, runningText, description } = homepageTexts;
   return (
-    <article className="w-full md:w-[48%] flex flex-col justify-center items-center">
-      <div className="mt-13">
+    <article className="w-full md:w-[48%] flex justify-center items-start sm:items-center ">
+      <div className="">
         {/* dev image with effect */}
         <img
           src="/ritesh_mishra.jpeg"

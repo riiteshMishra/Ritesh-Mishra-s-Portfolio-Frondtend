@@ -28,9 +28,7 @@ const LeftBox = () => {
         {description}
       </p>
 
-      <div className="flex sm:flex-row flex-col gap-4 mt-5 items-center justify-center sm:justify-start">
-        <Skill />
-      </div>
+      <Skill />
 
       {/* <div className="flex gap-4 mt-10 justify-center  flex-col items-center md:items-start">
         <p className="playfair text-4xl  text-white">Let’s work together</p>

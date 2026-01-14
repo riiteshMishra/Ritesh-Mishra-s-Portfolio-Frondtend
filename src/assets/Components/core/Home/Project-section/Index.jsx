@@ -7,7 +7,7 @@ import { projects } from "../Home_Data";
 const ProjectSection = () => {
   const [showMore, setShowMore] = useState(false);
   return (
-    <section className="text-white relative ">
+    <section className="text-white relative my-5">
       <div className="max-w-[1200px] mx-auto w-[97%] overflow-hidden border-[1px] border-white/10 p-4 rounded-2xl backdrop-blur-sm">
         {projects && (
           <div className="">
