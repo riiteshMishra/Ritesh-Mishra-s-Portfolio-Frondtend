@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { logout } from "../../../services/operations/auth";
 import RequestNotification from "./RequestNotification/Index";
+import { motion } from "framer-motion";
+import Logo from "./Logo";
 
 const NavBar = () => {
   const { token } = useSelector((state) => state.auth);
@@ -36,9 +38,20 @@ const NavBar = () => {
   ];
   const [slideBar, setSlideBar] = useState(false);
   return (
-    <div className="bg-gray-800 h-[60px]  z-10 border-b-[1px] border-richblack-600 top-0 sticky">
-      <nav className="text-white container py-4  flex items-center justify-between flex-wrap">
-        <Link to={"/"}>Ritesh Mishra</Link>
+    <motion.div
+      initial={{ y: -20 }}
+      animate={{ y: 0 }}
+      transition={{
+        duration: 0.4,
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        ease: "anticipate",
+      }}
+      className="backdrop-blur-2xl sm:h-[60px] h-[50px]  z-10 border-b-[1px] border-b-gray-500 rounded-b-2xl    top-0 left-0 right-0 sticky "
+    >
+      <nav className="text-white container py-2  flex items-center justify-between flex-wrap">
+        <Logo/>
         <ul className="md:flex gap-4 hidden">
           {navbarLinks.map((li) => (
             <li key={li.id} className=" capitalize">
@@ -124,7 +137,7 @@ const NavBar = () => {
           <SmallMenu setSlideBar={setSlideBar} slideBar={slideBar} />
         )}
       </nav>
-    </div>
+    </motion.div>
   );
 };
 
