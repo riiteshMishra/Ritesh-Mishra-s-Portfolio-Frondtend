@@ -48,7 +48,7 @@ const NavBar = () => {
         damping: 15,
         ease: "anticipate",
       }}
-      className="backdrop-blur-2xl sm:h-[60px] h-[50px]  z-10 border-b-[1px] border-b-gray-500 rounded-b-2xl    top-0 left-0 right-0 sticky "
+      className="backdrop-blur-2xl h-[60px] z-10 border-b-[1px] border-b-gray-500 rounded-b-2xl    top-0 left-0 right-0 sticky "
     >
       <nav className="text-white container py-2  flex items-center justify-between flex-wrap">
         <Logo/>
