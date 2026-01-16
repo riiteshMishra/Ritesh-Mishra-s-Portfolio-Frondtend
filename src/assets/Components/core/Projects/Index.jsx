@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOpenApiLoading } from "../../../../slices/project";
 import ProjectCards from "./ProjectCards";
 import { getAllProjects } from "../../../../services/operations/project";
+import ProjectSkeleton from "../../common/Skeleton_Loadings/Project/Index";
 
 const ProjectPageContainer = () => {
   // PROJECT ARRAY --> MAP --> SINGLE_PROJECT
   const { openApiLoading } = useSelector((state) => state.project);
   const [projectData, setProjectData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,12 +32,13 @@ const ProjectPageContainer = () => {
 
     if (!openApiLoading) fetchProjects();
   }, []);
-  if (loading) <RequestSkeleton />;
-  return (
-    <div className="">
-      {/* heading */}
-      <Heading />
 
+  // loading
+  if (loading) {
+    return <ProjectSkeleton />;
+  }
+  return (
+    <div className="min-h-screen">
       {/* cards */}
       {projectData.map((project, idx) => (
         <ProjectCards project={project} key={idx} />
