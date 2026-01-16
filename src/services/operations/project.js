@@ -26,8 +26,28 @@ export const createProject = async (formData, token, dispatch) => {
   }
 };
 
-// get projects
+// get projects open api
 export const getAllProjects = async (dispatch) => {
+  let result = [];
+  try {
+    const response = await apiConnector(
+      "GET",
+      projectsEndpoints.GET_ALL_PROJECTS_API
+    );
+
+    console.log("GET ALL PROJECTS API RESPONSE", response);
+    result = response?.data;
+    // dispatch(setProjectData(result));
+  } catch (err) {
+    console.log("GET ALL PROJECTS API ERROR RESPONSE", err);
+    toast.error(getErrorMessage(err));
+  } finally {
+    return result;
+  }
+};
+
+// GET PROJECT ADMIN API
+export const adminProject = async (token, dispatch) => {
   let result = [];
   try {
     const response = await apiConnector(

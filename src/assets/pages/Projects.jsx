@@ -1,18 +1,18 @@
-import EmptyProjectUi from "../Components/common/fallback_ui/MyProjects";
-import { projects } from "../Data/projectspage";
 import { useEffect } from "react";
-import { motion } from "framer-motion";
 import Footer from "../Components/core/Footer/Index";
-import Heading from "../Components/core/Projects/Heading";
+import ProjectPageContainer from "../Components/core/Projects/Index";
+import { getAllProjects } from "../../services/operations/project";
+import { useDispatch } from "react-redux";
 
 const ProjectsPage = () => {
-  useEffect(() => {
-    document.title = "Ritesh | Mishra | Projects";
-  }, []);
+  const dispatch = useDispatch();
+
+
   return (
-    <section className=" min-h-[calc(100vh-60px)]">
-      <main className="container mx-auto py-10 text-white ">
-        <Heading />
+    <section className=" min-h-screen">
+      <main className="container mx-auto text-white ">
+        {/* <ProjectCards /> */}
+        <ProjectPageContainer />
       </main>
 
       {/* footer */}

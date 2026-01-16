@@ -23,7 +23,7 @@ const Heading = ({ title = "My Projects", to = "/" }) => {
       variants={logoVariants}
       initial="hidden"
       animate="visible"
-      className="logo-wrapper flex justify-center items-center mb-10"
+      className="logo-wrapper flex justify-center items-center mb-"
     >
       <motion.div
         className="relative overflow-hidden"
@@ -36,7 +36,11 @@ const Heading = ({ title = "My Projects", to = "/" }) => {
         }}
       >
         {/* text */}
-        <Link to={"#"} className="logo-text relative z-10 cursor-pointer">
+        <Link
+          to={"#"}
+          className="logo-text relative z-10 cursor-pointer"
+          style={{ fontSize: "2rem" }}
+        >
           {title}
         </Link>
 

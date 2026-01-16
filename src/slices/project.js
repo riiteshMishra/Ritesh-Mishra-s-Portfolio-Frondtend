@@ -7,6 +7,7 @@ const initialState = {
 
   isLoaded: false,
   edit: false,
+  openApiLoading: false,
 };
 
 const projectSlice = createSlice({
@@ -20,8 +21,11 @@ const projectSlice = createSlice({
 
       localStorage.setItem("projectData", JSON.stringify(action.payload));
     },
+    setOpenApiLoading: (state, action) => {
+      state.openApiLoading = action.payload;
+    },
   },
 });
 
-export const { setProjectData } = projectSlice.actions;
+export const { setProjectData, setOpenApiLoading } = projectSlice.actions;
 export default projectSlice.reducer;
