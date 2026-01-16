@@ -6,6 +6,7 @@ const initialState = {
     : [],
 
   isLoaded: false,
+  isOpenLoaded: false,
   edit: false,
   openApiLoading: false,
 };
@@ -17,7 +18,7 @@ const projectSlice = createSlice({
     setProjectData: (state, action) => {
       state.projectData = action.payload;
       // local storage me set krne ke liye localStorage("key",value)  dena hota hai
-      if (Array.isArray(action.payload)) state.isLoaded = true;
+      if (Array.isArray(action.payload)) state.isOpenLoaded = true;
 
       localStorage.setItem("projectData", JSON.stringify(action.payload));
     },

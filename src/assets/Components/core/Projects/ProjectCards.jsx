@@ -40,7 +40,7 @@ const ProjectCards = ({ project }) => {
     liveLink,
     _id,
   };
-  console.log("project", project);
+  // console.log("project", project);
   return (
     <article
       className="
