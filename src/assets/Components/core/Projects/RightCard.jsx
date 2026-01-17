@@ -48,9 +48,10 @@ const RightCard = ({ thumbnail, projectName }) => {
         {/* Laptop Frame (decorative) */}
         <img
           src={laptop}
-          alt=""
+          loading="lazy"
+          alt="static-computer-picture"
           aria-hidden="true"
-          className="relative z-5 w-full select-none pointer-events-none"
+          className="relative z-5 w-full select-none pointer-events-none  drop-shadow-[0_25px_50px_rgba(10,10,10,0.6)] "
         />
 
         {/* Project Screenshot */}
@@ -59,9 +60,10 @@ const RightCard = ({ thumbnail, projectName }) => {
           src={thumbnail}
           alt={`${projectName} website preview`}
           loading="lazy"
-          className="
+          className=" pointer-events-none select-none
+          border-gray-400/50 border
             absolute
-            top-[12%] left-[10%]
+            top-[13%] left-[10%]
             w-[80%] h-[65%]
             object-cover rounded-md
             z-6
