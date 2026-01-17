@@ -81,7 +81,7 @@ const LeftCard = ({
             {frontendTech.map((tech, i) => (
               <span
                 key={i}
-                className="bg-blue-500 text-black text-xs px-2 py-[2px] rounded"
+                className="capitalize bg-blue-500 text-black text-xs px-2 py-[2px] rounded"
               >
                 {tech}
               </span>
@@ -96,7 +96,7 @@ const LeftCard = ({
             {backendTech.map((tech, i) => (
               <span
                 key={i}
-                className="text-black bg-green-500 text-xs px-2 py-[2px] rounded"
+                className="capitalize text-black bg-green-500 text-xs px-2 py-[2px] rounded"
               >
                 {tech}
               </span>
