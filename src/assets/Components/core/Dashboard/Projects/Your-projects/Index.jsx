@@ -5,7 +5,7 @@ import { useState } from "react";
 import ProjectCards from "./ProjectCards";
 
 const YourProjects = () => {
-  const { projectData } = useSelector((state) => state.project);
+  const { adminProjectData } = useSelector((state) => state.project);
   const [loading, setLoading] = useState(false);
   return (
     <div className="relative min-h-[calc(100vh-60px)] overflow-hidden flex flex-col items-center justify-start px-4 pb-12 pt-4">
@@ -26,7 +26,7 @@ const YourProjects = () => {
       </div>
 
       {/* No Projects */}
-      {!loading && projectData?.length === 0 && (
+      {!loading && adminProjectData?.length === 0 && (
         <div className="text-center text-white/70 text-xl mt-20 animate-scaleIn">
           <CiFaceSmile className="text-6xl text-blue-300 mx-auto mb-3 animate-bounce" />
           No projects found
@@ -36,7 +36,7 @@ const YourProjects = () => {
         </div>
       )}
 
-      <ProjectCards loading={loading} setLoading={setLoading} />
+      <ProjectCards/>
     </div>
   );
 };

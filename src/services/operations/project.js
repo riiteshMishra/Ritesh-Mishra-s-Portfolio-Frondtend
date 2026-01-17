@@ -1,7 +1,6 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { projectsEndpoints } from "../allApis";
-import { setProjectData } from "../../slices/project";
 
 // error message
 const getErrorMessage = (err, fallback = "Something went wrong") =>
@@ -38,26 +37,6 @@ export const getAllProjects = async (dispatch) => {
     console.log("GET ALL PROJECTS API RESPONSE", response);
     result = response?.data;
     // dispatch(setProjectData(result));
-  } catch (err) {
-    console.log("GET ALL PROJECTS API ERROR RESPONSE", err);
-    toast.error(getErrorMessage(err));
-  } finally {
-    return result;
-  }
-};
-
-// GET PROJECT ADMIN API
-export const adminProject = async (token, dispatch) => {
-  let result = [];
-  try {
-    const response = await apiConnector(
-      "GET",
-      projectsEndpoints.GET_ALL_PROJECTS_API
-    );
-
-    console.log("GET ALL PROJECTS API RESPONSE", response);
-    result = response?.data?.data;
-    dispatch(setProjectData(result));
   } catch (err) {
     console.log("GET ALL PROJECTS API ERROR RESPONSE", err);
     toast.error(getErrorMessage(err));

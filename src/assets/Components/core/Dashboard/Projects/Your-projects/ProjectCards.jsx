@@ -3,28 +3,45 @@ import ProjectCard from "./ProjectCard";
 import { useEffect } from "react";
 import { getAllProjects } from "../../../../../../services/operations/project";
 import Loader from "../../../../common/Loader";
+import {
+  setAdminApiLoaded,
+  setAdminApiLoading,
+  setAdminProjectData,
+} from "../../../../../../slices/project";
 
-const ProjectCards = ({ loading, setLoading, limit }) => {
-  const { projectData, isLoaded } = useSelector((state) => state.project);
+const ProjectCards = ({ limit }) => {
+  // ADMIN FETCH API
+  // LOADING API REDUX STORAGE
+  const { adminProjectData, isAdminLoaded, isAdminApiLoading } = useSelector(
+    (state) => state.project
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // AGAR isAdminLoaded === true HO CHUKA HAI TO RETURN &&
+    // ADMIN PROJECT KA LENGTH > 0 RETURN
+    // console.log("admin api loaded", isAdminLoaded);
+    // console.log("admin project length", adminProjectData.length);
+    if (isAdminLoaded && adminProjectData.length > 0) return;
+
     const fetchAllProjects = async () => {
       try {
-        setLoading(true);
-        await getAllProjects(dispatch);
-      } catch (err) {
-        console.log(err);
+        dispatch(setAdminApiLoading(true));
+        const result = await getAllProjects();
+        if (result?.success) dispatch(setAdminProjectData(result?.data));
+        dispatch(setAdminApiLoaded(true));
       } finally {
-        setLoading(false);
+        dispatch(setAdminApiLoading(false));
       }
     };
 
-    if (!isLoaded) fetchAllProjects();
-  }, [isLoaded, dispatch]);
+    if (!isAdminLoaded) fetchAllProjects();
+  }, [isAdminLoaded, dispatch]);
 
-  if (loading) return <Loader/>;
-  const finalProjects = limit ? projectData.slice(0, limit) : projectData;
+  if (isAdminApiLoading) return <Loader />;
+  const finalProjects = limit
+    ? adminProjectData.slice(0, limit)
+    : adminProjectData;
 
   return (
     <section>
