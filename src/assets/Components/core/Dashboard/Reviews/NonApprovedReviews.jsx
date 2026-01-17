@@ -51,7 +51,7 @@ const NonApprovedReviews = () => {
     <section className="min-h-[70vh] text-white p-4">
       {/*  Loader */}
       {loading && (
-        <div className="w-full flex justify-center py-10 overflow-hidden">
+        <div className="w-full flex justify-center py-10 relative overflow-hidden">
           <Loader />
         </div>
       )}
