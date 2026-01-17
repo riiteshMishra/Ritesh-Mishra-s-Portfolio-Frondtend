@@ -4,7 +4,7 @@ import { homepageTexts } from "../../../Data/homepage";
 const LeftBox = () => {
   const { heading, role, runningText, description } = homepageTexts;
   return (
-    <article className="w-full md:w-[48%] flex flex-col">
+    <article className="w-full md:w-[48%] flex flex-col justify-center pt-5">
       <header>
         <h1 className="text-[3.3rem] bg-clip-text bg-gradient-to-r from-[#f6f6d9] via-[#47e4e0] to-[#5f81e4] lg:text-left text-center ModernText playfair">
           {heading}
