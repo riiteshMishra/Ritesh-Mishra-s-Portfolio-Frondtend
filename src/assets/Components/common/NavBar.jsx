@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { navbarLinks } from "../../Data/navbar";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaBarsStaggered } from "react-icons/fa6";
@@ -37,21 +37,45 @@ const NavBar = () => {
     },
   ];
   const [slideBar, setSlideBar] = useState(false);
+
+  // Animated navbar
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
+
+    useEffect(() => {
+      const controlNavbar = () => {
+        const currentScrollY = window.scrollY;
+
+        // scroll down
+        if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+          setHidden(true);
+        }
+        // scroll up
+        else {
+          setHidden(false);
+        }
+
+        lastScrollY.current = currentScrollY;
+      };
+
+      window.addEventListener("scroll", controlNavbar);
+      return () => window.removeEventListener("scroll", controlNavbar);
+    }, []);
   return (
     <motion.div
-      initial={{ y: -20 }}
-      animate={{ y: 0 }}
+      initial={{ y: 0 }}
+      animate={{ y: hidden ? "-100%" : "0%" }}
       transition={{
         duration: 0.4,
         type: "spring",
         stiffness: 100,
         damping: 15,
-        ease: "anticipate",
+        ease:"easeInOut",
       }}
       className="backdrop-blur-2xl bg-white/10 h-[60px] z-10 border-b-[1px] border-b-white rounded-b-2xl top-0 left-0 right-0 sticky "
     >
       <nav className="text-white container py-2  flex items-center justify-between flex-wrap">
-        <Logo/>
+        <Logo />
         <ul className="md:flex gap-4 hidden">
           {navbarLinks.map((li) => (
             <li key={li.id} className=" capitalize">
