@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./assets/pages/Home";
 import About from "./assets/pages/About";
@@ -29,10 +29,30 @@ import CreateProject from "./assets/Components/core/Dashboard/Projects/Index";
 import YourProjects from "./assets/Components/core/Dashboard/Projects/Your-projects/Index";
 import Category from "./assets/Components/core/Dashboard/Category/Index";
 import Notification from "./assets/Components/core/Dashboard/Notification/Index";
+import Lenis from "lenis";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
+
+  // Lenis - smooth scroll
+    useEffect(() => {
+      const lenis = new Lenis({
+        duration: 1.2,
+        smooth: true,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+
+      return () => {
+        lenis.destroy();
+      };
+    }, []);
   return (
     <div className="min-h-screen bg-gray-950 relative z-0">
       <NavBar />
