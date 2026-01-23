@@ -36,7 +36,7 @@ const Footer = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.25 }}
     >
-      <div className="container mx-auto px-4">
+      <div className="max-w-[1300px] mx-auto">
         {/* Footer main sections */}
         <div className="flex flex-col sm:flex-row flex-wrap gap-y-10 justify-between">
           {/* About / Brand */}

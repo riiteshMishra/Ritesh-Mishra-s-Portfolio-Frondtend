@@ -28,7 +28,7 @@ const Intro = () => {
   return (
     <section
       aria-labelledby="footer-intro"
-      className="px-6 max-w-[400px] h-fit w-fit"
+      className="px-3 max-w-[400px] h-fit w-fit"
     >
       <motion.div
         className="rounded-2xl"
