@@ -11,7 +11,7 @@ const Dashboard = () => {
       </aside>
 
       {/* right main */}
-      <main className=" sm:w-[calc(100% - 250px)] w-full bg-black/40 h-[calc(100vh-60px)] overflow-x-hidden overflow-y-scroll">
+      <main className=" sm:w-[calc(100% - 250px)] w-full h-[calc(100vh-60px)] overflow-x-hidden overflow-y-scroll">
         <Outlet />
       </main>
     </section>

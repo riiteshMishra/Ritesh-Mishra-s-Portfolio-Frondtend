@@ -29,30 +29,33 @@ import CreateProject from "./assets/Components/core/Dashboard/Projects/Index";
 import YourProjects from "./assets/Components/core/Dashboard/Projects/Your-projects/Index";
 import Category from "./assets/Components/core/Dashboard/Category/Index";
 import Notification from "./assets/Components/core/Dashboard/Notification/Index";
+import { useLocation } from "react-router-dom";
 import Lenis from "lenis";
 
 const App = () => {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
+  const location = useLocation();
 
   // Lenis - smooth scroll
-    useEffect(() => {
-      const lenis = new Lenis({
-        duration: 1.2,
-        smooth: true,
-      });
+  useEffect(() => {
+    if (location.pathname.startsWith("/dashboard")) return;
+    const lenis = new Lenis({
+      duration: 1.2,
+      smooth: true,
+    });
 
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-
+    function raf(time) {
+      lenis.raf(time);
       requestAnimationFrame(raf);
+    }
 
-      return () => {
-        lenis.destroy();
-      };
-    }, []);
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, [location.pathname]);
   return (
     <div className="min-h-screen bg-gray-950 relative z-0">
       <NavBar />
