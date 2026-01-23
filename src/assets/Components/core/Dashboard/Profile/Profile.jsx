@@ -14,20 +14,10 @@ const Profile = () => {
       </div>
 
       {/* bio */}
-      {/* <div className=" p-4 flex items-center gap-10 flex-col md:flex-row justify-between bg-gray-800 max-w-[1200px] mx-auto my-8 border-[1px] border-gray-600 rounded w-11/12">
-        <div>
-          <h2 className="text-2xl capitalize">bio</h2>
-          <p className="text-lg capitalize text-gray-400">
-            {bio ?? "this field is not available"}
-          </p>
-        </div>
-        <Edit path={"/dashboard/settings"} />
-      </div> */}
-<BioCard/>
+      <BioCard />
+
       {/* user profile details */}
-      <div className=" p-4 flex items-center gap-10 flex-col md:flex-row justify-between bg-gray-800 max-w-[1200px] mx-auto my-8 border-[1px] border-gray-600 rounded w-11/12">
-        <ProfileDetails />
-      </div>
+      <ProfileDetails />
     </section>
   );
 };
