@@ -53,8 +53,8 @@ const Blogs = () => {
   }, [loading]);
 
   return (
-    <section className=" min-h-[calc(100vh-60px)] overflow-x-hidden overflow-y-auto">
-      <div className="max-w-[1300px] mx-auto p-6 rounded-lg min-h-[calc(100vh-60px)]">
+    <div className="">
+      <section className="max-w-[1300px] mx-auto  rounded-lg">
         <div>
           {loading ? (
             <div className=" ">
@@ -84,10 +84,10 @@ const Blogs = () => {
             <BlogUi blogs={blogs} />
           )}
         </div>
-      </div>
+      </section>
       {/* footer */}
       <Footer />
-    </section>
+    </div>
   );
 };
 
