@@ -66,3 +66,21 @@ export const projectsEndpoints = {
   DELETE_PROJECT_API: "/project/delete-project/:projectId",
   GET_ALL_PROJECTS_API: "/projects/get-all-projects",
 };
+
+// SECTION
+export const sectionsEndPoints = {
+  CREATE_SECTION: "/profile/create-section",
+  UPDATE_SECTION: "/profile/update-section",
+  DELETE_SECTION: "/profile/delete-section/:sectionId",
+  GET_SECTION_BY_ID: "/profile/section/:sectionId",
+  GET_SECTIONS_BY_BLOG_ID: "/profile/sections/:blogId",
+};
+
+// SUB SECTION
+export const subSectionsEndPoints = {
+  CREATE_SUB_SECTION: "/profile/create-sub-section",
+  UPDATE_SUB_SECTION: "/profile/update-sub-section",
+  DELETE_SUB_SECTION: "/profile/delete-sub-section/:subSectionId",
+  GET_SUB_SECTION_BY_ID: "/profile/sub-section/:subSectionId",
+  GET_SUB_SECTIONS_BY_SECTION_ID: "/profile/sub-sections/:sectionId",
+};
