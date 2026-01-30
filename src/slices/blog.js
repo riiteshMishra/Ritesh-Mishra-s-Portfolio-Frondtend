@@ -5,7 +5,7 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("blogData"))
     : null,
   loading: false,
-  step: 1,
+  step: 2,
   edit: false,
 };
 
@@ -36,5 +36,5 @@ const blogSlice = createSlice({
   },
 });
 
-export const { setBlog, updateBlog, deleteBlog ,setStep} = blogSlice.actions;
+export const { setBlog, updateBlog, deleteBlog, setStep } = blogSlice.actions;
 export default blogSlice.reducer;

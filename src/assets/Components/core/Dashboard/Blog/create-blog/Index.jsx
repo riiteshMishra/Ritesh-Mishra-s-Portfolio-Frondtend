@@ -4,9 +4,12 @@ import BlogInfo from "./BlogInfo";
 import { useForm } from "react-hook-form";
 import BlogStatus from "./BlogStatus";
 import { useEffect } from "react";
+import BlogContent from "./BlogContent";
 
 const CreateBlogs = () => {
   const { step } = useSelector((state) => state.blog);
+  const { blog } = useSelector((state) => state.blog);
+  console.log("Blog", blog)
   return (
     <section className="container text-white ">
       <div className="flex flex-col gap-4">
@@ -15,8 +18,8 @@ const CreateBlogs = () => {
 
         {/* form se data fetch */}
         {step === 1 && <BlogInfo />}
-        {step === 2 && <BlogStatus  />}
-        {/* {step === 3 && <></>} */}
+        {step === 2 && <BlogContent />}
+        {step === 3 && <BlogStatus />}
       </div>
     </section>
   );

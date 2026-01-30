@@ -33,8 +33,8 @@ const BlogInfo = () => {
     formData.append("tags", data.tags);
     const blog = await createBlog(formData, token);
     dispatch(setBlog(blog));
-   
-    dispatch(setStep(2));
+    console.log("blog data", blog);
+    if (blog) dispatch(setStep(2));
   };
 
   useEffect(() => {
@@ -122,7 +122,7 @@ const BlogInfo = () => {
 
         <button
           type="submit"
-          className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700"
+          className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 cursor-pointer"
         >
           Save & Continue
         </button>
