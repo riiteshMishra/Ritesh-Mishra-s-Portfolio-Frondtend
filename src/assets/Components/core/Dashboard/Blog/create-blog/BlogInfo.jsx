@@ -28,7 +28,7 @@ const BlogInfo = () => {
     formData.append("title", data.title);
     formData.append("slug", data.slug);
     formData.append("categoryId", data.categoryId);
-    formData.append("content", data.content);
+    formData.append("description", data.content);
     formData.append("thumbnail", data.thumbnail);
     formData.append("tags", data.tags);
     const blog = await createBlog(formData, token);

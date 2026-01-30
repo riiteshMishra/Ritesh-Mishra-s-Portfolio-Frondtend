@@ -4,11 +4,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsPatchPlus } from "react-icons/bs";
 import SubSectionModal from "./sub-section/SubSectionModal";
+import { useSelector } from "react-redux";
 
-const SectionPreview = ({ sections, setSections }) => {
+const SectionPreview = ({}) => {
+  const { blog } = useSelector((state) => state.blog);
+  // console.log("blog", blog);
   const [activeSection, setActiveSection] = useState(null);
   const [subSectionModal, setSubSectionModal] = useState(false);
-
+  const { contents: sections } = blog;
   //   HANDLE ACTIVE
   const handleActive = (index) => {
     setActiveSection((prev) => (prev === index ? null : index));

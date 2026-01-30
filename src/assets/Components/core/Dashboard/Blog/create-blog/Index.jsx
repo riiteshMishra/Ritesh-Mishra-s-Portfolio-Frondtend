@@ -9,7 +9,7 @@ import BlogContent from "./BlogContent";
 const CreateBlogs = () => {
   const { step } = useSelector((state) => state.blog);
   const { blog } = useSelector((state) => state.blog);
-  console.log("Blog", blog)
+  // console.log("Blog", blog)
   return (
     <section className="container text-white ">
       <div className="flex flex-col gap-4">

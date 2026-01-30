@@ -23,6 +23,8 @@ export const createSection = async (token, formData) => {
       { Authorization: `Bearer ${token}` },
     );
 
+    console.log("CREATE SECTION API RESPONSE", response);
+
     if (!response?.data?.success) {
       throw new Error("Invalid Response");
     }
