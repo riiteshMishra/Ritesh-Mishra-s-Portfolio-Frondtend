@@ -1,17 +1,28 @@
 import { FiTrash2 } from "react-icons/fi";
 import { CiEdit } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsPatchPlus } from "react-icons/bs";
 import SubSectionModal from "./sub-section/SubSectionModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteSection } from "../../../../../../services/operations/section";
+import ConfirmationModal from "../../../../common/ConfirmationModal";
+import { setEdit } from "../../../../../../slices/blog";
+import SectionModal from "./SectionModal";
 
 const SectionPreview = ({}) => {
+  const { edit } = useSelector((state) => state.blog);
+  const { token } = useSelector((state) => state.auth);
   const { blog } = useSelector((state) => state.blog);
-  // console.log("blog", blog);
+  const [sectionData, setSectionData] = useState("");
+  const [modal, setModal] = useState(null);
+  const [sectionModal, setSectionModal] = useState(false);
+  const dispatch = useDispatch();
+
   const [activeSection, setActiveSection] = useState(null);
   const [subSectionModal, setSubSectionModal] = useState(false);
   const { contents: sections } = blog;
+
   //   HANDLE ACTIVE
   const handleActive = (index) => {
     setActiveSection((prev) => (prev === index ? null : index));
@@ -23,9 +34,27 @@ const SectionPreview = ({}) => {
     setSubSectionModal(true);
   };
 
+  // HANDLE DELETE
+  const handleDeleteSection = async (sectionId) => {
+    await deleteSection(token, sectionId, dispatch);
+    return setModal(null);
+  };
+
+  // HANDLE EDIT
+  const handleEdit = (sectionData) => {
+    if (!sectionData) return;
+
+    setSectionData(sectionData);
+    dispatch(setEdit(true));
+    setModal(null);
+    setSectionModal(true);
+    return;
+  };
+
+  useEffect(() => {}, [edit]);
   return (
     <div className="mt-6 space-y-4">
-      {sections.map((sec, index) => (
+      {sections?.map((sec, index) => (
         <motion.div
           key={index}
           className="max-w-[600px]"
@@ -45,9 +74,9 @@ const SectionPreview = ({}) => {
             {/* TEXT */}
             <div>
               <h2 className="text-xs font-semibold capitalize text-black">
-                {sec.title}
+                {sec?.sectionName}
               </h2>
-              <p className="text-sm text-gray-800">{sec.description}</p>
+              <p className="text-sm text-gray-800">{sec?.description}</p>
             </div>
 
             {/* ICONS */}
@@ -72,7 +101,20 @@ const SectionPreview = ({}) => {
               </motion.button>
 
               {/* EDIT */}
-              <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() =>
+                  setModal({
+                    title: "Edit Section?",
+                    description: "Do you want to edit this section details?",
+                    confirmText: "Edit",
+                    cancelText: "Cancel",
+                    onConfirm: () => handleEdit(sec),
+                    onCancel: () => setModal(null),
+                  })
+                }
+              >
                 <CiEdit
                   className="text-yellow-100 cursor-pointer"
                   fontSize={18}
@@ -83,6 +125,18 @@ const SectionPreview = ({}) => {
               <motion.div
                 whileHover={{ scale: 1.2, rotate: -10 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={() =>
+                  setModal({
+                    title: "Permanent Delete!",
+                    description:
+                      "This section and all its content will be deleted forever. You won't be able to recover it.",
+                    confirmText: "Yes, Delete",
+                    cancelText: "No, Keep it",
+
+                    onConfirm: () => handleDeleteSection(sec._id),
+                    onCancel: () => setModal(null),
+                  })
+                }
               >
                 <FiTrash2 className="text-yellow-300 cursor-pointer" />
               </motion.div>
@@ -120,8 +174,12 @@ const SectionPreview = ({}) => {
       ))}
 
       {/* MODAL */}
-      {/* {subSectionModal && <SubSectionModal/>} */}
-      {/* <SubSectionModal/> */}
+      {/* {} */}
+      {modal && <ConfirmationModal modalData={modal} />}
+      {/* SECTION MODAL */}
+      {sectionModal && (
+        <SectionModal setModal={setSectionModal} sectionData={sectionData} />
+      )}
     </div>
   );
 };

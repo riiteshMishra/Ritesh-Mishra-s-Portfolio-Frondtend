@@ -71,7 +71,7 @@ export const projectsEndpoints = {
 export const sectionsEndPoints = {
   CREATE_SECTION: "/profile/create-section",
   UPDATE_SECTION: "/profile/update-section",
-  DELETE_SECTION: "/profile/delete-section/:sectionId",
+  DELETE_SECTION: "/profile/delete-section",
   GET_SECTION_BY_ID: "/profile/section/:sectionId",
   GET_SECTIONS_BY_BLOG_ID: "/profile/sections/:blogId",
 };

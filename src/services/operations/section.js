@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { sectionsEndPoints } from "../allApis";
+import { setBlog } from "../../slices/blog";
 
 const getErrorMessage = (err, fallback = "Some Thing Went Wrong") =>
   err?.response?.data?.message || err?.message || fallback;
@@ -50,7 +51,7 @@ export const updateSection = async (token, formData) => {
 
   try {
     const response = await apiConnector(
-      "PUT",
+      "POST",
       sectionsEndPoints.UPDATE_SECTION,
       formData,
       { Authorization: `Bearer ${token}` },
@@ -75,14 +76,14 @@ export const updateSection = async (token, formData) => {
 /* ============================
    DELETE SECTION
 ============================ */
-export const deleteSection = async (token, sectionId) => {
+export const deleteSection = async (token, sectionId, dispatch) => {
   const toastId = toast.loading("Deleting Section");
-  let success = false;
+  let result;
 
   try {
     const response = await apiConnector(
       "DELETE",
-      sectionsEndPoints.DELETE_SECTION.replace(":sectionId", sectionId),
+      `${sectionsEndPoints.DELETE_SECTION}/${sectionId}`,
       null,
       { Authorization: `Bearer ${token}` },
     );
@@ -90,8 +91,8 @@ export const deleteSection = async (token, sectionId) => {
     if (!response?.data?.success) {
       throw new Error("Invalid Response");
     }
-
-    success = true;
+    result = response?.data?.data;
+    if (response?.data?.success) dispatch(setBlog(result));
     toast.success(getSuccessMessage(response, "Section Deleted"));
   } catch (err) {
     console.log("DELETE SECTION API ERROR", err);
@@ -100,7 +101,7 @@ export const deleteSection = async (token, sectionId) => {
     toast.dismiss(toastId);
   }
 
-  return success;
+  return result;
 };
 
 /* ============================

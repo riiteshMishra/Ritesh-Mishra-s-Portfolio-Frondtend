@@ -1,9 +1,13 @@
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { addSection, setBlog } from "../../../../../../slices/blog";
-import { createSection } from "../../../../../../services/operations/section";
+
+import { setBlog } from "../../../../../../slices/blog";
+import {
+  createSection,
+  updateSection,
+} from "../../../../../../services/operations/section";
 
 const backdropVariants = {
   hidden: { opacity: 0 },
@@ -21,17 +25,27 @@ const modalVariants = {
   exit: { opacity: 0, scale: 0.8, y: 40 },
 };
 
-const SectionModal = ({ setModal, blogId }) => {
-  const { blog } = useSelector((state) => state.blog);
-
-  const { token } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
+const SectionModal = ({ setModal, blogId, sectionData = null }) => {
   const dispatch = useDispatch();
-  //  Controlled state
+  const { edit } = useSelector((state) => state.blog);
+  const { token } = useSelector((state) => state.auth);
+
+  const sectionId = sectionData?._id;
+
+  // ---------- l ----------
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  // HANDLE SUBMIT
+  // ---------- prefill on edit ----------
+  useEffect(() => {
+    if (sectionData) {
+      setTitle(sectionData.sectionName || "");
+      setDescription(sectionData.description || "");
+    }
+  }, [sectionData]);
+
+  // ---------- submit handler ----------
   const next = async () => {
     if (!title.trim()) {
       return toast.error("Section title is required");
@@ -41,22 +55,40 @@ const SectionModal = ({ setModal, blogId }) => {
       sectionName: title.trim(),
       description: description.trim(),
       blogId,
+      sectionId: sectionData && sectionData?._id,
     };
 
-    // API CALL
-    setLoading(true);
-    const result = await createSection(token, formData, dispatch);
-    setLoading(false);
-    if (!result) return;
-    console.log(blog);
-    // Save API response in localStorage
-    // dispatch(setBlog(result));
-    dispatch(setBlog(result));
+    // EDIT MODE
+    if (edit) {
+      if (!sectionId) {
+        return toast.error("Section id not found");
+      }
+      console.log("EDIT SECTION API CALL HERE", sectionId);
+      setLoading(true);
+      const result = await updateSection(token, formData);
+      setLoading(false);
+
+      if (!result) return;
+      dispatch(setBlog(result));
+    }
+
+    // CREATE MODE
+    if (!edit) {
+      setLoading(true);
+      const result = await createSection(token, formData, dispatch);
+      setLoading(false);
+
+      if (!result) return;
+      dispatch(setBlog(result));
+    }
 
     setModal(false);
   };
 
-  if (loading) <div className="text-white text-4xl">loading</div>;
+  // ---------- loading ----------
+  if (loading) {
+    return <div className="text-white text-4xl">loading</div>;
+  }
   return (
     <AnimatePresence>
       <motion.div
@@ -75,7 +107,9 @@ const SectionModal = ({ setModal, blogId }) => {
           exit="exit"
           onClick={(e) => e.stopPropagation()}
         >
-          <h1 className="text-lg font-semibold mb-4">Create Section</h1>
+          <h1 className="text-lg font-semibold mb-4">
+            {edit ? "Edit Section" : "Create Section"}
+          </h1>
 
           <p className="text-sm mb-1">Section title</p>
           <input
@@ -97,6 +131,7 @@ const SectionModal = ({ setModal, blogId }) => {
 
           <div className="flex justify-between">
             <button
+              disabled={loading}
               onClick={() => setModal(false)}
               className="text-gray-800 cursor-pointer"
             >
@@ -105,9 +140,10 @@ const SectionModal = ({ setModal, blogId }) => {
 
             <button
               onClick={next}
+              disabled={loading}
               className="px-4 py-2 cursor-pointer bg-indigo-600 text-white rounded"
             >
-              Create
+              {edit ? "Update" : "Create"}
             </button>
           </div>
         </motion.div>

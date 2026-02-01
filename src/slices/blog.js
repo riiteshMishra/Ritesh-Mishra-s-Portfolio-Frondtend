@@ -81,6 +81,11 @@ const blogSlice = createSlice({
 
       localStorage.setItem("blogData", JSON.stringify(state.blog));
     },
+
+    /* ================= EDIT ================= */
+    setEdit: (state, action) => {
+      state.edit = action.payload;
+    },
   },
 });
 
@@ -93,6 +98,7 @@ export const {
   updateSection,
   deleteSection,
   addSubSection,
+  setEdit,
 } = blogSlice.actions;
 
 export default blogSlice.reducer;
