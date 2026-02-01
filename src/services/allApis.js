@@ -78,7 +78,7 @@ export const sectionsEndPoints = {
 
 // SUB SECTION
 export const subSectionsEndPoints = {
-  CREATE_SUB_SECTION: "/profile/create-sub-section",
+  CREATE_SUB_SECTION: "/profile/create-subSection",
   UPDATE_SUB_SECTION: "/profile/update-sub-section",
   DELETE_SUB_SECTION: "/profile/delete-sub-section/:subSectionId",
   GET_SUB_SECTION_BY_ID: "/profile/sub-section/:subSectionId",

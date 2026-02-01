@@ -9,6 +9,7 @@ import { deleteSection } from "../../../../../../services/operations/section";
 import ConfirmationModal from "../../../../common/ConfirmationModal";
 import { setEdit } from "../../../../../../slices/blog";
 import SectionModal from "./SectionModal";
+import SubSectionPreview from "./sub-section/SubSectionPreview";
 
 const SectionPreview = ({}) => {
   const { edit } = useSelector((state) => state.blog);
@@ -29,8 +30,9 @@ const SectionPreview = ({}) => {
   };
 
   //   SUB SECTION ADD KRNA HAI
-  const addSubSection = (index) => {
-    console.log("first");
+  const [sectionId, setSectionId] = useState("");
+  const addSubSection = (sectionId) => {
+    setSectionId(sectionId);
     setSubSectionModal(true);
   };
 
@@ -54,9 +56,9 @@ const SectionPreview = ({}) => {
   useEffect(() => {}, [edit]);
   return (
     <div className="mt-6 space-y-4">
-      {sections?.map((sec, index) => (
+      {sections?.map((sec) => (
         <motion.div
-          key={index}
+          key={sec?._id}
           className="max-w-[600px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,7 +66,7 @@ const SectionPreview = ({}) => {
         >
           {/* SECTION */}
           <motion.div
-            onClick={() => handleActive(index)}
+            onClick={() => handleActive(sec?._id)}
             className="flex justify-between items-center cursor-pointer 
             bg-gradient-to-r from-green-500 via-red-400 to-pink-500 
             py-2 px-4 border rounded-tl-2xl rounded-br-2xl overflow-hidden"
@@ -76,7 +78,9 @@ const SectionPreview = ({}) => {
               <h2 className="text-xs font-semibold capitalize text-black">
                 {sec?.sectionName}
               </h2>
-              <p className="text-sm text-gray-800">{sec?.description.substring(0,70)}...</p>
+              <p className="text-sm text-gray-800">
+                {sec?.description.substring(0, 70)}...
+              </p>
             </div>
 
             {/* ICONS */}
@@ -88,7 +92,7 @@ const SectionPreview = ({}) => {
             >
               {/* PLUS */}
               <motion.button
-                onClick={() => addSubSection(index)}
+                onClick={() => addSubSection(sec?._id)}
                 className="text-xl font-bold text-green-900 cursor-pointer"
                 whileHover={{
                   scale: 1.3,
@@ -145,28 +149,15 @@ const SectionPreview = ({}) => {
 
           {/* SUB SECTIONS */}
           <AnimatePresence>
-            {activeSection === index && (
+            {activeSection === sec?._id && (
               <motion.div
-                className="ml-6 mt-2 space-y-2"
+                className="ml-6 mt-2"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                {sec.subSections?.length > 0 ? (
-                  sec.subSections.map((sub, i) => (
-                    <motion.div
-                      key={i}
-                      className="bg-white/70 px-3 py-1 rounded border text-sm"
-                      initial={{ x: -10, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                    >
-                      ▸ {sub.title}
-                    </motion.div>
-                  ))
-                ) : (
-                  <p className="text-xs text-gray-500">No sub sections added</p>
-                )}
+                <SubSectionPreview subSections={sec.subSections} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -180,6 +171,13 @@ const SectionPreview = ({}) => {
       {sectionModal && (
         <SectionModal setModal={setSectionModal} sectionData={sectionData} />
       )}
+      {/* SUB SECTION MODAL */}
+      <SubSectionModal
+        isOpen={subSectionModal}
+        onClose={() => setSubSectionModal(false)}
+        // onSubmit={handleSubSectionSubmit}
+        sectionId={sectionId}
+      />
     </div>
   );
 };
