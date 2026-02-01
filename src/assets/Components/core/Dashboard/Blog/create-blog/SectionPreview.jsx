@@ -76,7 +76,7 @@ const SectionPreview = ({}) => {
               <h2 className="text-xs font-semibold capitalize text-black">
                 {sec?.sectionName}
               </h2>
-              <p className="text-sm text-gray-800">{sec?.description}</p>
+              <p className="text-sm text-gray-800">{sec?.description.substring(0,70)}...</p>
             </div>
 
             {/* ICONS */}
