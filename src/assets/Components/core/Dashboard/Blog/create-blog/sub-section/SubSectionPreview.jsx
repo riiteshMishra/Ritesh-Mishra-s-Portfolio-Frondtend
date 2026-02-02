@@ -3,10 +3,12 @@ import { FiTrash2 } from "react-icons/fi";
 import { CiEdit } from "react-icons/ci";
 import { useState } from "react";
 import ConfirmationModal from "../../../../../common/ConfirmationModal";
+import SubSectionModal from "./SubSectionModal";
 
 const SubSectionPreview = ({ subSections }) => {
   const [modal, setModal] = useState(null);
-
+  const [subSectionData, setSubSectionData] = useState(null);
+  const [subSectionModal, setSubSectionModal] = useState(false);
   if (!subSections || subSections.length === 0) {
     return (
       <p className="text-xs text-gray-400 italic">No sub sections added</p>
@@ -15,7 +17,8 @@ const SubSectionPreview = ({ subSections }) => {
 
   // PREVIEW
   const handlePreview = (sub) => {
-    console.log("PREVIEW SUB SECTION", sub);
+                            setSubSectionData(sub);
+    setSubSectionModal(true);
   };
 
   // EDIT
@@ -108,6 +111,14 @@ const SubSectionPreview = ({ subSections }) => {
 
       {/* CONFIRMATION MODAL */}
       {modal && <ConfirmationModal modalData={modal} />}
+
+      {/* SUB SECTION MODAL */}
+      <SubSectionModal
+        subSectionData={subSectionData}
+        isOpen={subSectionModal}
+        state="preview"
+        onClose={() => setSubSectionModal(false)}
+      />
     </>
   );
 };

@@ -65,7 +65,7 @@ const SectionPreview = ({}) => {
           transition={{ duration: 0.3 }}
         >
           {/* SECTION */}
-          {/* SECTION */}
+
           <motion.div
             layout
             onClick={() => handleActive(sec?._id)}
@@ -187,6 +187,7 @@ const SectionPreview = ({}) => {
       {/* SUB SECTION MODAL */}
       <SubSectionModal
         isOpen={subSectionModal}
+        state="add"
         onClose={() => setSubSectionModal(false)}
         // onSubmit={handleSubSectionSubmit}
         sectionId={sectionId}
