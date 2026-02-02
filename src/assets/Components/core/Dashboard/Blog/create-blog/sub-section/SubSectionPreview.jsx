@@ -13,17 +13,17 @@ const SubSectionPreview = ({ subSections }) => {
     );
   }
 
-  // 👁️ PREVIEW
+  // PREVIEW
   const handlePreview = (sub) => {
     console.log("PREVIEW SUB SECTION", sub);
   };
 
-  // ✏️ EDIT
+  // EDIT
   const handleEdit = (sub) => {
     console.log("EDIT SUB SECTION", sub);
   };
 
-  // 🗑 DELETE
+  // DELETE
   const handleDelete = async (subSectionId) => {
     console.log("DELETE SUB SECTION", subSectionId);
     setModal(null);

@@ -65,22 +65,35 @@ const SectionPreview = ({}) => {
           transition={{ duration: 0.3 }}
         >
           {/* SECTION */}
+          {/* SECTION */}
           <motion.div
+            layout
             onClick={() => handleActive(sec?._id)}
-            className="flex justify-between items-center cursor-pointer 
-            bg-gradient-to-r from-green-500 via-red-400 to-pink-500 
-            py-2 px-4 border rounded-tl-2xl rounded-br-2xl overflow-hidden"
-            // whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            className="
+    flex justify-between items-center
+    cursor-pointer
+   bg-gray-700
+    py-2 px-4
+    border
+   rounded-md
+    overflow-hidden
+  "
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{
+              type: "spring",
+              stiffness: 220,
+              damping: 22,
+            }}
           >
             {/* TEXT */}
             <div>
-              <h2 className="text-xs font-semibold capitalize text-black">
+              <h2 className="text-md font-semibold capitalize text-white">
                 {sec?.sectionName}
               </h2>
-              <p className="text-sm text-gray-800">
+              {/* <p className="text-sm text-gray-800">
                 {sec?.description.substring(0, 70)}...
-              </p>
+              </p> */}
             </div>
 
             {/* ICONS */}
@@ -93,7 +106,7 @@ const SectionPreview = ({}) => {
               {/* PLUS */}
               <motion.button
                 onClick={() => addSubSection(sec?._id)}
-                className="text-xl font-bold text-green-900 cursor-pointer"
+                className="text-xl font-bold text-yellow-200 cursor-pointer"
                 whileHover={{
                   scale: 1.3,
                   rotate: 360,
