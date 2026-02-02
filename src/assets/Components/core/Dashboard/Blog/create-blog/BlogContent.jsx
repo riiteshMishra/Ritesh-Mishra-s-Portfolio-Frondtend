@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import SectionModal from "./SectionModal";
 import SectionPreview from "./SectionPreview";
 import { motion } from "framer-motion";
-import { setEdit } from "../../../../../../slices/blog";
+import { setEdit, setStep } from "../../../../../../slices/blog";
+import toast from "react-hot-toast";
 
 const BlogContent = () => {
   const { edit } = useSelector((state) => state.blog);
@@ -18,7 +19,28 @@ const BlogContent = () => {
     setModal(true);
   };
 
-  const handleNextStep = () => {};
+  const handleNextStep = () => {
+    // console.log(blog);
+
+    // no sections
+    if (!blog?.contents || blog.contents.length === 0) {
+      return toast.error("Pehle kam se kam ek section add karo");
+    }
+
+    // no subsections in any section
+    const hasAnySubSection = blog.contents.some(
+      (section) => section.subSections && section.subSections.length > 0,
+    );
+
+    if (!hasAnySubSection) {
+      return toast.error("Har blog me kam se kam ek sub section hona chahiye");
+    }
+
+    //  ALL GOOD
+    console.log("NEXT STEP ALLOWED");
+    // navigate("/next-step")
+    dispatch(setStep(3));
+  };
 
   const handlePrevStep = () => {};
   return (
@@ -89,7 +111,7 @@ const BlogContent = () => {
     "
           onClick={() => {
             console.log("NEXT STEP");
-            // handleNextStep()
+            handleNextStep();
           }}
         >
           Next Step →
