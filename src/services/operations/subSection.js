@@ -25,7 +25,7 @@ export const createSubSection = async (formData, token, dispatch) => {
         "Content-Type": "multipart/form-data",
       },
     );
-    
+
     console.log("CREATE SUB SECTION API RESPONSE", response);
 
     if (!response?.data?.success) {
@@ -89,7 +89,7 @@ export const deleteSubSection = async (subSectionId, token, dispatch) => {
 
   try {
     const response = await apiConnector(
-      "DELETE",
+      "PATCH",
       subSectionsEndPoints.DELETE_SUB_SECTION.replace(
         ":subSectionId",
         subSectionId,
@@ -110,7 +110,9 @@ export const deleteSubSection = async (subSectionId, token, dispatch) => {
 
     toast.success(getSuccessMessage(response, "Sub section deleted"));
     result = response.data;
+    if (response?.data?.data) dispatch(setBlog(result?.data));
   } catch (err) {
+    console.log("DELETE SUB SECTION API ERROR RESPONSE", err);
     toast.error(getErrorMessage(err, "Failed to delete sub section"));
   } finally {
     toast.dismiss(toastId);

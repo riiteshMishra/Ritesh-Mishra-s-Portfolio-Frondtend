@@ -80,7 +80,7 @@ export const sectionsEndPoints = {
 export const subSectionsEndPoints = {
   CREATE_SUB_SECTION: "/profile/create-subSection",
   UPDATE_SUB_SECTION: "/profile/update-sub-section",
-  DELETE_SUB_SECTION: "/profile/delete-sub-section/:subSectionId",
+  DELETE_SUB_SECTION: "/profile/delete-subSection/:subSectionId",
   GET_SUB_SECTION_BY_ID: "/profile/sub-section/:subSectionId",
   GET_SUB_SECTIONS_BY_SECTION_ID: "/profile/sub-sections/:sectionId",
 };

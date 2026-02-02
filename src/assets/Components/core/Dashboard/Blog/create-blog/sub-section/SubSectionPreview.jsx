@@ -4,12 +4,17 @@ import { CiEdit } from "react-icons/ci";
 import { useState } from "react";
 import ConfirmationModal from "../../../../../common/ConfirmationModal";
 import SubSectionModal from "./SubSectionModal";
+import { deleteSubSection } from "../../../../../../../services/operations/subSection";
+import { useDispatch, useSelector } from "react-redux";
 
 const SubSectionPreview = ({ subSections }) => {
+  const { token } = useSelector((state) => state.auth);
   const [modal, setModal] = useState(null);
   const [subSectionData, setSubSectionData] = useState(null);
   const [subSectionModal, setSubSectionModal] = useState(false);
   const [state, setState] = useState("");
+  const dispatch = useDispatch();
+
   if (!subSections || subSections.length === 0) {
     return (
       <p className="text-xs text-gray-400 italic">No sub sections added</p>
@@ -33,7 +38,7 @@ const SubSectionPreview = ({ subSections }) => {
 
   // DELETE
   const handleDelete = async (subSectionId) => {
-    console.log("DELETE SUB SECTION", subSectionId);
+    await deleteSubSection(subSectionId, token, dispatch);
     setModal(null);
   };
 
