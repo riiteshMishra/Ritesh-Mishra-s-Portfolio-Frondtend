@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { createSubSection } from "../../../../../../../services/operations/subSection";
+import {
+  createSubSection,
+  updateSubSection,
+} from "../../../../../../../services/operations/subSection";
 
 const add = "add";
 const edit = "edit";
@@ -116,6 +119,13 @@ const SubSectionModal = ({
       setLoading(false);
     }
 
+    // EDIT SUB SECTION
+    if (state === edit) {
+      setLoading(true);
+      formData.append("subSectionId", subSectionData?._id);
+      result = await updateSubSection(formData, token, dispatch);
+      setLoading(false);
+    }
     if (!result) return;
 
     onClose();
@@ -242,7 +252,7 @@ const SubSectionModal = ({
                 <button
                   onClick={onClose}
                   className="px-4 py-1.5 rounded-lg border
-                border-gray-300 text-gray-700 hover:bg-gray-100"
+                border-gray-300 text-gray-700 hover:bg-gray-100 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -251,9 +261,9 @@ const SubSectionModal = ({
                   onClick={handleSubmit}
                   disabled={loading}
                   className="px-4 py-1.5 rounded-lg bg-indigo-600
-                text-white hover:bg-indigo-700 disabled:opacity-60"
+                text-white hover:bg-indigo-700 disabled:opacity-60 cursor-pointer"
                 >
-                  {loading ? "Adding..." : "Add"}
+                  {loading ? "Adding..." : state}
                 </button>
               </div>
             )}

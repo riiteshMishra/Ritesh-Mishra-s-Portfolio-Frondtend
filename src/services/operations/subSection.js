@@ -55,12 +55,11 @@ export const updateSubSection = async (formData, token, dispatch) => {
 
   try {
     const response = await apiConnector(
-      "PUT",
+      "PATCH",
       subSectionsEndPoints.UPDATE_SUB_SECTION,
       formData,
       {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
       },
     );
 

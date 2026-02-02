@@ -9,6 +9,7 @@ const SubSectionPreview = ({ subSections }) => {
   const [modal, setModal] = useState(null);
   const [subSectionData, setSubSectionData] = useState(null);
   const [subSectionModal, setSubSectionModal] = useState(false);
+  const [state, setState] = useState("");
   if (!subSections || subSections.length === 0) {
     return (
       <p className="text-xs text-gray-400 italic">No sub sections added</p>
@@ -17,13 +18,17 @@ const SubSectionPreview = ({ subSections }) => {
 
   // PREVIEW
   const handlePreview = (sub) => {
-                            setSubSectionData(sub);
+    setState("preview");
+    setSubSectionData(sub);
     setSubSectionModal(true);
   };
 
   // EDIT
   const handleEdit = (sub) => {
     console.log("EDIT SUB SECTION", sub);
+    setState("edit");
+    setSubSectionData(sub);
+    setSubSectionModal(true);
   };
 
   // DELETE
@@ -116,7 +121,7 @@ const SubSectionPreview = ({ subSections }) => {
       <SubSectionModal
         subSectionData={subSectionData}
         isOpen={subSectionModal}
-        state="preview"
+        state={state}
         onClose={() => setSubSectionModal(false)}
       />
     </>
