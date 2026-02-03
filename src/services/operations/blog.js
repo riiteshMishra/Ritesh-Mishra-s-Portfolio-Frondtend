@@ -14,9 +14,9 @@ export const getBlogById = async (blogId) => {
   try {
     const response = await apiConnector(
       "GET",
-      `${blogsEndPoints.GET_BLOG_BY_ID}${blogId}`
+      `${blogsEndPoints.GET_BLOG_BY_ID}${blogId}`,
     );
- console.log("GET BLOG BY ID API RESPONSE", response)
+    console.log("GET BLOG BY ID API RESPONSE", response);
     if (!response.data.success)
       return toast.error(getErrorMessage("Invalid response"));
     // console.log("GET BLOG BY ID API RESPONSE", response);
@@ -39,7 +39,7 @@ export const toggleBlogLike = async (userId, blogId, token) => {
       { userId: userId },
       {
         Authorization: `Bearer ${token}`,
-      }
+      },
     );
 
     console.log("TOGGLE BLOG API RESPONSE", response);
@@ -65,7 +65,7 @@ export const addComment = async (blogId, formData, token) => {
       formData,
       {
         Authorization: `Bearer ${token}`,
-      }
+      },
     );
 
     console.log("ADD COMMENT API RESPONSE", response);
@@ -90,7 +90,7 @@ export const getAllLikedBlogs = async (token) => {
       null,
       {
         Authorization: `Bearer ${token}`,
-      }
+      },
     );
 
     if (!response.data?.success) {
