@@ -185,7 +185,7 @@ const ViewBlog = () => {
       </div>
 
       <div className="my-4">
-        <CommentUi comments={blogData.comments} />
+        <CommentUi comments={blogData?.comments} />
       </div>
       {commentModal && (
         <CommentModal setCommentModal={setCommentModal} blogId={blogId} />

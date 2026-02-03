@@ -4,7 +4,7 @@ const CommentUi = ({ comments }) => {
   return (
     <section className="container ">
       <div className="flex flex-col gap-4 max-w-4xl mx-auto">
-        {comments.map((comment) => (
+        {comments?.map((comment) => (
           <div
             key={comment?._id}
             className="flex items-start gap-4 p-4 border-b border-gray-700"

@@ -16,7 +16,7 @@ export const getBlogById = async (blogId) => {
       "GET",
       `${blogsEndPoints.GET_BLOG_BY_ID}${blogId}`
     );
-
+ console.log("GET BLOG BY ID API RESPONSE", response)
     if (!response.data.success)
       return toast.error(getErrorMessage("Invalid response"));
     // console.log("GET BLOG BY ID API RESPONSE", response);
