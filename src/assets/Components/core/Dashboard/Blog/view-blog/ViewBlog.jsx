@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { BiCommentDetail } from "react-icons/bi";
 import CommentModal from "./CommentModal";
 import CommentUi from "./CommentUi";
+import BlogAccordion from "./BlogAccordion";
 
 const ViewBlog = () => {
   const [blogData, setBlogData] = useState(null);
@@ -163,10 +164,13 @@ const ViewBlog = () => {
             ))}
           </div>
 
-          {/* Content */}
+          {/* description */}
           <div className="text-gray-300 leading-relaxed text-[17px]">
-            {blogData.content}
+            {blogData?.description}
           </div>
+
+          {/* CONTENTS */}
+          <BlogAccordion contents={blogData?.contents} />
 
           {/* Likes & Comments */}
           <div className="flex justify-between items-center mt-10 text-gray-400 text-sm border-t border-gray-800 pt-4">

@@ -6,7 +6,7 @@ import BlogCard from "./BlogCard";
 const BlogUi = ({ blogs }) => {
   const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-5  place-items-center mx-auto">
+    <div className=" flex flex-col items-center md:flex-row flex-wrap gap-6 p-6 container mx-auto">
       {blogs.map((blog) => (
         <BlogCard key={blog?._id} blog={blog} />
       ))}
@@ -15,3 +15,4 @@ const BlogUi = ({ blogs }) => {
 };
 
 export default BlogUi;
+  
