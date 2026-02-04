@@ -4,10 +4,22 @@ import Footer from "../Components/core/Footer/Index";
 import Testimonials from "../Components/core/Testimonials/Index";
 import { useEffect } from "react";
 import ProjectSection from "../Components/core/Home/Project-section/Index";
+import { initLenis } from "../../utils/lenis";
+
 const Home = () => {
-  // bg-[#ff000025]   min-h-[calc(100vh-60)]
   useEffect(() => {
     document.title = "Ritesh | Mishra | Home";
+  }, []);
+
+  // LENIS
+  useEffect(() => {
+    const { destroy } = initLenis({
+      duration: 1.2,
+    });
+
+    return () => {
+      destroy();
+    };
   }, []);
   return (
     <section>

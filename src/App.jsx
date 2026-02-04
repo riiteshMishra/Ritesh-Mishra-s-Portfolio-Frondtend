@@ -37,25 +37,6 @@ const App = () => {
   const { user } = useSelector((state) => state.profile);
   const location = useLocation();
 
-  // Lenis - smooth scroll
-  useEffect(() => {
-    if (location.pathname.startsWith("/dashboard")) return;
-    const lenis = new Lenis({
-      duration: 1.2,
-      smooth: true,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, [location.pathname]);
   return (
     <div className="min-h-screen bg-gray-950 relative z-0">
       <NavBar />
