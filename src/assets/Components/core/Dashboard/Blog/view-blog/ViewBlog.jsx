@@ -95,7 +95,7 @@ const ViewBlog = () => {
     );
   // console.log("blogData.comments", blogData.comments);
   return (
-    <section className="min-h-[calc(100vh-60px)] relative  text-white py-10 px-4 ">
+    <section className=" text-white py-10 px-4 ">
       <div className="max-w-4xl mx-auto">
         {/* Thumbnail */}
         <div className="overflow-hidden rounded-2xl shadow-lg relative">
