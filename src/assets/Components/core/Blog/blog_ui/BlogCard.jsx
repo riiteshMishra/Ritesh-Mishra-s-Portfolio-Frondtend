@@ -33,7 +33,7 @@ const BlogCard = ({ blog }) => {
       "
     >
       {/* image */}
-      <BlogImg image={blog?.image} />
+      <BlogImg image={blog?.thumbnail} />
       {/* Title */}
       <h2 className="mb-1 text-[15px] font-semibold text-gray-900 capitalize">
         {title.length > 30 ? `${title.slice(0, 30)}...` : title}
