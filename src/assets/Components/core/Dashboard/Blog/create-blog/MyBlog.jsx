@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { adminBlogs } from "../../../../../../services/operations/auth";
 import { FiCheck, FiX } from "react-icons/fi";
 import { BiSolidEditAlt } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import EmptyMyBlogs from "../../../../common/fallback_ui/Myblogs";
 import Loader from "../../../../common/Loader";
@@ -43,6 +43,7 @@ const MyBlog = () => {
   const [myBlogs, setMyBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const { token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   // Fetch blogs
   useEffect(() => {
@@ -90,6 +91,7 @@ const MyBlog = () => {
                   overflow-hidden group
                   max-h-[480px] flex flex-col
                 "
+                onClick={() => navigate(`/blogs/blog/${blog?._id}`)}
               >
                 {/* ================= THUMBNAIL ================= */}
                 <div className="relative">
