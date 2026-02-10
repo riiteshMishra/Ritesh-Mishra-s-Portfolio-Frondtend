@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BlogImg from "./BlogImg";
 import { AiTwotoneLike } from "react-icons/ai";
 import { GoComment } from "react-icons/go";
@@ -7,7 +7,7 @@ import { GoComment } from "react-icons/go";
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
   if (!blog) return null;
-
+  console.log("blog slug", blog?.title);
   const {
     title,
     contents,
@@ -17,11 +17,13 @@ const BlogCard = ({ blog }) => {
     likes,
     comments,
     description,
+    slug,
   } = blog;
 
   return (
-    <div
-      onClick={() => navigate(`blog/${blog?._id}`)}
+    <Link
+      // onClick={() => navigate(`blog/${blog?._id}`)}
+      to={`/blog/${blog?.slug}`}
       className="
         cursor-pointer rounded-xl
         border border-gray-200
@@ -33,7 +35,7 @@ const BlogCard = ({ blog }) => {
       "
     >
       {/* image */}
-      <BlogImg image={blog?.thumbnail} />
+      <BlogImg image={blog?.thumbnail} title={blog?.title} />
       {/* Title */}
       <h2 className="mb-1 text-[15px] font-semibold text-gray-900 capitalize">
         {title.length > 30 ? `${title.slice(0, 30)}...` : title}
@@ -43,6 +45,7 @@ const BlogCard = ({ blog }) => {
         <span>{author?.email}</span>
         <span>•</span>
         <span>{new Date(createdAt).toLocaleDateString()}</span>sp
+        <span>{blog?.slug}</span>
       </div>
       {/* Content */}
       <p className="mb-3 text-gray-800 line-clamp-3 leading-relaxed text-[14px]">
@@ -111,7 +114,7 @@ const BlogCard = ({ blog }) => {
           Read more →
         </motion.span>
       </motion.div>
-    </div>
+    </Link>
   );
 };
 

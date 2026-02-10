@@ -8,13 +8,14 @@ import { blogsEndPoints, blogsFunctionEndpoints } from "../allApis";
 const getErrorMessage = (err, fallback = "Something went wrong") =>
   err?.response?.data?.message || err.message || fallback;
 
-export const getBlogById = async (blogId) => {
+// GET BLOG BY SLUG
+export const getBlogBySlug = async (slug) => {
   // const toastId = toast.loading
   let result = [];
   try {
     const response = await apiConnector(
       "GET",
-      `${blogsEndPoints.GET_BLOG_BY_ID}${blogId}`,
+      `${blogsEndPoints.GET_BLOG_BY_ID}${slug}`,
     );
     console.log("GET BLOG BY ID API RESPONSE", response);
     if (!response.data.success)

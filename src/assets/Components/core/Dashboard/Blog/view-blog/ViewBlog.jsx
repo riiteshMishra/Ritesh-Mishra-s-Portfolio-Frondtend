@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  getBlogById,
+  getBlogBySlug,
   toggleBlogLike,
 } from "../../../../../../services/operations/blog";
 import { FaComment, FaRegHeart, FaHeart } from "react-icons/fa6";
@@ -19,7 +19,7 @@ const ViewBlog = () => {
   const [loading, setLoading] = useState(false);
   const [likeLoading, setLikeLoading] = useState(false);
   const [userLiked, setUserLiked] = useState(false);
-  const { blogId } = useParams();
+  const { slug } = useParams();
   const { user } = useSelector((state) => state.profile);
   const [commentModal, setCommentModal] = useState(false);
   const { token } = useSelector((state) => state.auth);
@@ -29,7 +29,7 @@ const ViewBlog = () => {
   const fetchBlog = async () => {
     setLoading(true);
     try {
-      const result = await getBlogById(blogId);
+      const result = await getBlogBySlug(slug);
       setBlogData(result);
     } catch (err) {
       console.log(err);
@@ -40,7 +40,7 @@ const ViewBlog = () => {
 
   useEffect(() => {
     fetchBlog();
-  }, [blogId]);
+  }, [slug]);
 
   //  toggle like functionality
   const blogLikeToggle = async () => {
@@ -187,7 +187,10 @@ const ViewBlog = () => {
           <CommentUi comments={blogData?.comments} />
         </div>
         {commentModal && (
-          <CommentModal setCommentModal={setCommentModal} blogId={blogId} />
+          <CommentModal
+            setCommentModal={setCommentModal}
+            blogId={blogData?._id}
+          />
         )}
       </section>
 

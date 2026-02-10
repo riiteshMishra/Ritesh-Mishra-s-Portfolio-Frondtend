@@ -22,7 +22,13 @@ const VideoUi = ({ data }) => {
       {/* VIDEO / FALLBACK */}
       {videoUrl ? (
         <div className="aspect-video bg-black">
-          <ReactPlayer src={videoUrl} width="100%" height="100%" controls />
+          <ReactPlayer
+            src={videoUrl}
+            width="100%"
+            height="100%"
+            controls
+            title={data?.title}
+          />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-16 text-gray-400">
