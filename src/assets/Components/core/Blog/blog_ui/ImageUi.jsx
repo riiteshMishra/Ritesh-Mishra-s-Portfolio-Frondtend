@@ -2,9 +2,9 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const ImageUi = ({ data }) => {
-  const imageUrl = data?.imageUrl;
-  // const imageUrl =
-  //   "https://res.cloudinary.com/dwpplwqzs/image/upload/v1770131913/Portfolio-site/blogs/thumbnails/xjtsnvkebqz7ikmlqggg.jpg";
+  // const imageUrl = data?.imageUrl;
+  const imageUrl =
+    "https://res.cloudinary.com/dwpplwqzs/image/upload/v1770131913/Portfolio-site/blogs/thumbnails/xjtsnvkebqz7ikmlqggg.jpg";
   const [showTitle, setShowTitle] = useState(false);
   const [viewImage, setViewImage] = useState(null);
 
@@ -89,7 +89,7 @@ const ImageUi = ({ data }) => {
                 whileTap={{ border: "1px solid #fff" }}
                 src={viewImage}
                 alt="Full View"
-                className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg"
+                className="max-h-max max-w-max w-11/12 object-contain rounded-lg"
                 onClick={(e) => e.stopPropagation()}
               />
             </motion.div>
