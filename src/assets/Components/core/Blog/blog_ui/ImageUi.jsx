@@ -2,9 +2,9 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const ImageUi = ({ data }) => {
-  // const imageUrl = data?.imageUrl;
-  const imageUrl =
-    "https://res.cloudinary.com/dwpplwqzs/image/upload/v1770131913/Portfolio-site/blogs/thumbnails/xjtsnvkebqz7ikmlqggg.jpg";
+  const imageUrl = data?.imageUrl;
+  // const imageUrl =
+  //   "https://res.cloudinary.com/dwpplwqzs/image/upload/v1770131913/Portfolio-site/blogs/thumbnails/xjtsnvkebqz7ikmlqggg.jpg";
   const [showTitle, setShowTitle] = useState(false);
   const [viewImage, setViewImage] = useState(null);
 
