@@ -33,7 +33,7 @@ const Home = () => {
 
         <meta
           name="keywords"
-          content="Ritesh Mishra,Ritesh Mishra Developer,MERN Stack Developer,Full Stack Developer,React Developer,Node.js Developer,JavaScript Developer,MongoDB Developer,Express.js Developer,Frontend Developer,Backend Developer,Web Developer India,Freelance Web Developer,Portfolio Website,React Portfolio,Vite React Portfolio,Tailwind CSS Developer,Framer Motion Developer,Modern Web Developer,UI UX Developer,Software Engineer,MERN Developer India"
+          content="Ritesh Mishra,Ritesh Mishra Developer,MERN Stack Developer,Full Stack Developer,React Developer,Node.js Developer,JavaScript Developer,MongoDB Developer,Express.js Developer,Frontend Developer,Backend Developer,Web Developer India,Freelance Web Developer,Portfolio Website,React Portfolio,Vite React Portfolio,Tailwind CSS Developer,Framer Motion Developer,Modern Web Developer,UI UX Developer,Software Engineer,MERN Developer India , web developer in hata, kushinar, sukrauli ,khotaha , ahirauli"
         />
 
         <meta
@@ -63,42 +63,12 @@ const Home = () => {
 
         <main className="HomePage overflow-x-hidden overflow-y-auto">
 
-          {/* Hero */}
           <HeroSection />
-
-          {/* Animated Sections */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{
-              once: true,
-              amount: 0.1,
-            }}
-            className="space-y-0"
-          >
-
-            <motion.div variants={fadeUp}>
-              <Exp />
-            </motion.div>
-
-            <motion.div variants={fadeUp}>
-              <Skills />
-            </motion.div>
-
-            <motion.div variants={fadeUp}>
-              <Projects />
-            </motion.div>
-
-            <motion.div variants={fadeUp}>
-              <Testimonial />
-            </motion.div>
-
-            <motion.div variants={fadeUp}>
-              <Contact />
-            </motion.div>
-
-          </motion.div>
+          <Exp />
+          <Skills />
+          <Projects />
+          <Testimonial />
+          <Contact />
 
         </main>
 
