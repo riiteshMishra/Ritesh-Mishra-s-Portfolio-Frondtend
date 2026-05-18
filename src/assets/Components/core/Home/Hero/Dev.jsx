@@ -63,7 +63,7 @@ const Dev = () => {
                 />
 
                 {/* IMAGE WRAPPER */}
-                <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-full p-[5px] bg-background">
+                <div className="relative w-58 h-58 md:w-64 md:h-64 rounded-full p-[5px] bg-background">
 
                     <motion.img
                         src={Ritesh}

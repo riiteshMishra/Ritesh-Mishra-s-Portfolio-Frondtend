@@ -1,67 +1,207 @@
-const Skill = () => {
-  const skills = [
-    {
-      id: "1",
-      name: "MongoDB",
-      icon: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-mongodb-a-cross-platform-document-oriented-database-program-logo-color-tal-revivo.png",
-    },
-    {
-      id: "2",
-      name: "ExpressJs",
-      icon: "https://img.icons8.com/ios/100/express-js.png",
-    },
-    {
-      id: "3",
-      name: "ReactJs",
-      icon: "https://img.icons8.com/plasticine/100/react.png",
-    },
-    {
-      id: "4",
-      name: "NodeJs",
-      icon: "https://img.icons8.com/fluency/96/node-js.png",
-    },
-  ];
+import React from 'react'
+import { motion } from 'framer-motion'
+import { itemVariants } from './Hero/Index'
 
+import {
+  FaReact,
+  FaNodeJs,
+  FaGitAlt,
+  FaGithub,
+  FaDocker,
+  FaAws,
+} from "react-icons/fa";
+
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiJavascript,
+  SiTypescript,
+  SiFramer,
+  SiExpress,
+  SiMongodb,
+  SiRedux,
+  SiPostman,
+  SiVercel,
+  SiNetlify,
+} from "react-icons/si";
+
+const skillsData = [
+  {
+    title: "Frontend",
+    icon: "brush",
+    color: "primary",
+    border: "hover:border-primary/20",
+    glow: "shadow-[0_0_40px_rgba(79,70,229,0.08)]",
+    bg: "bg-primary-container/10",
+
+    skills: [
+      { name: "React", icon: FaReact },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "Framer Motion", icon: SiFramer },
+    ],
+  },
+
+  {
+    title: "Backend",
+    icon: "terminal",
+    color: "secondary",
+    border: "hover:border-secondary/20",
+    glow: "shadow-[0_0_40px_rgba(98,223,125,0.08)]",
+    bg: "bg-secondary-container/10",
+
+    skills: [
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "Express.js", icon: SiExpress },
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "REST API", icon: SiPostman },
+      { name: "JWT Auth", icon: SiRedux },
+      { name: "Redux Toolkit", icon: SiRedux },
+    ],
+  },
+
+  {
+    title: "Tools",
+    icon: "construction",
+    color: "tertiary",
+    border: "hover:border-tertiary/20",
+    glow: "shadow-[0_0_40px_rgba(249,189,34,0.08)]",
+    bg: "bg-tertiary-container/10",
+
+    skills: [
+      { name: "Git", icon: FaGitAlt },
+      { name: "GitHub", icon: FaGithub },
+      { name: "Docker", icon: FaDocker },
+      { name: "AWS", icon: FaAws },
+      { name: "Vercel", icon: SiVercel },
+      { name: "Netlify", icon: SiNetlify },
+    ],
+  },
+]
+
+const Skills = () => {
   return (
-    <div className="flex gap-6 flex-wrap justify-around py-6 items-center">
-      {skills.map((skill) => (
-        <div
-          key={skill.id}
-          className="flex flex-col items-center bg-[#ffffff] shadow-md rounded-xl p-4 w-28 hover:scale-105
-       transition-all duration-200 relative group"
+    <section
+      id="skills"
+      aria-label="Technical Skills"
+      className="relative py-14 px-8 overflow-hidden"
+    >
+
+      {/* glow */}
+      <div className="absolute top-0 left-10 w-72 h-72 bg-primary-container/10 rounded-full blur-[120px]" />
+
+      <div className="absolute bottom-0 right-10 w-72 h-72 bg-secondary/10 rounded-full blur-[120px]" />
+
+      <div className="relative max-w-7xl mx-auto space-y-16">
+
+        {/* heading */}
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center space-y-4"
         >
-          <img src={skill.icon} alt={skill.name} className="w-12 h-12" />
-          <p className="text-sm mt-2 font-medium text-gray-700">{skill.name}</p>
 
-          {/* tooltip */}
-          <div className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center mb-2">
-            <div className="capsule ">{skill.name}</div>
-            {/* Arrow */}
-            <div className="w-3 h-3 border-white border-2 rotate-45 -mt-2 z-0 bg-blue-50"></div>
-          </div>
+          <p className="text-secondary uppercase tracking-[0.2em] text-sm font-semibold">
+            Skills
+          </p>
+
+          <h2 className="text-4xl md:text-5xl font-extrabold font-headline tracking-tight text-on-surface">
+            Technical Arsenal
+          </h2>
+
+          <p className="text-on-surface-variant text-lg">
+            The technologies and tools I use to build modern web applications.
+          </p>
+
+        </motion.div>
+
+        {/* cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          {skillsData.map((category, index) => (
+
+            <motion.article
+              key={index}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              whileHover={{
+                y: -8,
+                scale: 1.02,
+              }}
+              transition={{
+                duration: 0.3,
+              }}
+              className={`bg-surface-container/80 backdrop-blur-xl p-10 rounded-3xl border border-outline-variant/10 ${category.border} transition-all group ${category.glow}`}
+            >
+
+              {/* icon */}
+              <div
+                className={`w-14 h-14 rounded-2xl ${category.bg} flex items-center justify-center mb-6 text-${category.color}`}
+              >
+
+                <span className="material-symbols-outlined text-3xl">
+                  {category.icon}
+                </span>
+
+              </div>
+
+              {/* title */}
+              <h3 className="text-2xl font-bold mb-6 font-headline text-on-surface">
+                {category.title}
+              </h3>
+
+              {/* skills */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+
+                {category.skills.map((skill, skillIndex) => {
+
+                  const Icon = skill.icon
+
+                  return (
+
+                    <motion.div
+                      key={skillIndex}
+                      whileHover={{
+                        y: -3,
+                        scale: 1.05,
+                      }}
+                      transition={{
+                        duration: 0.2,
+                      }}
+                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-highest text-sm text-on-surface hover:text-secondary transition-all cursor-pointer 
+                     active:text-secondary
+                      "
+                    >
+
+                      <Icon className="text-base" />
+
+                      <span>
+                        {skill.name}
+                      </span>
+
+                    </motion.div>
+
+                  )
+                })}
+
+              </div>
+
+            </motion.article>
+
+          ))}
+
         </div>
-      ))}
-    </div>
-  );
-};
 
-export default Skill;
+      </div>
 
-// {frontendSkillsIcons.map((skill, index) => (
-//       <div key={index} className="relative group flex flex-col items-center">
-//         <img
-//           src={skill.icon}
-//           alt={skill.name}
-//           className="h-[45px] w-[45px]"
-//         />
+    </section>
+  )
+}
 
-//         {/* Tooltip */}
-//         <div className="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center mb-2">
-//           <div className="capsule ">
-//             {skill.name}
-//           </div>
-//           {/* Arrow */}
-//           <div className="w-3 h-3 border-white border-2 rotate-45 -mt-2 z-0 bg-blue-50"></div>
-//         </div>
-//       </div>
-//     ))}
+export default Skills

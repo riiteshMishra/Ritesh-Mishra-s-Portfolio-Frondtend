@@ -37,30 +37,34 @@ export const itemVariants = {
 
 const HeroSection = () => {
     return (
-        <section className="relative flex items-center justify-center pt-10 px-8 overflow-hidden">
+        <>
 
-            <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary-container/20 rounded-full blur-[120px]" />
+            <section className="relative flex items-center justify-center pt-10 px-8 overflow-hidden">
 
-            <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/10 rounded-full blur-[120px]" />
+                <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary-container/20 rounded-full blur-[120px]" />
 
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="relative  max-w-5xl mx-auto text-center space-y-8"
-            >
+                <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/10 rounded-full blur-[120px]" />
 
-                <Badge />
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="relative max-w-5xl mx-auto text-center space-y-8"
+                >
 
-                <Heading />
+                    <Badge />
 
-                <HeroBtn />
+                    <Heading />
 
-                <Dev />
+                    <HeroBtn />
 
-            </motion.div>
+                    <Dev />
 
-        </section>
+                </motion.div>
+
+            </section>
+
+        </>
     );
 };
 
