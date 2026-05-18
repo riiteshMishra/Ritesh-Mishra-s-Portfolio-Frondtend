@@ -5,6 +5,7 @@ import Testimonials from "../Components/core/Testimonials/Index";
 import { useEffect } from "react";
 import ProjectSection from "../Components/core/Home/Project-section/Index";
 import { initLenis } from "../../utils/lenis";
+import HeroSection from "../Components/core/Home/Hero/Index";
 
 const Home = () => {
   useEffect(() => {
@@ -12,29 +13,23 @@ const Home = () => {
   }, []);
 
   // LENIS
-  useEffect(() => {
-    const { destroy } = initLenis({
-      duration: 1.2,
-    });
+  // useEffect(() => {
+  //   const { destroy } = initLenis({
+  //     duration: .5,
+  //   });
 
-    return () => {
-      destroy();
-    };
-  }, []);
+  //   return () => {
+  //     destroy();
+  //   };
+  // }, []);
   return (
     <section>
       <main className="HomePage overflow-x-hidden overflow-y-auto">
-        <section className="container ">
-          <div className="flex flex-col md:flex-row justify-between max-w-[1200px] mx-auto min-h-[calc(100vh-60px)] flex-wrap">
-            {/* left box */}
-            <LeftBox />
 
-            {/* right box */}
-            <RightBox />
-          </div>
-        </section>
-        <ProjectSection />
-        <Testimonials />
+        <HeroSection />
+
+        {/* <ProjectSection />
+        <Testimonials /> */}
       </main>
       <Footer />
     </section>
@@ -42,3 +37,11 @@ const Home = () => {
 };
 
 export default Home;
+
+//  <div className="flex flex-col md:flex-row justify-between max-w-[1200px] mx-auto flex-wrap">
+{/* left box */ }
+{/* <LeftBox /> */ }
+
+{/* right box */ }
+{/* <RightBox /> */ }
+{/* </div> */ }
