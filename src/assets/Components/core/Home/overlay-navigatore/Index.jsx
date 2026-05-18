@@ -58,11 +58,10 @@ const OverlayBar = () => {
                 {/* Icon */}
                 {IconComponent && (
                   <IconComponent
-                    className={`relative z-10 text-xl transition-all ${
-                      isActive
-                        ? "text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]"
-                        : "text-gray-600"
-                    } ${isActive ? "text-lg" : "text-sm"}`}
+                    className={`relative z-10 text-xl transition-all ${isActive
+                      ? "text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]"
+                      : "text-gray-600"
+                      } ${isActive ? "text-lg" : "text-sm"}`}
                   />
                 )}
 

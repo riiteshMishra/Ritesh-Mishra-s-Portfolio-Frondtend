@@ -1,7 +1,4 @@
-// src/pages/Home.jsx
-
 import Footer from "../Components/core/Footer/Index"
-import Testimonials from "../Components/core/Testimonials/Index"
 import HeroSection from "../Components/core/Home/Hero/Index"
 
 import { Helmet } from "react-helmet-async"

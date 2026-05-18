@@ -15,8 +15,9 @@ const SmallMenu = ({ setSlideBar, slideBar }) => {
     <motion.div
       initial={{ x: -400, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.3 }}
-      className="bg-gray-700 rounded-lg top-[60px]  left-0 right-0 select-none flex flex-col md:hidden backdrop-blur-3xl transition-all duration-300 z-20 absolute"
+      exit={{ x: -400, opacity: 0 }}
+      transition={{ duration: 0.35 }}
+      className="fixed inset-0 w-full min-h-[calc(100vh-70px)]  backdrop-blur-xl md:hidden z-99 bg-red-400 flex items-center justify-center"
       onClick={() => setSlideBar(false)}
     >
       <div
@@ -30,10 +31,9 @@ const SmallMenu = ({ setSlideBar, slideBar }) => {
                 to={li.path}
                 onClick={() => setSlideBar(false)}
                 className={({ isActive }) =>
-                  `Bebas capitalize transition-colors duration-300 ${
-                    isActive
-                      ? "text-amber-300"
-                      : "text-amber-50 hover:text-amber-200"
+                  `Bebas capitalize transition-colors duration-300 ${isActive
+                    ? "text-amber-300"
+                    : "text-amber-50 hover:text-amber-200"
                   }`
                 }
               >
