@@ -10,7 +10,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md"
 import { navbarLinks } from "../../../Data/navbar"
 import { logout } from "../../../../services/operations/auth"
 
-import SmallMenu from "../SmallMenu"
+import SmallMenu from './small nav/Index'
 import RequestNotification from "../RequestNotification/Index"
 import Logo from "../Logo"
 import Nav from "./Links"

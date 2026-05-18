@@ -26,6 +26,7 @@ dist-ssr
 # Environment variables
 .env
 template.html
+dist
 
 # Portfolio server
 Portfolio-server/
