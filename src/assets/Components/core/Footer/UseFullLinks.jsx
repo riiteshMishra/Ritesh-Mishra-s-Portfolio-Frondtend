@@ -54,21 +54,30 @@ const UseFullLinks = () => {
   return (
     <section
       aria-labelledby="footer-quick-links"
-      className="h-fit w-fit px-6 max-w-[400px] flex flex-col items-center"
+      className=" px-6 max-w-[400px] flex flex-col"
     >
       <h2
         id="footer-quick-links"
-        className="text-3xl font-extrabold leading-tight mb-4 text-gray-100"
+        className="text-4xl md:text-5xl font-black leading-tight tracking-tight"
       >
-     Quick Links
+        <span className="bg-gradient-to-br from-white via-white/80 to-white/20 bg-clip-text text-transparent">
+          Quick Links
+        </span>
       </h2>
+
+      <div className="mt-2 flex items-center gap-2">
+        <span className="h-[2px] w-5 rounded-full bg-primary/70" />
+        <p className="text-sm font-semibold tracking-widest text-primary/90 uppercase">
+          Navigate
+        </p>
+      </div>
 
       <motion.ul
         variants={listVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        className="space-y-3"
+        className="space-y-3 mt-4"
       >
         {useFullLinks.map(({ id, text, link, icon }) => {
           const isActive = location.pathname === link;
@@ -78,11 +87,10 @@ const UseFullLinks = () => {
               <Link
                 to={link}
                 aria-current={isActive ? "page" : undefined}
-                className={`group flex items-center gap-4 px-3 py-2 rounded-lg transition-all
-                  ${
-                    isActive
-                      ? "text-indigo-500 bg-indigo-500/10"
-                      : "text-gray-400 hover:text-indigo-500"
+                className={`group flex items-center gap-4 px-3 py-3 rounded-lg transition-all
+                  ${isActive
+                    ? "text-indigo-500 bg-indigo-500/10"
+                    : "text-gray-400 hover:text-indigo-500"
                   }
                 `}
               >

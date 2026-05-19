@@ -1,107 +1,126 @@
-import { motion } from "framer-motion";
-import { FaDownload, FaWhatsapp } from "react-icons/fa";
-import { RESUME_URL } from "../../../../utils/utilsData";
+import { motion } from "framer-motion"
+import { FaDownload, FaWhatsapp } from "react-icons/fa"
+import { RiRadioButtonLine } from "react-icons/ri"
+
+import { RESUME_URL } from "../../../../utils/utilsData"
 
 const containerVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const fadeVariants = {
+  hidden: {
+    opacity: 0,
+    y: 12,
+  },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: "easeOut",
-      staggerChildren: 0.12,
+      duration: 0.45,
+      ease: [0.25, 0.1, 0.25, 1],
     },
   },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: "easeOut" },
-  },
-};
+}
 
 const Intro = () => {
   return (
     <section
       aria-labelledby="footer-intro"
-      className="px-3 max-w-[400px] h-fit w-fit"
+      className="max-w-[420px]"
     >
       <motion.div
-        className="rounded-2xl"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.2 }}
+        className="space-y-5"
       >
-        {/* Name */}
-        <motion.h2
-          id="footer-intro"
-          variants={itemVariants}
-          className="text-4xl md:text-5xl font-extrabold leading-tight"
-        >
-          <span className="text-indigo-600">Ritesh Mishra</span>
-        </motion.h2>
 
-        {/* Role */}
+        {/* heading */}
+        <motion.div variants={fadeVariants}>
+
+          {/* availability badge */}
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 mb-3">
+            <RiRadioButtonLine className="text-emerald-400 text-[10px] animate-pulse" />
+            <span className="text-[11px] font-medium text-emerald-400 tracking-wide">
+              Available for work
+            </span>
+          </div>
+
+          <h3
+            id="footer-intro"
+            className="text-4xl md:text-5xl font-black leading-tight tracking-tight"
+          >
+            <span className="bg-gradient-to-br from-white via-white/80 to-white/20 bg-clip-text text-transparent">
+              Ritesh Mishra
+            </span>
+          </h3>
+
+          <div className="mt-2 flex items-center gap-2">
+            <span className="h-[2px] w-5 rounded-full bg-primary/70" />
+            <p className="text-sm font-semibold tracking-widest text-primary/90 uppercase">
+              Full Stack Developer
+            </p>
+          </div>
+
+        </motion.div>
+
+        {/* description */}
         <motion.p
-          variants={itemVariants}
-          className="mt-2 text-lg text-slate-400 font-bold"
+          variants={fadeVariants}
+          className="text-white/50 leading-relaxed text-[15px]"
         >
-          Full Stack Developer
+          MERN Stack developer focused on building scalable, responsive, and
+          high-performance web applications with modern UI and clean architecture.
         </motion.p>
 
-        {/* Description */}
-        <motion.p
-          variants={itemVariants}
-          className="mt-4 text-slate-500 max-w-2xl"
-        >
-          I’m a passionate MERN Stack developer who loves building beautiful,
-          responsive, and functional web applications. My goal is to create
-          impactful digital experiences through clean code and modern UI.
-        </motion.p>
-
-        {/* CTA Buttons */}
+        {/* buttons */}
         <motion.div
-          variants={itemVariants}
-          className="mt-6 flex flex-wrap gap-3 justify-between"
+          variants={fadeVariants}
+          className="flex flex-wrap items-center gap-3 pt-1"
         >
-          {/* WhatsApp */}
+
+          {/* whatsapp */}
           <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ y: -2, scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
             href={`https://wa.me/919565672752?text=${encodeURIComponent(
               "Hey Ritesh! 👋 I saw your portfolio and wanted to connect with you."
             )}`}
             target="_blank"
             rel="noreferrer"
             aria-label="Chat with Ritesh Mishra on WhatsApp"
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-green-600 text-white font-medium shadow hover:bg-green-700 transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl bg-green-500/10 border border-green-500/25 px-5 py-2.5 text-sm font-medium text-green-400 backdrop-blur-xl transition-all duration-300 hover:bg-green-500/20 hover:border-green-500/40 hover:shadow-[0_0_16px_-4px_rgba(74,222,128,0.4)]"
           >
-            <FaWhatsapp className="text-xl" aria-hidden="true" />
+            <FaWhatsapp className="text-base" aria-hidden="true" />
             WhatsApp
           </motion.a>
 
-          {/* Resume */}
+          {/* resume */}
           <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            href={RESUME_URL  }
+            whileHover={{ y: -2, scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
+            href={RESUME_URL}
             target="_blank"
             rel="noreferrer"
             aria-label="Download resume of Ritesh Mishra"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-sm font-medium hover:bg-slate-50 hover:text-black transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-white/70 backdrop-blur-xl transition-all duration-300 hover:bg-white/[0.08] hover:text-white hover:border-white/20"
           >
-            <FaDownload aria-hidden="true" />
+            <FaDownload className="text-[13px]" aria-hidden="true" />
             Resume
           </motion.a>
+
         </motion.div>
+
       </motion.div>
     </section>
-  );
-};
+  )
+}
 
-export default Intro;
+export default Intro
