@@ -10,15 +10,11 @@ const Footer = () => {
   return (
 
     <footer
-
       role="contentinfo"
-
       aria-label="Ritesh Mishra Portfolio Footer"
-
       className="relative overflow-hidden border-t border-white/10 bg-gradient-to-b from-transparent to-white/[0.03] backdrop-blur-xl text-white py-16"
     >
 
-      {/* seo meta tags */}
       <Helmet>
 
         <title>Ritesh Mishra — Full Stack Developer</title>
@@ -56,6 +52,28 @@ const Footer = () => {
         <meta name="twitter:title" content="Ritesh Mishra — Full Stack Developer" />
         <meta name="twitter:description" content="MERN Stack Developer building scalable, responsive web applications with modern UI and clean architecture." />
         <meta name="twitter:image" content="https://riteshmishra.online/og-image.webp" />
+
+        {/* structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Ritesh Mishra",
+            "url": "https://riteshmishra.online",
+            "email": "riteshmishra.dev@gmail.com",
+            "jobTitle": "Full Stack Developer",
+            "description": "MERN Stack Developer specializing in React.js, Node.js, Express.js, MongoDB, Tailwind CSS, and modern web applications.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Lucknow",
+              "addressCountry": "IN"
+            },
+            "sameAs": [
+              "https://github.com/riiteshMishra",
+              "https://www.linkedin.com/in/ritesh-mishra-059519352"
+            ]
+          })}
+        </script>
 
       </Helmet>
 
@@ -99,19 +117,21 @@ const Footer = () => {
         {/* bottom — avatar + copyright */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
 
-          {/*  dev image avatar added here */}
           <div className="flex items-center gap-3">
 
             <div className="relative shrink-0">
 
               <img
                 src={Ritesh}
-                alt="Ritesh Mishra — Full Stack Developer"
+                alt="Ritesh Mishra — Full Stack Developer from Lucknow India"
                 className="w-9 h-9 rounded-full object-cover object-top border border-white/15 pointer-events-none"
               />
 
               {/* online dot */}
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0a0a0a]" />
+              <span
+                className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0a0a0a]"
+                aria-label="Online"
+              />
 
             </div>
 
